@@ -16,14 +16,16 @@ html {
 
 body {
   margin: 0;
-  /* min-width: 20rem; */
 }
 
 .main-header {
+  display: flex;
   background: var(--primary-main-color);
   color: var(--primary-text-color);
   padding: 1rem 2rem;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main-header h1 {
@@ -31,8 +33,27 @@ body {
   margin: 0;
 }
 
-.tag-container {
+.mobile-menu {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  background: none;
+  border: 0px;
+  cursor: pointer;
+}
+
+.mobile-menu span {
+  display: block;
+  position: relative;
+  width: 2rem;
+  height: 0.3rem;
+  border-radius: 0.1rem;
+  background: var(--primary-text-color);
+}
+
+.tag-container {
+  display: none;
   margin: 2rem;
   gap: 1rem;
   flex-wrap: wrap;
@@ -70,6 +91,13 @@ body {
 }
 
 @media (min-width: 40rem) {
+  .mobile-menu {
+    display: none;
+  }
+
+  .tag-container {
+    display: flex;
+  }
   .post-container {
     margin: 1rem auto;
     flex-direction: row;
