@@ -16,6 +16,7 @@ html {
 
 body {
   margin: 0;
+  min-width: 15rem;
 }
 
 .backdrop {
@@ -84,19 +85,22 @@ body {
 }
 
 .tag-container {
-  display: none;
-  margin: 2rem;
+  background: var(--primary-text-color);
+  display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  transition: transform 3s;
+  position: absolute;
+  visibility: hidden;
+  transition: transform 1s, visibility 1s;
+  transform: translateY(-100%);
 }
 
 .display-tag {
-  display: flex;
-  position: relative;
+  padding: 1rem 0;
   z-index: 8;
-  background: var(--primary-text-color);
+  visibility: visible;
+  transform: translateX(0);
 }
 
 .tag {
@@ -140,7 +144,12 @@ body {
   }
 
   .tag-container {
+    position: relative;
+    visibility: visible;
+    transform: translateX(0);
     display: flex;
+    margin: 2rem auto;
+    width: 70%;
   }
 
   .post-container {
