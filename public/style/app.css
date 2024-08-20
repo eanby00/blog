@@ -45,6 +45,11 @@ body {
   margin: 0;
 }
 
+.main-header a {
+  text-decoration: none;
+  color: var(--primary-text-color);
+}
+
 .mobile-menu {
   display: flex;
   flex-direction: column;
@@ -92,7 +97,7 @@ body {
   flex-wrap: wrap;
   position: absolute;
   visibility: hidden;
-  transition: transform 1s, visibility 1s;
+  transition: transform 0.5s, visibility 0.5s;
   transform: translateY(-100%);
 }
 
