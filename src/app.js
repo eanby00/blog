@@ -14,32 +14,22 @@ const toggleMobileMenu = () => {
 mobileTagIcon.addEventListener("click", toggleMobileMenu);
 backdrop.addEventListener("click", toggleMobileMenu);
 
-const octokit = new Octokit({
-  auth: API_KEY,
-});
-
-octokit
-  .request("GET /repos/{owner}/{repo}/contents/{path}", {
-    owner: "eanby00",
-    repo: "blog",
-    path: "public",
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  })
-  .then((response) => {
-    console.log(response);
+const getPosts = async () => {
+  const octokit = new Octokit({
+    auth: API_KEY,
   });
 
-// octokit
-//   .request("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
-//     owner: "eanby00",
-//     repo: "blog",
-//     tree_sha: "main",
-//     headers: {
-//       "X-GitHub-Api-Version": "2022-11-28",
-//     },
-//   })
-//   .then((response) => {
-//     console.log(response);
-//   });
+  const response = await octokit.request(
+    "GET /repos/{owner}/{repo}/contents/{path}",
+    {
+      owner: "eanby00",
+      repo: "blog",
+      path: "Posts",
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
+};
+
+getPosts();
