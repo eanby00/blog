@@ -1,3 +1,7 @@
+import { Octokit } from "octokit";
+
+console.log(API_KEY);
+
 const mobileTagIcon = document.querySelector(".mobile-menu");
 const backdrop = document.querySelector(".backdrop");
 
