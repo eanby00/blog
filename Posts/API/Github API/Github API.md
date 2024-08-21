@@ -1,11 +1,8 @@
 # Github API
 
-## Github Repository Content 가져오기
-
-### 특정한 Content 가져오기
+## get Repository Content
 
 ```javascript
-// 실행 예시
 octokit
   .request("GET /repos/{owner}/{repo}/contents/{path}", {
     owner: "eanby00",
@@ -20,11 +17,21 @@ octokit
   });
 ```
 
-- `data`의 `content`로 데이터를 가져올 수 있다.
+![img1](./get%20content%20folder.png)
+
+- 폴더의 경우 `data` 속성이 배열이다
+- 폴더의 경우 배열 속 객체에 `content` 값이 존재하지 않는다.
 
 <br/>
 
-### Repository 전체 데이터 tree로 가져오기
+![img2](./get%20content%20file.png)
+
+- 파일의 경우 `data` 속성이 객체다.
+- 파일의 경우 `content`로 데이터가 저장되어 있다.
+
+<br/>
+
+## get Repository Tree
 
 ```javascript
 // 실행 예시
@@ -42,7 +49,7 @@ octokit
   });
 ```
 
-- `data`의 `tree`로 데이터 `tree`가 형성되어 있다.
-- `tree`라면 폴더를 의미한다.
+![img](./get%20tree.png)
+
 - 데이터의 `type`이 `blob`이라면 파일이며, `url`을 통해 접근해서 내부의 `content`를 디코딩해야 한다.
 - 데이터의 `type`이 `tree`라면 폴더이며, `url`을 통해 접근해서 내부의 `tree`에 접근해야 한다.
