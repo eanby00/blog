@@ -1,7 +1,5 @@
 import { Octokit } from "octokit";
 
-console.log(API_KEY);
-
 const mobileTagIcon = document.querySelector(".mobile-menu");
 const backdrop = document.querySelector(".backdrop");
 
@@ -15,3 +13,33 @@ const toggleMobileMenu = () => {
 
 mobileTagIcon.addEventListener("click", toggleMobileMenu);
 backdrop.addEventListener("click", toggleMobileMenu);
+
+const octokit = new Octokit({
+  auth: API_KEY,
+});
+
+octokit
+  .request("GET /repos/{owner}/{repo}/contents/{path}", {
+    owner: "eanby00",
+    repo: "blog",
+    path: "public",
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  })
+  .then((response) => {
+    console.log(response);
+  });
+
+// octokit
+//   .request("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
+//     owner: "eanby00",
+//     repo: "blog",
+//     tree_sha: "main",
+//     headers: {
+//       "X-GitHub-Api-Version": "2022-11-28",
+//     },
+//   })
+//   .then((response) => {
+//     console.log(response);
+//   });
