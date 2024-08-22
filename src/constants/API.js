@@ -1,6 +1,6 @@
 export const GITHUB_API = {
-  OWNER: "",
-  REPO: "",
-  PATH_POSTS: "",
-  TAG_DEPTH: "",
+  OWNER: "eanby00",
+  REPO: "blog",
+  PATH_POSTS: "Posts",
+  TAG_DEPTH: 1,
 };
