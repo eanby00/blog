@@ -1,7 +1,24 @@
 import { Octokit } from "octokit";
 
+const OWNER = "eanby00";
+const REPO = "blog";
+const PATH_POSTS = "Posts";
+const TAG_DEPTH = 1;
+
+const octokit = new Octokit({
+  auth: API_KEY,
+});
+
 const mobileTagIcon = document.querySelector(".mobile-menu");
 const backdrop = document.querySelector(".backdrop");
+
+const isMDFile = (name) => {
+  return name.slice(name.length - 2).toLowerCase() === "md";
+};
+
+const getTag = (path = "Posts/API/Github API/Github API.md") => {
+  return path.split("/")[TAG_DEPTH];
+};
 
 const toggleMobileMenu = () => {
   const tagContainer = document.querySelector(".tag-container");
@@ -14,102 +31,44 @@ const toggleMobileMenu = () => {
 mobileTagIcon.addEventListener("click", toggleMobileMenu);
 backdrop.addEventListener("click", toggleMobileMenu);
 
-const posts = {};
+const posts = [];
+
+const getContent = async (octokit, path) => {
+  return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+    owner: OWNER,
+    repo: REPO,
+    path: path,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+};
+
+const getPost = async (path) => {
+  const response = await getContent(octokit, path);
+
+  if (Array.isArray(response.data)) {
+    response.data.forEach((data) => {
+      getPost(data.path);
+    });
+  } else if (
+    typeof response.data === "object" &&
+    isMDFile(response.data.name)
+  ) {
+    console.log(response);
+    posts.push({
+      ...response.data,
+      title: response.data.name.slice(0, response.data.name.length - 2),
+      tag: getTag(response.data.path),
+      "last-modified": response.headers["last-modified"],
+    });
+  }
+};
 
 const getPosts = async () => {
-  const octokit = new Octokit({
-    auth: API_KEY,
-  });
+  await getPost(PATH_POSTS);
 
-  const response = await octokit.request(
-    "GET /repos/{owner}/{repo}/contents/{path}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      path: "Posts",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  const response_Posts_API = await octokit.request(
-    "GET /repos/{owner}/{repo}/contents/{path}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      path: "Posts/API",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  const response_Posts_API_GITHUB_API = await octokit.request(
-    "GET /repos/{owner}/{repo}/contents/{path}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      path: "Posts/API/Github API",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  const response_Posts_API_GITHUB_API_MD = await octokit.request(
-    "GET /repos/{owner}/{repo}/contents/{path}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      path: "Posts/API/Github API/Github API.md",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  console.log(response);
-  console.log(response_Posts_API);
-  console.log(response_Posts_API_GITHUB_API);
-  console.log(response_Posts_API_GITHUB_API_MD);
-
-  console.log("--------------------------------------");
-
-  const response_tree = await octokit.request(
-    "GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      tree_sha: "main",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  const response_tree_sha = await octokit.request(
-    "GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
-    {
-      owner: "eanby00",
-      repo: "blog",
-      tree_sha: "0fc657365d503491cf57f3283eb1353a06153e0a",
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  console.log(response_tree);
-  console.log(response_tree_sha);
-
-  // const tags = response.data;
-  // tags.forEach((tag) => {
-  //   posts[tag.name] = "1";
-  // });
-
-  // console.log(tags);
-  // console.log(posts);
+  console.log(posts);
 };
 
 getPosts();
