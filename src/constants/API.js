@@ -1,5 +1,5 @@
 export const GITHUB_API = {
-  OWNER: "eanby0s0",
+  OWNER: "eanby00",
   REPO: "blog",
   PATH_POSTS: "Posts",
   TAG_DEPTH: 1,
