@@ -56,7 +56,11 @@ export const getPostsAndTags = () => {
   };
 
   const getPosts = async () => {
-    await getPost(GITHUB_API.PATH_POSTS);
+    try {
+      await getPost(GITHUB_API.PATH_POSTS);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   getPosts();

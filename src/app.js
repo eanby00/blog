@@ -15,4 +15,5 @@ mobileTagIcon.addEventListener("click", toggleMobileMenu);
 backdrop.addEventListener("click", toggleMobileMenu);
 
 const { posts, tags } = getPostsAndTags();
-console.log(posts, tags);
+console.log(posts);
+console.log(tags);
