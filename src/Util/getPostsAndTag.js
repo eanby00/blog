@@ -13,8 +13,23 @@ export const getPostsAndTags = () => {
     return path.split("/")[GITHUB_API.TAG_DEPTH];
   };
 
-  const setTag = (tag) => {
+  const addTag = (tag) => {
     tags.add(tag);
+  };
+
+  const addPost = (response, tag) => {
+    posts.push({
+      ...response.data,
+      title: response.data.name.slice(0, response.data.name.length - 2),
+      tag,
+      "last-modified": response.headers["last-modified"],
+    });
+  };
+
+  const addPostAndTag = (response) => {
+    const tag = getTag(response.data.path);
+    addTag(tag);
+    addPost(response, tag);
   };
 
   const getContent = async (octokit, path) => {
@@ -28,18 +43,6 @@ export const getPostsAndTags = () => {
     });
   };
 
-  const appendPostAndTag = (response) => {
-    const tag = getTag(response.data.path);
-    setTag(tag);
-
-    posts.push({
-      ...response.data,
-      title: response.data.name.slice(0, response.data.name.length - 2),
-      tag,
-      "last-modified": response.headers["last-modified"],
-    });
-  };
-
   const getPost = async (path) => {
     const response = await getContent(octokit, path);
 
@@ -48,7 +51,7 @@ export const getPostsAndTags = () => {
         await getPost(data.path);
       });
     } else if (isMDFile(response.data)) {
-      appendPostAndTag(response);
+      addPostAndTag(response);
     }
   };
 
