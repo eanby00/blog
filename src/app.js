@@ -1,9 +1,5 @@
 import { Octokit } from "octokit";
-
-const OWNER = "eanby00";
-const REPO = "blog";
-const PATH_POSTS = "Posts";
-const TAG_DEPTH = 1;
+import { GITHUB_API } from "./constants/API";
 
 const octokit = new Octokit({
   auth: API_KEY,
@@ -12,12 +8,19 @@ const octokit = new Octokit({
 const mobileTagIcon = document.querySelector(".mobile-menu");
 const backdrop = document.querySelector(".backdrop");
 
-const isMDFile = (name) => {
-  return name.slice(name.length - 2).toLowerCase() === "md";
+const isMDFile = (data) => {
+  return (
+    typeof data === "object" &&
+    data.name.slice(name.length - 2).toLowerCase() === "md"
+  );
 };
 
-const getTag = (path = "Posts/API/Github API/Github API.md") => {
-  return path.split("/")[TAG_DEPTH];
+const isFolder = (data) => {
+  return Array.isArray(data);
+};
+
+const getTag = (path) => {
+  return path.split("/")[GITHUB_API.TAG_DEPTH];
 };
 
 const toggleMobileMenu = () => {
@@ -35,8 +38,8 @@ const posts = [];
 
 const getContent = async (octokit, path) => {
   return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-    owner: OWNER,
-    repo: REPO,
+    owner: GITHUB_API.OWNER,
+    repo: GITHUB_API.REPO,
     path: path,
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
@@ -47,15 +50,11 @@ const getContent = async (octokit, path) => {
 const getPost = async (path) => {
   const response = await getContent(octokit, path);
 
-  if (Array.isArray(response.data)) {
+  if (isFolder(response.data)) {
     response.data.forEach((data) => {
       getPost(data.path);
     });
-  } else if (
-    typeof response.data === "object" &&
-    isMDFile(response.data.name)
-  ) {
-    console.log(response);
+  } else if (isMDFile(response.data)) {
     posts.push({
       ...response.data,
       title: response.data.name.slice(0, response.data.name.length - 2),
@@ -66,7 +65,7 @@ const getPost = async (path) => {
 };
 
 const getPosts = async () => {
-  await getPost(PATH_POSTS);
+  await getPost(GITHUB_API.PATH_POSTS);
 
   console.log(posts);
 };
