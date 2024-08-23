@@ -19,17 +19,31 @@ export const getPostsAndTags = () => {
     tags.add(tag);
   };
 
+  const getDescription = (rawMD) => {
+    const elementTree = getElementTreeFromMd(rawMD);
+    const blockquoteElements = elementTree.children.filter(
+      (element) => element.type === "blockquote"
+    );
+
+    if (blockquoteElements.length === 0) {
+      return;
+    }
+
+    return blockquoteElements[0].children[0].children[0].type === "text"
+      ? blockquoteElements[0].children[0].children[0].value
+      : "";
+  };
+
   const addPost = (response, tag) => {
     const raw = decodeBase64(response.data.content);
 
-    getElementTreeFromMd(raw);
-    getHTMLFromMD(raw);
-
     posts.push({
-      ...response.data,
       title: response.data.name.slice(0, response.data.name.length - 2),
       tag,
       "last-modified": response.headers["last-modified"],
+      "html-url": response.data["html_url"],
+      html: getHTMLFromMD(raw),
+      description: getDescription(raw),
     });
   };
 

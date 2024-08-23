@@ -4,7 +4,8 @@ import remarkRehype from "remark-rehype";
 import html from "rehype-stringify";
 
 export const getHTMLFromMD = (rawMD) => {
-  return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD);
+  return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD)
+    .value;
 };
 
 export const getElementTreeFromMd = (rawMD) => {
