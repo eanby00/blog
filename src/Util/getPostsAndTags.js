@@ -2,12 +2,13 @@ import { GITHUB_API } from "../constants/API";
 import { Octokit } from "octokit";
 import { isFolder, isMDFile } from "./typeCheck";
 import { decodeBase64 } from "./decodeBase64";
-import { getElementTreeFromMd, getHTMLFromMD } from "./getHTML";
+import { getDescription, getHTMLFromMD } from "./getHTML";
 
 export const getPostsAndTags = () => {
   const octokit = new Octokit({
     auth: API_KEY,
   });
+
   const posts = [];
   const tags = new Set();
 
@@ -17,21 +18,6 @@ export const getPostsAndTags = () => {
 
   const addTag = (tag) => {
     tags.add(tag);
-  };
-
-  const getDescription = (rawMD) => {
-    const elementTree = getElementTreeFromMd(rawMD);
-    const blockquoteElements = elementTree.children.filter(
-      (element) => element.type === "blockquote"
-    );
-
-    if (blockquoteElements.length === 0) {
-      return;
-    }
-
-    return blockquoteElements[0].children[0].children[0].type === "text"
-      ? blockquoteElements[0].children[0].children[0].value
-      : "";
   };
 
   const addPost = (response, tag) => {

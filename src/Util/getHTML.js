@@ -11,3 +11,18 @@ export const getHTMLFromMD = (rawMD) => {
 export const getElementTreeFromMd = (rawMD) => {
   return unified().use(markdown).parse(rawMD);
 };
+
+export const getDescription = (rawMD) => {
+  const elementTree = getElementTreeFromMd(rawMD);
+  const blockquoteElements = elementTree.children.filter(
+    (element) => element.type === "blockquote"
+  );
+
+  if (blockquoteElements.length === 0) {
+    return;
+  }
+
+  return blockquoteElements[0].children[0].children[0].type === "text"
+    ? blockquoteElements[0].children[0].children[0].value
+    : "";
+};
