@@ -3,6 +3,16 @@ import markdown from "remark-parse";
 import remarkRehype from "remark-rehype";
 import html from "rehype-stringify";
 
+const findDescription = (data) => {
+  if (!data.type) {
+    return "";
+  } else if (data.type === "text") {
+    return data.value;
+  } else {
+    return findDescription(data.children[0]);
+  }
+};
+
 export const getHTMLFromMD = (rawMD) => {
   return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD)
     .value;
@@ -19,10 +29,8 @@ export const getDescription = (rawMD) => {
   );
 
   if (blockquoteElements.length === 0) {
-    return;
+    return "";
   }
 
-  return blockquoteElements[0].children[0].children[0].type === "text"
-    ? blockquoteElements[0].children[0].children[0].value
-    : "";
+  return findDescription(blockquoteElements[0]);
 };
