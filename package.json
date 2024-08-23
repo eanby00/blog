@@ -32,7 +32,11 @@
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "regenerator-runtime": "^0.14.1",
+    "rehype-stringify": "^10.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
     "stream-browserify": "^3.0.0",
+    "unified": "^11.0.5",
     "vm-browserify": "^1.1.2",
     "webpack-dev-server": "^5.0.4"
   }

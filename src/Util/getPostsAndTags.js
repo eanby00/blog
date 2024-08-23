@@ -1,6 +1,8 @@
 import { GITHUB_API } from "../constants/API";
 import { Octokit } from "octokit";
 import { isFolder, isMDFile } from "./typeCheck";
+import { decodeBase64 } from "./decodeBase64";
+import { getElementTreeFromMd, getHTMLFromMD } from "./getHTML";
 
 export const getPostsAndTags = () => {
   const octokit = new Octokit({
@@ -18,6 +20,11 @@ export const getPostsAndTags = () => {
   };
 
   const addPost = (response, tag) => {
+    const raw = decodeBase64(response.data.content);
+
+    getElementTreeFromMd(raw);
+    getHTMLFromMD(raw);
+
     posts.push({
       ...response.data,
       title: response.data.name.slice(0, response.data.name.length - 2),
