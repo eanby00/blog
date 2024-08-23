@@ -1,5 +1,7 @@
 # Github API
 
+> Github Rest API 중 특정 위치의 데이터를 가져오는 API, 2개의 API가 가져오는 데이터는 거의 유사하나 Path를 통해서 가져오는지 branch를 통해서 가져오는지의 차이가 있다.
+
 ## get Repository Content
 
 ```javascript
