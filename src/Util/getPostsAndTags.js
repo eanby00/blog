@@ -1,6 +1,6 @@
 import { GITHUB_API } from "../constants/API";
 import { Octokit } from "octokit";
-import { isFolder, isMDFile } from "./typeCheck";
+import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
 
