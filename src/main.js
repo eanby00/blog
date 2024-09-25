@@ -1,6 +1,7 @@
 import { getPostsAndTags } from "./Util/getPostsAndTags";
+import { renderTags } from "./render/renderTag";
 
-const init = () => {
+const init = async () => {
   const mobileTagIcon = document.querySelector(".mobile-menu");
   const backdrop = document.querySelector(".backdrop");
 
@@ -18,6 +19,7 @@ const init = () => {
   const { posts, tags } = getPostsAndTags();
   console.log(posts);
   console.log(tags);
+  renderTags(tags);
 };
 
 init();
