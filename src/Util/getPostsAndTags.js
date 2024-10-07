@@ -14,7 +14,7 @@ export const getPostsAndTags = () => {
   };
 
   const getTags = (posts) => {
-    return posts.map((post) => post.tag);
+    return Array.from(new Set(posts.map((post) => post.tag)));
   };
 
   const getContent = async (octokit, path) => {
