@@ -5,19 +5,11 @@ import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
 
 export const getPostsAndTags = () => {
-  const octokit = new Octokit({
-    auth: API_KEY,
-  });
+  const getContent = async (path) => {
+    const octokit = new Octokit({
+      auth: API_KEY,
+    });
 
-  const getTag = (path) => {
-    return path.split("/")[GITHUB_API.TAG_DEPTH];
-  };
-
-  const getTags = (posts) => {
-    return Array.from(new Set(posts.map((post) => post.tag)));
-  };
-
-  const getContent = async (octokit, path) => {
     return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
       owner: GITHUB_API.OWNER,
       repo: GITHUB_API.REPO,
@@ -35,7 +27,7 @@ export const getPostsAndTags = () => {
 
     while (queue.length > 0) {
       const target = queue.shift();
-      const response = await getContent(octokit, target);
+      const response = await getContent(target);
       if (isFolder(response.data)) {
         response.data.forEach((element) => {
           queue.push(element.path);
@@ -46,6 +38,14 @@ export const getPostsAndTags = () => {
     }
 
     return posts;
+  };
+
+  const getTag = (path) => {
+    return path.split("/")[GITHUB_API.TAG_DEPTH];
+  };
+
+  const getTags = (posts) => {
+    return Array.from(new Set(posts.map((post) => post.tag)));
   };
 
   const modifyPost = (post, tag) => {
