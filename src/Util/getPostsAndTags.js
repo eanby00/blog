@@ -9,34 +9,12 @@ export const getPostsAndTags = () => {
     auth: API_KEY,
   });
 
-  const posts = [];
-  const tags = new Set();
-
   const getTag = (path) => {
     return path.split("/")[GITHUB_API.TAG_DEPTH];
   };
 
-  const maintainTag = (tag) => {
-    tags.add(tag);
-  };
-
-  const maintainPost = (response, tag) => {
-    const raw = decodeBase64(response.data.content);
-
-    posts.push({
-      title: response.data.name.slice(0, response.data.name.length - 2),
-      tag,
-      "last-modified": response.headers["last-modified"],
-      "html-url": response.data["html_url"],
-      html: getHTMLFromMD(raw),
-      description: getDescription(raw),
-    });
-  };
-
-  const maintainPostAndTag = (response) => {
-    const tag = getTag(response.data.path);
-    maintainTag(tag);
-    maintainPost(response, tag);
+  const getTags = (posts) => {
+    return posts.map((post) => post.tag);
   };
 
   const getContent = async (octokit, path) => {
@@ -50,29 +28,53 @@ export const getPostsAndTags = () => {
     });
   };
 
-  const getPost = async (path) => {
-    const response = await getContent(octokit, path);
+  const getRawPosts = async (path) => {
+    const posts = [];
+    const queue = [];
+    queue.push(path);
 
-    if (isFolder(response.data)) {
-      response.data.forEach(async (data) => {
-        await getPost(data.path);
-      });
-    } else if (isMDFile(response.data)) {
-      maintainPostAndTag(response);
+    while (queue.length > 0) {
+      const target = queue.shift();
+      const response = await getContent(octokit, target);
+      if (isFolder(response.data)) {
+        response.data.forEach((element) => {
+          queue.push(element.path);
+        });
+      } else if (isMDFile(response.data)) {
+        posts.push(response);
+      }
     }
+
+    return posts;
+  };
+
+  const modifyPost = (post, tag) => {
+    const raw = decodeBase64(post.data.content);
+
+    return {
+      title: post.data.name.slice(0, post.data.name.length - 2),
+      tag,
+      "last-modified": post.headers["last-modified"],
+      "html-url": post.data["html_url"],
+      html: getHTMLFromMD(raw),
+      description: getDescription(raw),
+    };
+  };
+
+  const modifyPosts = (posts) => {
+    return posts.map((post) => modifyPost(post, getTag(post.data.path)));
   };
 
   const getPosts = async () => {
     try {
-      await getPost(GITHUB_API.PATH_POSTS);
+      const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
+      const modifiedPosts = modifyPosts(rawPosts);
+      const tags = getTags(modifiedPosts);
+      return { posts: modifiedPosts, tags };
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  getPosts();
-  return {
-    posts,
-    tags,
-  };
+  return getPosts();
 };
