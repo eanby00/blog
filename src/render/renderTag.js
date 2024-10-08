@@ -1,16 +1,12 @@
-const copyTagTemplate = () => {
-  const template = document.querySelector(".tag");
-  return document.importNode(template.content, true);
-};
-
 export const renderTags = (tags) => {
   const tagContainer = document.querySelector(".tag-container");
+  const tagTemplate = document.querySelector(".tag");
   console.log("entered renderTags");
 
   tags.forEach((tag) => {
-    console.log(tag);
-    // body.querySelector("div").textContent = "테스트 이름";
+    const tagElement = document.importNode(tagTemplate.content, true);
+    tagElement.querySelector("div").textContent = tag;
 
-    // tagContainer.append(body);
+    tagContainer.append(tagElement);
   });
 };
