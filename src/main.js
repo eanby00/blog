@@ -1,6 +1,6 @@
 import { getPostsAndTags } from "./Util/getPostsAndTags";
 
-const init = () => {
+const init = async () => {
   const mobileTagIcon = document.querySelector(".mobile-menu");
   const backdrop = document.querySelector(".backdrop");
 
@@ -15,7 +15,7 @@ const init = () => {
   mobileTagIcon.addEventListener("click", toggleMenu);
   backdrop.addEventListener("click", toggleMenu);
 
-  const { posts, tags } = getPostsAndTags();
+  const { posts, tags } = await getPostsAndTags();
   console.log(posts);
   console.log(tags);
 };
