@@ -16,7 +16,7 @@ const init = async () => {
   mobileTagIcon.addEventListener("click", toggleMenu);
   backdrop.addEventListener("click", toggleMenu);
 
-  const { posts, tags } = getPostsAndTags();
+  const { posts, tags } = await getPostsAndTags();
   console.log(posts);
   console.log(tags);
   renderTags(tags);
