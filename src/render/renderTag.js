@@ -1,6 +1,6 @@
 export const renderTags = (tags) => {
   const tagContainer = document.querySelector(".tag-container");
-  const tagTemplate = document.querySelector(".tag");
+  const tagTemplate = document.querySelector(".template-tag");
   console.log("entered renderTags");
 
   tags.forEach((tag) => {

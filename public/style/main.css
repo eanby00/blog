@@ -90,6 +90,7 @@ body {
 }
 
 .tag-container {
+  width: 100%;
   background: var(--primary-text-color);
   display: flex;
   gap: 1rem;
