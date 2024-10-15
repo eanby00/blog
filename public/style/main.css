@@ -114,6 +114,16 @@ body {
   padding: 0.5rem 1rem;
   background: var(--secondary-dark-color);
   color: var(--primary-text-color);
+  border: 0.1rem solid var(--secondary-dark-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tag:hover,
+.tag:active {
+  background: var(--primary-text-color);
+  color: var(--secondary-dark-color);
+  border: 0.1rem solid var(--secondary-dark-color);
 }
 
 .card {
