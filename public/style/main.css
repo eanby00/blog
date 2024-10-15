@@ -120,7 +120,8 @@ body {
 }
 
 .tag:hover,
-.tag:active {
+.tag:active,
+.tag-open {
   background: var(--primary-text-color);
   color: var(--secondary-dark-color);
   border: 0.1rem solid var(--secondary-dark-color);
