@@ -18,31 +18,44 @@ export const render = (posts, tags) => {
     backdrop.addEventListener("click", toggleMenu);
   };
 
-  const selectTag = (tagElement, tag) => {};
+  const resetSelectedTag = (tagElement) => {
+    const tags = Array.from(tagElement.closest("nav").children);
+    tags.forEach((tag) => {
+      tag.classList.remove("tag-open");
+    });
+  };
+
+  const resetFilteredPosts = () => {
+    filteredPosts = [...posts];
+    selectedTag = "";
+  };
+
+  const filterPosts = (tagElement) => {
+    filteredPosts = posts.filter((post) => post.tag === tagElement.textContent);
+    selectedTag = tagElement.textContent;
+    tagElement.classList.add("tag-open");
+  };
+
+  const selectTag = (event) => {
+    const tagElement = event.target;
+    if (!tagElement.tagName === "DIV") {
+      return;
+    }
+
+    resetSelectedTag();
+    if (selectedTag === tagElement.textContent) {
+      resetFilteredPosts();
+    } else {
+      filterPosts(tagElement);
+    }
+    renderPosts(filteredPosts);
+    console.log(filteredPosts);
+  };
 
   const renderTags = (tags) => {
     const tagContainer = document.querySelector(".tag-container");
     const tagTemplate = document.querySelector(".template-tag");
-    tagContainer.addEventListener("click", (event) => {
-      if (!event.target.tagName === "DIV") {
-        return;
-      }
-
-      Array.from(event.target.closest("nav").children).forEach((tag) => {
-        tag.classList.remove("tag-open");
-      });
-      if (selectedTag === event.target.textContent) {
-        filteredPosts = [...posts];
-      } else {
-        filteredPosts = posts.filter(
-          (post) => post.tag === event.target.textContent
-        );
-        selectedTag = event.target.textContent;
-        event.target.classList.add("tag-open");
-      }
-      renderPosts(filteredPosts);
-      console.log(filteredPosts);
-    });
+    tagContainer.addEventListener("click", selectTag);
 
     tags.forEach((tag) => {
       const tagElement = document
