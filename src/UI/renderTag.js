@@ -5,6 +5,9 @@ export const renderTags = (tags) => {
   tags.forEach((tag) => {
     const tagElement = document.importNode(tagTemplate.content, true);
     tagElement.querySelector("div").textContent = tag;
+    tagElement.querySelector("div").addEventListener("click", () => {
+      console.log(tag);
+    });
 
     tagContainer.append(tagElement);
   });
