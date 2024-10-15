@@ -1,5 +1,5 @@
+import { render } from "./UI/render";
 import { getPostsAndTags } from "./Util/getPostsAndTags";
-import { renderTags } from "./render/renderTag";
 
 const init = async () => {
   const mobileTagIcon = document.querySelector(".mobile-menu");
@@ -19,7 +19,7 @@ const init = async () => {
   const { posts, tags } = await getPostsAndTags();
   console.log(posts);
   console.log(tags);
-  renderTags(tags);
+  render(posts, tags);
 };
 
 init();
