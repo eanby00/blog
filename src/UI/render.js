@@ -1,19 +1,21 @@
+import { $ } from "../Util/Helper";
+
 export const render = (posts, tags) => {
+  const mobileTagIcon = $(".mobile-menu");
+  const backdrop = $(".backdrop");
+  const tagContainer = $(".tag-container");
+  const tagTemplate = $(".template-tag");
+
   let filteredPosts = [...posts];
   let selectedTag = "";
 
+  const toggleMenu = () => {
+    tagContainer.classList.toggle("display-tag");
+    backdrop.classList.toggle("display-block");
+    mobileTagIcon.classList.toggle("open");
+  };
+
   const renderHeader = () => {
-    const mobileTagIcon = document.querySelector(".mobile-menu");
-    const backdrop = document.querySelector(".backdrop");
-
-    const toggleMenu = () => {
-      const tagContainer = document.querySelector(".tag-container");
-
-      tagContainer.classList.toggle("display-tag");
-      backdrop.classList.toggle("display-block");
-      mobileTagIcon.classList.toggle("open");
-    };
-
     mobileTagIcon.addEventListener("click", toggleMenu);
     backdrop.addEventListener("click", toggleMenu);
   };
@@ -38,11 +40,11 @@ export const render = (posts, tags) => {
 
   const selectTag = (event) => {
     const tagElement = event.target;
-    if (!tagElement.tagName === "DIV") {
+    if (tagElement.classList.contains("tag-container")) {
       return;
     }
 
-    resetSelectedTag();
+    resetSelectedTag(tagElement);
     if (selectedTag === tagElement.textContent) {
       resetFilteredPosts();
     } else {
@@ -53,10 +55,6 @@ export const render = (posts, tags) => {
   };
 
   const renderTags = (tags) => {
-    const tagContainer = document.querySelector(".tag-container");
-    const tagTemplate = document.querySelector(".template-tag");
-    tagContainer.addEventListener("click", selectTag);
-
     tags.forEach((tag) => {
       const tagElement = document
         .importNode(tagTemplate.content, true)
@@ -65,6 +63,7 @@ export const render = (posts, tags) => {
 
       tagContainer.append(tagElement);
     });
+    tagContainer.addEventListener("click", selectTag);
   };
 
   const renderPosts = (posts) => {};
