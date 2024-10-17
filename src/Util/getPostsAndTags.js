@@ -67,7 +67,7 @@ const modifyPost = async (post, tag) => {
   const raw = decodeBase64(post.content);
   const date = await getDate(post.path);
   return {
-    title: post.name.slice(0, post.name.length - 2),
+    title: post.name.slice(0, post.name.length - 3),
     tag,
     date: formatDate(date),
     "html-url": post["html_url"],

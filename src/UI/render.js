@@ -4,7 +4,9 @@ export const render = (posts, tags) => {
   const mobileTagIcon = $(".mobile-menu");
   const backdrop = $(".backdrop");
   const tagContainer = $(".tag-container");
+  const postContainer = $(".post-container");
   const tagTemplate = $(".template-tag");
+  const postTemplate = $(".template-post");
 
   let filteredPosts = [...posts];
   let selectedTag = "";
@@ -66,7 +68,19 @@ export const render = (posts, tags) => {
     tagContainer.addEventListener("click", selectTag);
   };
 
-  const renderPosts = (posts) => {};
+  const renderPosts = (posts) => {
+    posts.forEach((post) => {
+      const postElement = document
+        .importNode(postTemplate.content, true)
+        .querySelector("section");
+      postElement.querySelector("h2").textContent = post.title;
+      postElement.querySelector(".post-date").textContent = post.date;
+      postElement.querySelector(".post-description").textContent =
+        post.description;
+
+      postContainer.append(postElement);
+    });
+  };
 
   renderHeader();
   renderTags(tags);
