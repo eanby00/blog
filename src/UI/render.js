@@ -53,7 +53,6 @@ export const render = (posts, tags) => {
       filterPosts(tagElement);
     }
     renderPosts(filteredPosts);
-    console.log(filteredPosts);
   };
 
   const renderTags = (tags) => {

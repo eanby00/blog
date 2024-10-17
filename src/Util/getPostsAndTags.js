@@ -84,12 +84,17 @@ const modifyPosts = (posts) => {
   );
 };
 
+const sortPosts = (posts) => {
+  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
 export const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
     const modifiedPosts = await modifyPosts(rawPosts);
-    const tags = getTags(modifiedPosts);
-    return { posts: modifiedPosts, tags };
+    const sortedPosts = sortPosts(modifiedPosts);
+    const tags = getTags(sortedPosts);
+    return { posts: sortedPosts, tags };
   } catch (error) {
     console.log(error.message);
   }
