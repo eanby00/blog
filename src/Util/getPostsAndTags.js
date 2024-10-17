@@ -1,14 +1,10 @@
 import { GITHUB_API } from "../constants/API";
-import { Octokit } from "octokit";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
+import { octokit } from "./Helper";
 
 const getContent = async (path) => {
-  const octokit = new Octokit({
-    auth: API_KEY,
-  });
-
   return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
     owner: GITHUB_API.OWNER,
     repo: GITHUB_API.REPO,
@@ -20,10 +16,6 @@ const getContent = async (path) => {
 };
 
 const getDate = async (path) => {
-  const octokit = new Octokit({
-    auth: API_KEY,
-  });
-
   const response = await octokit.request("GET /repos/{owner}/{repo}/commits", {
     owner: GITHUB_API.OWNER,
     repo: GITHUB_API.REPO,
