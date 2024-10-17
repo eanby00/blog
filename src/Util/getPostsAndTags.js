@@ -19,6 +19,30 @@ const getContent = async (path) => {
   });
 };
 
+const getDate = async (path) => {
+  const octokit = new Octokit({
+    auth: API_KEY,
+  });
+
+  const response = await octokit.request("GET /repos/{owner}/{repo}/commits", {
+    owner: GITHUB_API.OWNER,
+    repo: GITHUB_API.REPO,
+    path: path,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+
+  return new Date(response.data[0].commit.author.date);
+};
+
+const formatDate = (day) => {
+  const year = day.getFullYear();
+  const month = day.getMonth() + 1;
+  const date = day.getDate();
+  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}`;
+};
+
 const getRawPosts = async (path) => {
   const posts = [];
   const queue = [];
@@ -47,13 +71,13 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const modifyPost = (post, tag) => {
+const modifyPost = async (post, tag) => {
   const raw = decodeBase64(post.data.content);
-
+  const date = await getDate(post.data.path);
   return {
     title: post.data.name.slice(0, post.data.name.length - 2),
     tag,
-    "last-modified": post.headers["last-modified"],
+    date: formatDate(date),
     "html-url": post.data["html_url"],
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
@@ -61,13 +85,15 @@ const modifyPost = (post, tag) => {
 };
 
 const modifyPosts = (posts) => {
-  return posts.map((post) => modifyPost(post, getTag(post.data.path)));
+  return Promise.all(
+    posts.map(async (post) => await modifyPost(post, getTag(post.data.path)))
+  );
 };
 
 export const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = modifyPosts(rawPosts);
+    const modifiedPosts = await modifyPosts(rawPosts);
     const tags = getTags(modifiedPosts);
     return { posts: modifiedPosts, tags };
   } catch (error) {
