@@ -3,6 +3,15 @@ import markdown from "remark-parse";
 import remarkRehype from "remark-rehype";
 import html from "rehype-stringify";
 
+export const getHTMLFromMD = (rawMD) => {
+  return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD)
+    .value;
+};
+
+const getElementTreeFromMd = (rawMD) => {
+  return unified().use(markdown).parse(rawMD);
+};
+
 const findDescription = (data) => {
   if (!data.type) {
     return "";
@@ -11,15 +20,6 @@ const findDescription = (data) => {
   } else {
     return findDescription(data.children[0]);
   }
-};
-
-export const getHTMLFromMD = (rawMD) => {
-  return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD)
-    .value;
-};
-
-export const getElementTreeFromMd = (rawMD) => {
-  return unified().use(markdown).parse(rawMD);
 };
 
 export const getDescription = (rawMD) => {

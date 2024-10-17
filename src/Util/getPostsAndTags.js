@@ -1,14 +1,10 @@
 import { GITHUB_API } from "../constants/API";
-import { Octokit } from "octokit";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
+import { octokit } from "./Helper";
 
 const getContent = async (path) => {
-  const octokit = new Octokit({
-    auth: API_KEY,
-  });
-
   return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
     owner: GITHUB_API.OWNER,
     repo: GITHUB_API.REPO,
@@ -17,6 +13,26 @@ const getContent = async (path) => {
       "X-GitHub-Api-Version": "2022-11-28",
     },
   });
+};
+
+const getDate = async (path) => {
+  const response = await octokit.request("GET /repos/{owner}/{repo}/commits", {
+    owner: GITHUB_API.OWNER,
+    repo: GITHUB_API.REPO,
+    path: path,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+
+  return new Date(response.data[0].commit.author.date);
+};
+
+const formatDate = (day) => {
+  const year = day.getFullYear();
+  const month = day.getMonth() + 1;
+  const date = day.getDate();
+  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
 const getRawPosts = async (path) => {
@@ -47,29 +63,38 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const modifyPost = (post, tag) => {
-  const raw = decodeBase64(post.data.content);
-
+const modifyPost = async (post, tag) => {
+  const raw = decodeBase64(post.content);
+  const date = await getDate(post.path);
   return {
-    title: post.data.name.slice(0, post.data.name.length - 2),
+    title: post.name.slice(0, post.name.length - 3),
     tag,
-    "last-modified": post.headers["last-modified"],
-    "html-url": post.data["html_url"],
+    date: formatDate(date),
+    "html-url": post["html_url"],
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
   };
 };
 
 const modifyPosts = (posts) => {
-  return posts.map((post) => modifyPost(post, getTag(post.data.path)));
+  return Promise.all(
+    posts.map(
+      async (post) => await modifyPost(post.data, getTag(post.data.path))
+    )
+  );
+};
+
+const sortPosts = (posts) => {
+  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
 export const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = modifyPosts(rawPosts);
-    const tags = getTags(modifiedPosts);
-    return { posts: modifiedPosts, tags };
+    const modifiedPosts = await modifyPosts(rawPosts);
+    const sortedPosts = sortPosts(modifiedPosts);
+    const tags = getTags(sortedPosts);
+    return { posts: sortedPosts, tags };
   } catch (error) {
     console.log(error.message);
   }

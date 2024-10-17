@@ -4,7 +4,9 @@ export const render = (posts, tags) => {
   const mobileTagIcon = $(".mobile-menu");
   const backdrop = $(".backdrop");
   const tagContainer = $(".tag-container");
+  const postContainer = $(".post-container");
   const tagTemplate = $(".template-tag");
+  const postTemplate = $(".template-post");
 
   let filteredPosts = [...posts];
   let selectedTag = "";
@@ -51,7 +53,6 @@ export const render = (posts, tags) => {
       filterPosts(tagElement);
     }
     renderPosts(filteredPosts);
-    console.log(filteredPosts);
   };
 
   const renderTags = (tags) => {
@@ -66,7 +67,20 @@ export const render = (posts, tags) => {
     tagContainer.addEventListener("click", selectTag);
   };
 
-  const renderPosts = (posts) => {};
+  const renderPosts = (posts) => {
+    postContainer.replaceChildren();
+    posts.forEach((post) => {
+      const postElement = document
+        .importNode(postTemplate.content, true)
+        .querySelector("section");
+      postElement.querySelector("h2").textContent = post.title;
+      postElement.querySelector(".post-date").textContent = post.date;
+      postElement.querySelector(".post-description").textContent =
+        post.description || `${post.title}에 관한 포스트`;
+
+      postContainer.append(postElement);
+    });
+  };
 
   renderHeader();
   renderTags(tags);

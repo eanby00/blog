@@ -1,23 +1,38 @@
 # Github API
 
-> Github Rest API 중 특정 위치의 데이터를 가져오는 API, 2개의 API가 가져오는 데이터는 거의 유사하나 Path를 통해서 가져오는지 branch를 통해서 가져오는지의 차이가 있다.
+> Github Rest API에 대한 정보
+
+## Octokit 설정
+
+```javascript
+const octokit = new Octokit({
+  auth: "API 키",
+});
+```
+
+- `Github REST API` 사용을 위한 기본 설정
+
+<br/>
 
 ## get Repository Content
 
 ```javascript
-octokit
-  .request("GET /repos/{owner}/{repo}/contents/{path}", {
-    owner: "eanby00",
-    repo: "blog",
-    path: "요구사항.md",
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  })
-  .then((response) => {
-    console.log(response);
-  });
+octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+  owner: "OWNER",
+  repo: "REPO",
+  path: "PATH",
+  headers: {
+    "X-GitHub-Api-Version": "2022-11-28",
+  },
+});
 ```
+
+- 특정 파일을 가져오는 코드
+- `owner`: `repository` 소유자
+- `repo`: `repository` 이름
+- `path`: 가져올 파일의 `reppository`상의 위치
+
+<br/>
 
 ![img1](./get%20content%20folder.png)
 
@@ -33,25 +48,18 @@ octokit
 
 <br/>
 
-## get Repository Tree
+## get Commit Data
 
 ```javascript
-// 실행 예시
-octokit
-  .request("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
-    owner: "eanby00",
-    repo: "blog",
-    tree_sha: "main",
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  })
-  .then((response) => {
-    console.log(response);
-  });
+octokit.request("GET /repos/{owner}/{repo}/commits", {
+  owner: "OWNER",
+  repo: "REPO",
+  path: "PATH",
+  headers: {
+    "X-GitHub-Api-Version": "2022-11-28",
+  },
+});
 ```
 
-![img](./get%20tree.png)
-
-- 데이터의 `type`이 `blob`이라면 파일이며, `url`을 통해 접근해서 내부의 `content`를 디코딩해야 한다.
-- 데이터의 `type`이 `tree`라면 폴더이며, `url`을 통해 접근해서 내부의 `tree`에 접근해야 한다.
+- 커밋 리스트를 가져오는 코드
+- `path`는 선택사항, `path`를 조건으로 선택할 수 있다.
