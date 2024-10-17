@@ -72,13 +72,13 @@ const getTags = (posts) => {
 };
 
 const modifyPost = async (post, tag) => {
-  const raw = decodeBase64(post.data.content);
-  const date = await getDate(post.data.path);
+  const raw = decodeBase64(post.content);
+  const date = await getDate(post.path);
   return {
-    title: post.data.name.slice(0, post.data.name.length - 2),
+    title: post.name.slice(0, post.name.length - 2),
     tag,
     date: formatDate(date),
-    "html-url": post.data["html_url"],
+    "html-url": post["html_url"],
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
   };
@@ -86,7 +86,9 @@ const modifyPost = async (post, tag) => {
 
 const modifyPosts = (posts) => {
   return Promise.all(
-    posts.map(async (post) => await modifyPost(post, getTag(post.data.path)))
+    posts.map(
+      async (post) => await modifyPost(post.data, getTag(post.data.path))
+    )
   );
 };
 
