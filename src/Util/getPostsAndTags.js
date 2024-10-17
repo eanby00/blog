@@ -32,7 +32,7 @@ const formatDate = (day) => {
   const year = day.getFullYear();
   const month = day.getMonth() + 1;
   const date = day.getDate();
-  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}`;
+  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
 const getRawPosts = async (path) => {
