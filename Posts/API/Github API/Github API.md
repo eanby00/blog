@@ -1,6 +1,6 @@
 # Github API
 
-> Github Rest API에 대한 정보
+> Github Rest API를 통한 콘텐츠와 커밋 가져오기
 
 ## Octokit 설정
 
