@@ -6,19 +6,24 @@ const getSelectedTag = (tagElement) => {
   return tags.filter((tag) => tag.classList.contains("tag-open"));
 };
 
+const isSelectedTag = (tags, tagElement) => {
+  return tags[0]?.textContent === tagElement.textContent;
+};
+
+const removeSelectedTag = (tags) => {
+  tags.forEach((tag) => {
+    tag.classList.remove("tag-open");
+  });
+};
+
 const filterPosts = (tagElement, posts) => {
   const selectedTags = getSelectedTag(tagElement);
-  if (
-    selectedTags.length === 1 &&
-    selectedTags[0].textContent === tagElement.textContent
-  ) {
+  if (isSelectedTag(selectedTags, tagElement)) {
     selectedTags[0].classList.remove("tag-open");
     return posts;
   }
 
-  selectedTags.forEach((tag) => {
-    tag.classList.remove("tag-open");
-  });
+  removeSelectedTag(selectedTags);
   tagElement.classList.add("tag-open");
   return posts.filter((post) => post.tag === tagElement.textContent);
 };
