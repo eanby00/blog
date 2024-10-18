@@ -7,6 +7,7 @@ export const render = (posts, tags) => {
   const postContainer = $(".post-container");
   const tagTemplate = $(".template-tag");
   const postTemplate = $(".template-post");
+  const loadingSpinner = $(".spinner");
 
   let filteredPosts = [...posts];
   let selectedTag = "";
@@ -82,7 +83,12 @@ export const render = (posts, tags) => {
     });
   };
 
+  const removeLoadingSpinner = () => {
+    loadingSpinner.classList.add("close");
+  };
+
   renderHeader();
   renderTags(tags);
   renderPosts(filteredPosts);
+  removeLoadingSpinner();
 };
