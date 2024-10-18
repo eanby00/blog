@@ -1,27 +1,15 @@
 import { $ } from "../Util/Helper";
+import { renderHeader } from "./renderHeader";
+import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
 export const render = (posts, tags) => {
-  const mobileTagIcon = $(".mobile-menu");
-  const backdrop = $(".backdrop");
   const tagContainer = $(".tag-container");
   const postContainer = $(".post-container");
   const tagTemplate = $(".template-tag");
   const postTemplate = $(".template-post");
-  const loadingSpinner = $(".spinner");
 
   let filteredPosts = [...posts];
   let selectedTag = "";
-
-  const toggleMenu = () => {
-    tagContainer.classList.toggle("display-tag");
-    backdrop.classList.toggle("display-block");
-    mobileTagIcon.classList.toggle("open");
-  };
-
-  const renderHeader = () => {
-    mobileTagIcon.addEventListener("click", toggleMenu);
-    backdrop.addEventListener("click", toggleMenu);
-  };
 
   const resetSelectedTag = (tagElement) => {
     const tags = Array.from(tagElement.closest("nav").children);
@@ -81,10 +69,6 @@ export const render = (posts, tags) => {
 
       postContainer.append(postElement);
     });
-  };
-
-  const removeLoadingSpinner = () => {
-    loadingSpinner.classList.add("close");
   };
 
   renderHeader();
