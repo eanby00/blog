@@ -2,38 +2,7 @@ import { GITHUB_API } from "../constants/API";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
-import { octokit } from "./Helper";
-
-const getContent = async (path) => {
-  return await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
-    owner: GITHUB_API.OWNER,
-    repo: GITHUB_API.REPO,
-    path: path,
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-};
-
-const getDate = async (path) => {
-  const response = await octokit.request("GET /repos/{owner}/{repo}/commits", {
-    owner: GITHUB_API.OWNER,
-    repo: GITHUB_API.REPO,
-    path: path,
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-
-  return new Date(response.data[0].commit.author.date);
-};
-
-const formatDate = (day) => {
-  const year = day.getFullYear();
-  const month = day.getMonth() + 1;
-  const date = day.getDate();
-  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
-};
+import { getCommit, getContent } from "./request";
 
 const getRawPosts = async (path) => {
   const posts = [];
@@ -59,8 +28,16 @@ const getTag = (path) => {
   return path.split("/")[GITHUB_API.TAG_DEPTH];
 };
 
-const getTags = (posts) => {
-  return Array.from(new Set(posts.map((post) => post.tag)));
+const getDate = async (path) => {
+  const commit = await getCommit(path);
+  return new Date(commit.data[0].commit.author.date);
+};
+
+const formatDate = (day) => {
+  const year = day.getFullYear();
+  const month = day.getMonth() + 1;
+  const date = day.getDate();
+  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
 const modifyPost = async (post, tag) => {
@@ -86,6 +63,10 @@ const modifyPosts = (posts) => {
 
 const sortPosts = (posts) => {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
+const getTags = (posts) => {
+  return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
 export const getPostsAndTags = async () => {
