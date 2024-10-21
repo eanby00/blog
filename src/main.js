@@ -1,8 +1,8 @@
 import { render } from "./UI/render";
-import { getPostsAndTags } from "./Util/getPostsAndTags";
+import { getData } from "./Util/getData";
 
 const init = async () => {
-  const { posts, tags } = await getPostsAndTags();
+  const { posts, tags } = await getData();
   render(posts, tags);
 };
 

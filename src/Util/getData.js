@@ -1,4 +1,5 @@
 import { GITHUB_API } from "../constants/API";
+import { hasData, loadData, saveData } from "../store/store";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
@@ -69,7 +70,7 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-export const getPostsAndTags = async () => {
+const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
     const modifiedPosts = await modifyPosts(rawPosts);
@@ -79,4 +80,14 @@ export const getPostsAndTags = async () => {
   } catch (error) {
     console.log(error.message);
   }
+};
+
+export const getData = async () => {
+  if (hasData()) {
+    return loadData();
+  }
+
+  const { posts, tags } = await getPostsAndTags();
+  saveData(posts, tags);
+  return { posts, tags };
 };
