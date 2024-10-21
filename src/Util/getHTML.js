@@ -15,11 +15,11 @@ const getElementTreeFromMd = (rawMD) => {
 const findDescription = (data) => {
   if (!data.type) {
     return "";
-  } else if (data.type === "text") {
-    return data.value;
-  } else {
-    return findDescription(data.children[0]);
   }
+  if (data.type === "text") {
+    return data.value;
+  }
+  return findDescription(data.children[0]);
 };
 
 export const getDescription = (rawMD) => {

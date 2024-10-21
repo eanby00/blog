@@ -1,9 +1,9 @@
-import { $ } from "../Util/Helper";
+import { $, createElement, hasClass } from "../Util/Helper";
 import { renderPosts } from "./renderPosts";
 
-const getSelectedTag = (tagElement) => {
+const getSelectedTags = (tagElement) => {
   const tags = Array.from(tagElement.closest("nav").children);
-  return tags.filter((tag) => tag.classList.contains("tag-open"));
+  return tags.filter((tag) => hasClass(tag, "tag-open"));
 };
 
 const isSelectedTag = (tags, tagElement) => {
@@ -17,7 +17,7 @@ const removeSelectedTag = (tags) => {
 };
 
 const filterPosts = (tagElement, posts) => {
-  const selectedTags = getSelectedTag(tagElement);
+  const selectedTags = getSelectedTags(tagElement);
   if (isSelectedTag(selectedTags, tagElement)) {
     selectedTags[0].classList.remove("tag-open");
     return posts;
@@ -30,24 +30,24 @@ const filterPosts = (tagElement, posts) => {
 
 const selectTag = (posts, event) => {
   const tagElement = event.target;
-  if (tagElement.classList.contains("tag-container")) {
+  if (hasClass(tagElement, "tag-container")) {
     return;
   }
 
-  const filteredPosts = filterPosts(tagElement, posts);
-  renderPosts(filteredPosts);
+  renderPosts(filterPosts(tagElement, posts));
+};
+
+const createTagElement = (tag) => {
+  const tagElement = createElement(".template-tag", "div");
+  tagElement.textContent = tag;
+  return tagElement;
 };
 
 export const renderTags = (posts, tags) => {
   const tagContainer = $(".tag-container");
 
   tags.forEach((tag) => {
-    const tagElement = document
-      .importNode($(".template-tag").content, true)
-      .querySelector("div");
-    tagElement.textContent = tag;
-
-    tagContainer.append(tagElement);
+    tagContainer.append(createTagElement(tag));
   });
 
   tagContainer.addEventListener("click", selectTag.bind(null, posts));
