@@ -1,8 +1,8 @@
-import { getStorage } from "./store/store";
+import { getDataFromURL } from "./Util/getDataFromURL";
 
-const url = new URL(location.href);
-const queryParams = url.searchParams;
-const id = queryParams.get("id");
+const init = () => {
+  const post = getDataFromURL();
+  document.title = post.title.toUpperCase();
+};
 
-const post = JSON.parse(getStorage(id));
-console.log(post);
+init();
