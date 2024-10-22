@@ -1,5 +1,10 @@
 import { $, createElement } from "../Util/Helper";
 
+const changeURLToPost = (event) => {
+  const title = event.target.closest("section").querySelector("h2").textContent;
+  location.href = `${location.href}/post/?title=${title}`;
+};
+
 const createPostElement = (post) => {
   const postElement = createElement(".template-post", "section");
   postElement.querySelector("h2").textContent = post.title;
@@ -7,12 +12,7 @@ const createPostElement = (post) => {
   postElement.querySelector(".post-description").textContent =
     post.description || `${post.title}에 관한 포스트`;
 
-  postElement.addEventListener("click", (event) => {
-    const title = event.target
-      .closest("section")
-      .querySelector("h2").textContent;
-    location.href = `${location.href}/post/?title=${title}`;
-  });
+  postElement.addEventListener("click", changeURLToPost);
   return postElement;
 };
 

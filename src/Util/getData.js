@@ -41,7 +41,7 @@ const formatDate = (day) => {
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-const modifyPost = async (post, tag) => {
+const trimPost = async (post, tag) => {
   const raw = decodeBase64(post.content);
   const date = await getDate(post.path);
   return {
@@ -54,11 +54,9 @@ const modifyPost = async (post, tag) => {
   };
 };
 
-const modifyPosts = (posts) => {
+const trimPosts = (posts) => {
   return Promise.all(
-    posts.map(
-      async (post) => await modifyPost(post.data, getTag(post.data.path))
-    )
+    posts.map(async (post) => await trimPost(post.data, getTag(post.data.path)))
   );
 };
 
@@ -73,7 +71,7 @@ const getTags = (posts) => {
 const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = await modifyPosts(rawPosts);
+    const modifiedPosts = await trimPosts(rawPosts);
     const sortedPosts = sortPosts(modifiedPosts);
     const tags = getTags(sortedPosts);
     return { posts: sortedPosts, tags };
@@ -84,7 +82,8 @@ const getPostsAndTags = async () => {
 
 export const getData = async () => {
   if (hasData()) {
-    return loadData();
+    const { posts, tags } = loadData();
+    return { posts: sortPosts(posts), tags };
   }
 
   const { posts, tags } = await getPostsAndTags();
