@@ -1,12 +1,13 @@
 import { $, createElement } from "../Util/Helper";
 
 const changeURLToPost = (event) => {
-  const title = event.target.closest("section").querySelector("h2").textContent;
-  location.href = `${location.href}post/?title=${title}`;
+  const id = event.target.closest("section").dataset.id;
+  location.href = `${location.href}post/?id=${id}`;
 };
 
 const createPostElement = (post) => {
   const postElement = createElement(".template-post", "section");
+  postElement.dataset.id = post.id;
   postElement.querySelector("h2").textContent = post.title;
   postElement.querySelector(".post-date").textContent = post.date;
   postElement.querySelector(".post-description").textContent =

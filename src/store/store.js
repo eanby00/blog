@@ -31,7 +31,7 @@ export const hasData = () => {
 
 export const saveData = (posts, tags) => {
   posts.forEach((post) => {
-    setStorage(post.title, post);
+    setStorage(post.id, post);
   });
   setStorage("tags", tags);
 };
