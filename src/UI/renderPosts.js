@@ -7,8 +7,11 @@ const createPostElement = (post) => {
   postElement.querySelector(".post-description").textContent =
     post.description || `${post.title}에 관한 포스트`;
 
-  postElement.addEventListener("click", () => {
-    console.log(post);
+  postElement.addEventListener("click", (event) => {
+    const title = event.target
+      .closest("section")
+      .querySelector("h2").textContent;
+    location.href = `${location.href}/post/?title=${title}`;
   });
   return postElement;
 };
