@@ -7,9 +7,9 @@ dotenv.config();
 
 module.exports = {
   mode: "production",
-  entry: "./src/main.js",
+  entry: { main: "./src/main.js", post: "./src/post.js" },
   output: {
-    filename: "main.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "public", "script"),
     publicPath: "public/script/",
   },

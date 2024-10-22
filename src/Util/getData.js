@@ -1,7 +1,9 @@
 import { GITHUB_API } from "../constants/API";
+import { hasData, loadData, saveData } from "../store/store";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
+import { generateID } from "./Helper";
 import { getCommit, getContent } from "./request";
 
 const getRawPosts = async (path) => {
@@ -40,11 +42,13 @@ const formatDate = (day) => {
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-const modifyPost = async (post, tag) => {
+const trimPost = async (post, tag) => {
   const raw = decodeBase64(post.content);
   const date = await getDate(post.path);
+  const title = post.name.slice(0, post.name.length - 3);
   return {
-    title: post.name.slice(0, post.name.length - 3),
+    id: generateID(title),
+    title,
     tag,
     date: formatDate(date),
     "html-url": post["html_url"],
@@ -53,11 +57,9 @@ const modifyPost = async (post, tag) => {
   };
 };
 
-const modifyPosts = (posts) => {
+const trimPosts = (posts) => {
   return Promise.all(
-    posts.map(
-      async (post) => await modifyPost(post.data, getTag(post.data.path))
-    )
+    posts.map(async (post) => await trimPost(post.data, getTag(post.data.path)))
   );
 };
 
@@ -69,14 +71,25 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-export const getPostsAndTags = async () => {
+const getPostsAndTags = async () => {
   try {
     const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = await modifyPosts(rawPosts);
+    const modifiedPosts = await trimPosts(rawPosts);
     const sortedPosts = sortPosts(modifiedPosts);
     const tags = getTags(sortedPosts);
     return { posts: sortedPosts, tags };
   } catch (error) {
     console.log(error.message);
   }
+};
+
+export const getData = async () => {
+  if (hasData()) {
+    const { posts, tags } = loadData();
+    return { posts: sortPosts(posts), tags };
+  }
+
+  const { posts, tags } = await getPostsAndTags();
+  saveData(posts, tags);
+  return { posts, tags };
 };
