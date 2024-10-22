@@ -2,7 +2,7 @@ import { $, createElement } from "../Util/Helper";
 
 const changeURLToPost = (event) => {
   const title = event.target.closest("section").querySelector("h2").textContent;
-  location.href = `${location.href}/post/?title=${title}`;
+  location.href = `${location.href}post/?title=${title}`;
 };
 
 const createPostElement = (post) => {
