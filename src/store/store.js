@@ -2,7 +2,7 @@ const setStorage = (key, data) => {
   sessionStorage.setItem(key, JSON.stringify(data));
 };
 
-const getStorage = (key) => {
+export const getStorage = (key) => {
   return sessionStorage.getItem(key);
 };
 
