@@ -14,6 +14,7 @@ const parseAnchorID = (textContent) => {
 
     return text;
   });
+
   return replacedText.join("");
 };
 
