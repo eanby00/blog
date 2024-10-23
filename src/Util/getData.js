@@ -46,25 +46,16 @@ const trimPost = async (post, tag) => {
   const raw = decodeBase64(post.content);
   const date = await getDate(post.path);
   const title = post.name.slice(0, post.name.length - 3);
-  const html = await parseMD(raw);
+
   return {
     id: generateID(title),
     title,
     tag,
     date: formatDate(date),
     "html-url": post["html_url"],
-    html: html.data,
+    html: getHTMLFromMD(raw),
     description: getDescription(raw),
   };
-  // return {
-  //   id: generateID(title),
-  //   title,
-  //   tag,
-  //   date: formatDate(date),
-  //   "html-url": post["html_url"],
-  //   html: getHTMLFromMD(raw),
-  //   description: getDescription(raw),
-  // };
 };
 
 const trimPosts = (posts) => {
