@@ -29,9 +29,12 @@ export const hasData = () => {
   return !(sessionStorage.length === 0);
 };
 
-export const saveData = (posts, tags) => {
+export const saveData = (posts, tags, images) => {
   posts.forEach((post) => {
-    setStorage(post.id, post);
+    setStorage(post.id, {
+      ...post,
+      images: images.filter((image) => post.path === image.path),
+    });
   });
   setStorage("tags", tags);
 };

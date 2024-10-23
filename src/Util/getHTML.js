@@ -4,7 +4,6 @@ import remarkRehype from "remark-rehype";
 import html from "rehype-stringify";
 
 export const getHTMLFromMD = (rawMD) => {
-  console.log(rawMD);
   return unified().use(markdown).use(remarkRehype).use(html).processSync(rawMD)
     .value;
 };

@@ -3,11 +3,26 @@ import { hasData, loadData, saveData } from "../store/store";
 import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
-import { generateID } from "./Helper";
-import { getCommit, getContent, parseMD } from "./request";
+import { $, generateID } from "./Helper";
+import { getCommit, getContent } from "./request";
+
+const getPath = (path) => {
+  return path.split("/").slice(0, -1).join("/");
+};
+
+const modifyImage = (image) => {
+  const name = image.data.name;
+  return {
+    name,
+    content: image.data.content,
+    path: getPath(image.data.path),
+    type: name.split(".").pop(),
+  };
+};
 
 const getRawPosts = async (path) => {
   const posts = [];
+  const images = [];
   const queue = [];
   queue.push(path);
 
@@ -20,10 +35,12 @@ const getRawPosts = async (path) => {
       });
     } else if (isMDFile(response.data)) {
       posts.push(response);
+    } else {
+      images.push(modifyImage(response));
     }
   }
 
-  return posts;
+  return { rawPosts: posts, images };
 };
 
 const getTag = (path) => {
@@ -51,6 +68,7 @@ const trimPost = async (post, tag) => {
     id: generateID(title),
     title,
     tag,
+    path: getPath(post.path),
     date: formatDate(date),
     "html-url": post["html_url"],
     html: getHTMLFromMD(raw),
@@ -72,13 +90,13 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const getPostsAndTags = async () => {
+const getPostsAndTagsAndImages = async () => {
   try {
-    const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
+    const { rawPosts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
     const modifiedPosts = await trimPosts(rawPosts);
     const sortedPosts = sortPosts(modifiedPosts);
     const tags = getTags(sortedPosts);
-    return { posts: sortedPosts, tags };
+    return { posts: sortedPosts, tags, images };
   } catch (error) {
     console.log(error.message);
   }
@@ -90,7 +108,7 @@ export const getData = async () => {
     return { posts: sortPosts(posts), tags };
   }
 
-  const { posts, tags } = await getPostsAndTags();
-  saveData(posts, tags);
+  const { posts, tags, images } = await getPostsAndTagsAndImages();
+  saveData(posts, tags, images);
   return { posts, tags };
 };
