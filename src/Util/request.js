@@ -23,3 +23,12 @@ export const getContent = (path) => {
 export const getCommit = (path) => {
   return request("GET /repos/{owner}/{repo}/commits", path);
 };
+
+export const parseMD = (text) => {
+  return octokit.request("POST /markdown", {
+    text: text,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+};

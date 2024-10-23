@@ -4,7 +4,7 @@ import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
 import { generateID } from "./Helper";
-import { getCommit, getContent } from "./request";
+import { getCommit, getContent, parseMD } from "./request";
 
 const getRawPosts = async (path) => {
   const posts = [];
@@ -46,15 +46,25 @@ const trimPost = async (post, tag) => {
   const raw = decodeBase64(post.content);
   const date = await getDate(post.path);
   const title = post.name.slice(0, post.name.length - 3);
+  const html = await parseMD(raw);
   return {
     id: generateID(title),
     title,
     tag,
     date: formatDate(date),
     "html-url": post["html_url"],
-    html: getHTMLFromMD(raw),
+    html: html.data,
     description: getDescription(raw),
   };
+  // return {
+  //   id: generateID(title),
+  //   title,
+  //   tag,
+  //   date: formatDate(date),
+  //   "html-url": post["html_url"],
+  //   html: getHTMLFromMD(raw),
+  //   description: getDescription(raw),
+  // };
 };
 
 const trimPosts = (posts) => {
