@@ -10,13 +10,29 @@ const getPath = (path) => {
   return path.split("/").slice(0, -1).join("/");
 };
 
-const modifyImage = (image) => {
-  const name = image.data.name;
+const modifyPost = async ({ data }) => {
+  const raw = decodeBase64(data.content);
+  const date = await getDate(data.path);
+  const title = data.name.slice(0, data.name.length - 3);
+
   return {
-    name,
-    content: image.data.content,
-    path: getPath(image.data.path),
-    type: name.split(".").pop(),
+    id: generateID(title),
+    title,
+    tag: getTag(data.path),
+    path: getPath(data.path),
+    date: formatDate(date),
+    "html-url": data["html_url"],
+    html: getHTMLFromMD(raw),
+    description: getDescription(raw),
+  };
+};
+
+const modifyImage = ({ data }) => {
+  return {
+    name: data.name,
+    content: data.content,
+    path: getPath(data.path),
+    type: data.name.split(".").pop(),
   };
 };
 
@@ -34,13 +50,13 @@ const getRawPosts = async (path) => {
         queue.push(element.path);
       });
     } else if (isMDFile(response.data)) {
-      posts.push(response);
+      posts.push(await modifyPost(response));
     } else {
       images.push(modifyImage(response));
     }
   }
 
-  return { rawPosts: posts, images };
+  return { posts, images };
 };
 
 const getTag = (path) => {
@@ -59,27 +75,13 @@ const formatDate = (day) => {
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-const trimPost = async (post, tag) => {
-  const raw = decodeBase64(post.content);
-  const date = await getDate(post.path);
-  const title = post.name.slice(0, post.name.length - 3);
-
-  return {
-    id: generateID(title),
-    title,
-    tag,
-    path: getPath(post.path),
-    date: formatDate(date),
-    "html-url": post["html_url"],
-    html: getHTMLFromMD(raw),
-    description: getDescription(raw),
-  };
-};
-
-const trimPosts = (posts) => {
-  return Promise.all(
-    posts.map(async (post) => await trimPost(post.data, getTag(post.data.path)))
-  );
+const connectImages = (posts, images) => {
+  return posts.map((post) => {
+    return {
+      ...post,
+      images: images.filter((image) => post.path === image.path),
+    };
+  });
 };
 
 const sortPosts = (posts) => {
@@ -90,25 +92,25 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const getPostsAndTagsAndImages = async () => {
+const getData = async () => {
   try {
-    const { rawPosts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = await trimPosts(rawPosts);
-    const sortedPosts = sortPosts(modifiedPosts);
+    const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
+    const postsWithImage = connectImages(posts, images);
+    const sortedPosts = sortPosts(postsWithImage);
     const tags = getTags(sortedPosts);
-    return { posts: sortedPosts, tags, images };
+    return { posts: sortedPosts, tags };
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const getData = async () => {
+export const getDatas = async () => {
   if (hasData()) {
     const { posts, tags } = loadData();
     return { posts: sortPosts(posts), tags };
   }
 
-  const { posts, tags, images } = await getPostsAndTagsAndImages();
-  saveData(posts, tags, images);
+  const { posts, tags } = await getData();
+  saveData(posts, tags);
   return { posts, tags };
 };
