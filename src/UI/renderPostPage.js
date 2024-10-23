@@ -41,7 +41,20 @@ const renderPostContent = (post) => {
   mainElement.insertAdjacentHTML("beforeend", html);
 };
 
+const renderImage = (post) => {
+  const imageElements = document.querySelectorAll("img");
+  const images = post.images;
+  imageElements.forEach((imageElement) => {
+    imageElement.id = imageElement.src.split("/").pop().replaceAll("%20", " ");
+    const image = images.find((image) => image.name === imageElement.id);
+    if (image) {
+      imageElement.src = `data:image/${image.type};base64, ${image.content}`;
+    }
+  });
+};
+
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderAnchors();
+  renderImage(post);
 };
