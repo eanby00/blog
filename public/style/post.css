@@ -1,0 +1,44 @@
+main {
+  border: 1px solid #ccc;
+  border-top: 0px;
+}
+
+main h1,
+main h2,
+main h3 {
+  margin-top: 2rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+main h1:first-of-type {
+  margin-top: 0;
+}
+
+main blockquote {
+  margin: 0;
+  font-weight: bold;
+  color: #525252;
+}
+
+main p {
+  text-align: center;
+}
+
+main pre {
+  background: #ebebeb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+main li code {
+  background: #ebebeb;
+  padding: 0.2rem;
+  border-radius: 0.1rem;
+}
+
+main img {
+  margin-top: 1rem;
+  width: 100%;
+}
