@@ -114,7 +114,7 @@ main {
   display: none;
 }
 
-svg {
+.spinner svg {
   position: relative;
   width: 10rem;
   height: 10rem;
