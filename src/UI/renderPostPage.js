@@ -1,5 +1,6 @@
 import { INDEX_ANCHOR } from "../constants/MD";
 import { $ } from "../Util/Helper";
+import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
 const parseAnchorID = (textContent) => {
   const textList = textContent.toLowerCase().split("");
@@ -57,4 +58,5 @@ export const renderPostPage = (post) => {
   renderPostContent(post);
   renderAnchors();
   renderImage(post);
+  removeLoadingSpinner();
 };
