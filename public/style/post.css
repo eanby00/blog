@@ -59,3 +59,26 @@ footer {
   width: 2rem;
   height: 2rem;
 }
+
+.upToTop {
+  background: var(--secondary-main-color);
+  border: 0px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.upToTop:active,
+.upToTop:hover {
+  background: var(--primary-text-color);
+  border: 0.1rem solid var(--secondary-main-color);
+
+  svg {
+    fill: var(--secondary-main-color);
+  }
+}

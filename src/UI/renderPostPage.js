@@ -60,10 +60,38 @@ const renderGithubIcon = (href) => {
   githubIcon.classList.remove("close");
 };
 
+const observeHeader = (targetEl, entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      targetEl.classList.add("close");
+    } else {
+      targetEl.classList.remove("close");
+    }
+  });
+};
+
+const renderUpToTop = () => {
+  const upToTopButton = $(".upToTop");
+  upToTopButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+
+  const header = $(".main-header");
+  const observer = new IntersectionObserver(
+    observeHeader.bind(null, upToTopButton)
+  );
+  observer.observe(header);
+};
+
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);
+  renderUpToTop();
   removeLoadingSpinner();
 };
