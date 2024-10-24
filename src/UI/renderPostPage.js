@@ -54,9 +54,16 @@ const renderImage = (post) => {
   });
 };
 
+const renderGithubIcon = (href) => {
+  const githubIcon = $("footer a");
+  githubIcon.href = href;
+  githubIcon.classList.remove("close");
+};
+
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderAnchors();
   renderImage(post);
+  renderGithubIcon(post.html_url);
   removeLoadingSpinner();
 };

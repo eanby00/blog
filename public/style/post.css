@@ -55,7 +55,7 @@ footer {
   align-items: center;
 }
 
-.link-github {
+.link-github svg {
   width: 2rem;
   height: 2rem;
 }
