@@ -1,5 +1,5 @@
 import { INDEX_ANCHOR } from "../constants/MD";
-import { $ } from "../Util/Helper";
+import { $, createElement } from "../Util/Helper";
 import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
 const parseAnchorID = (textContent) => {
@@ -87,11 +87,18 @@ const renderUpToTop = () => {
   observer.observe(header);
 };
 
+const renderContentCopy = () => {
+  document.querySelectorAll("pre").forEach((code) => {
+    code.append(createElement(".content-copy", "svg"));
+  });
+};
+
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);
   renderUpToTop();
+  renderContentCopy();
   removeLoadingSpinner();
 };

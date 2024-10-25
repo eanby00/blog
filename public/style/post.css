@@ -27,9 +27,34 @@ main p {
 }
 
 main pre {
+  position: relative;
   background: #ebebeb;
   padding: 1rem;
   border-radius: 0.5rem;
+  min-width: max-content;
+
+  .copy-icon {
+    display: none;
+  }
+}
+
+main pre:hover,
+main pre:active {
+  .copy-icon {
+    display: block;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+    border-radius: 0.5rem;
+  }
+
+  .copy-icon:hover,
+  .copy-icon:active {
+    background: #a7a7a7;
+  }
 }
 
 main li {
@@ -42,7 +67,7 @@ main li code {
   border-radius: 0.5rem;
 }
 
-main img {
+main p img {
   margin-top: 1rem;
   width: 100%;
 }
@@ -80,5 +105,15 @@ footer {
 
   svg {
     fill: var(--secondary-main-color);
+  }
+}
+
+@media (min-width: 40rem) {
+  main {
+    min-width: max-content;
+  }
+
+  main p img {
+    max-width: 35rem;
   }
 }
