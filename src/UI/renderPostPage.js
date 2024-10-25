@@ -87,16 +87,28 @@ const renderUpToTop = () => {
   observer.observe(header);
 };
 
-const copyText = async () => {
-  await navigator.clipboard.writeText($("code").textContent);
-  console.log("done");
+const copyText = async (tag, copyButton, copyDone) => {
+  await navigator.clipboard.writeText(tag.querySelector("code").textContent);
+  copyDone.classList.toggle("close");
+  copyButton.classList.toggle("close");
+  setTimeout(() => {
+    copyDone.classList.toggle("close");
+    copyButton.classList.toggle("close");
+  }, 2000);
 };
 
 const renderContentCopy = () => {
-  document.querySelectorAll("pre").forEach((code) => {
+  document.querySelectorAll("pre").forEach((tag) => {
     const copyButton = createElement(".content-copy", "svg");
-    copyButton.addEventListener("click", copyText);
-    code.append(copyButton);
+    const copyDone = createElement(".content-copy-done", "svg");
+    copyButton.addEventListener(
+      "click",
+      copyText.bind(null, tag, copyButton, copyDone)
+    );
+    const div = document.createElement("div");
+    div.append(copyButton);
+    div.append(copyDone);
+    tag.append(div);
   });
 };
 
