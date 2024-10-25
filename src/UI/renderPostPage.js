@@ -29,13 +29,14 @@ const setAnchor = (targetElement, tag) => {
 
 const renderAnchors = () => {
   const mainElement = $("main article");
-  const navElement = $("main nav");
+  const navElement = createElement(".nav-anchor", "nav");
   INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
     setAnchor(mainElement, tagName);
   });
 
   const anchorList = mainElement.querySelector("ul li a").closest("ul");
   navElement.append(anchorList);
+  $("aside").append(navElement);
 };
 
 const renderPostContent = (post) => {

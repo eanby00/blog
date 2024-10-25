@@ -11,9 +11,12 @@ main h1:first-of-type {
 }
 
 main blockquote {
-  margin: 0;
   font-weight: bold;
   color: #525252;
+  border-left: 0.5rem solid #9b9b9b;
+  background: #ebebeb;
+  margin: 0 1rem;
+  padding: 0.2rem;
 }
 
 main p {
@@ -43,7 +46,7 @@ main pre code {
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: #a7a7a7;
+  background: #9b9b9b;
 }
 
 .copy-icon-done {
@@ -102,6 +105,27 @@ footer {
   svg {
     fill: var(--secondary-main-color);
   }
+}
+
+nav ul {
+  padding-left: 1rem;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #525252;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  border-left: 0.5rem solid white;
+}
+
+nav a:hover,
+nav a:active {
+  border-left: 0.5rem solid #9b9b9b;
 }
 
 @media (min-width: 40rem) {
