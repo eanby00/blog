@@ -27,18 +27,18 @@ main p {
 }
 
 main pre {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
   background: #ebebeb;
   padding: 1rem;
   border-radius: 0.5rem;
-  overflow-x: scroll;
+}
+
+main pre code {
+  overflow-x: auto;
 }
 
 .copy-icon {
-  display: block;
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
   width: 2rem;
   height: 2rem;
   fill: black;
