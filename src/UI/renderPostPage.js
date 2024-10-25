@@ -28,14 +28,18 @@ const setAnchor = (targetElement, tag) => {
 };
 
 const renderAnchors = () => {
-  const mainElement = $("main");
+  const mainElement = $("main article");
+  const navElement = $("main nav");
   INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
     setAnchor(mainElement, tagName);
   });
+
+  const anchorList = mainElement.querySelector("ul li a").closest("ul");
+  navElement.append(anchorList);
 };
 
 const renderPostContent = (post) => {
-  const mainElement = $("main");
+  const mainElement = $("main article");
   document.title = post.title.toUpperCase();
 
   const html = post.html;

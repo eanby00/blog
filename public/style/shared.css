@@ -160,9 +160,4 @@ svg circle {
   .mobile-menu {
     display: none;
   }
-
-  main {
-    margin: 0 auto;
-    width: 70%;
-  }
 }
