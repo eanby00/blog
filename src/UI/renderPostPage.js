@@ -87,9 +87,16 @@ const renderUpToTop = () => {
   observer.observe(header);
 };
 
+const copyText = async () => {
+  await navigator.clipboard.writeText($("code").textContent);
+  console.log("done");
+};
+
 const renderContentCopy = () => {
   document.querySelectorAll("pre").forEach((code) => {
-    code.append(createElement(".content-copy", "svg"));
+    const copyButton = createElement(".content-copy", "svg");
+    copyButton.addEventListener("click", copyText);
+    code.append(copyButton);
   });
 };
 

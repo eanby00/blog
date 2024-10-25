@@ -31,30 +31,34 @@ main pre {
   background: #ebebeb;
   padding: 1rem;
   border-radius: 0.5rem;
-  min-width: max-content;
-
-  .copy-icon {
-    display: none;
-  }
+  overflow-x: scroll;
 }
 
-main pre:hover,
-main pre:active {
-  .copy-icon {
-    display: block;
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 2rem;
-    height: 2rem;
-    fill: black;
-    border-radius: 0.5rem;
-  }
+.copy-icon {
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  fill: black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
 
-  .copy-icon:hover,
-  .copy-icon:active {
-    background: #a7a7a7;
-  }
+.copy-icon:hover,
+.copy-icon:active {
+  background: #a7a7a7;
+}
+
+.copy-icon-done {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  fill: black;
+  border-radius: 0.5rem;
 }
 
 main li {
