@@ -4,6 +4,7 @@ export const renderHeader = () => {
   const mobileMenu = $(".mobile-menu");
   const backdrop = $(".backdrop");
   const tagContainer = $(".tag-container");
+  const media = matchMedia("(min-width: 40rem)");
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
@@ -13,4 +14,11 @@ export const renderHeader = () => {
 
   mobileMenu.addEventListener("click", toggleMenu);
   backdrop.addEventListener("click", toggleMenu);
+  media.addEventListener("change", () => {
+    if (media.matches) {
+      mobileMenu.classList.remove("open");
+      backdrop.classList.remove("display-block");
+      tagContainer.classList.remove("display-tag");
+    }
+  });
 };
