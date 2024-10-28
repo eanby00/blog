@@ -1,7 +1,7 @@
 main {
-  width: 150%;
   padding: 0;
   display: flex;
+  position: relative;
 }
 
 main article {
@@ -15,24 +15,23 @@ main article {
 
 main aside {
   width: 50%;
-  height: 100vh;
+  height: 100%;
+  padding-top: 3rem;
   background: white;
-  position: sticky;
+  position: fixed;
   top: 0;
-  right: -50%;
-  visibility: hidden;
+  right: 0;
   z-index: 8;
-  transition: visibility 0.5s;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
 }
 
-/* main aside nav {
-  position: sticky;
-  height: max-content;
-} */
+main aside nav {
+  padding: 1rem;
+}
 
 main aside.open {
-  visibility: visible;
-  right: 0;
+  transform: translateX(0);
 }
 
 main h1,
@@ -178,10 +177,11 @@ nav a:active {
 
   main aside {
     width: 30%;
-    height: 100vh;
+    height: max-content;
     min-width: 12rem;
-    right: 0;
+    position: sticky;
     visibility: visible;
+    transform: translateX(0);
   }
 
   main p img {
