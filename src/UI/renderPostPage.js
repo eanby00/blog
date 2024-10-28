@@ -44,7 +44,22 @@ const renderPostContent = (post) => {
   document.title = post.title.toUpperCase();
 
   const html = post.html;
-  mainElement.insertAdjacentHTML("beforeend", html);
+  mainElement.insertAdjacentHTML("afterbegin", html);
+};
+
+export const renderHeader = () => {
+  const mobileMenu = $(".mobile-menu");
+  const backdrop = $(".backdrop");
+  const aside = $("aside");
+
+  const toggleMenu = () => {
+    mobileMenu.classList.toggle("open");
+    backdrop.classList.toggle("display-block");
+    aside.classList.toggle("open");
+  };
+
+  mobileMenu.addEventListener("click", toggleMenu);
+  backdrop.addEventListener("click", toggleMenu);
 };
 
 const renderImage = (post) => {
@@ -119,6 +134,7 @@ const renderContentCopy = () => {
 
 export const renderPostPage = (post) => {
   renderPostContent(post);
+  renderHeader();
   renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);

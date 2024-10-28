@@ -54,6 +54,10 @@ body {
   display: none;
 }
 
+.display-block {
+  display: block;
+}
+
 .mobile-menu {
   display: flex;
   flex-direction: column;

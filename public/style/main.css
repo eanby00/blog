@@ -76,10 +76,6 @@
   -webkit-box-orient: vertical;
 }
 
-.display-block {
-  display: block;
-}
-
 @media (min-width: 40rem) {
   main {
     margin: 0 auto;

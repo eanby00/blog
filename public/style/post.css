@@ -1,3 +1,40 @@
+main {
+  width: 150%;
+  padding: 0;
+  display: flex;
+}
+
+main article {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+main article {
+  width: 100%;
+}
+
+main aside {
+  width: 50%;
+  height: 100vh;
+  background: white;
+  position: sticky;
+  top: 0;
+  right: -50%;
+  visibility: hidden;
+  z-index: 8;
+  transition: visibility 0.5s;
+}
+
+/* main aside nav {
+  position: sticky;
+  height: max-content;
+} */
+
+main aside.open {
+  visibility: visible;
+  right: 0;
+}
+
 main h1,
 main h2,
 main h3 {
@@ -130,22 +167,21 @@ nav a:active {
 
 @media (min-width: 40rem) {
   main {
-    display: flex;
+    width: 100%;
   }
 
   main article {
     width: 70%;
-    border: 1px solid #ccc;
-    border-top: 0px;
-    border-bottom: 0px;
+    border-right: 1px solid #ccc;
+    padding: 1rem;
   }
 
   main aside {
     width: 30%;
-    height: max-content;
+    height: 100vh;
     min-width: 12rem;
-    position: sticky;
-    top: 2rem;
+    right: 0;
+    visibility: visible;
   }
 
   main p img {
