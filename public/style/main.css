@@ -82,11 +82,11 @@
 
   .tag-container {
     position: relative;
-    visibility: visible;
     transform: translateX(0);
     display: flex;
     margin: 2rem auto;
     width: 70%;
+    transition: initial;
   }
 
   .post-container {
