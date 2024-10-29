@@ -48,12 +48,25 @@ const renderAnchors = () => {
   $("aside").append(navElement);
 };
 
+const replaceCheckbox = (html) => {
+  return html
+    .replaceAll(
+      "[ ]",
+      `<input type="checkbox" disabled><label></label></input>`
+    )
+    .replaceAll(
+      "[x]",
+      `<input type="checkbox" checked disabled><label></label></input>`
+    );
+};
+
 const renderPostContent = (post) => {
   const mainElement = $("main article");
   document.title = post.title.toUpperCase();
 
   const html = post.html;
-  mainElement.insertAdjacentHTML("afterbegin", html);
+  const replacedHtml = replaceCheckbox(html);
+  mainElement.insertAdjacentHTML("afterbegin", replacedHtml);
 };
 
 export const renderHeader = () => {
