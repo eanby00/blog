@@ -7,31 +7,7 @@ main {
 main article {
   padding: 0.5rem;
   margin-top: 1rem;
-}
-
-main article {
   width: 100%;
-}
-
-main aside {
-  width: 50%;
-  height: 100%;
-  padding-top: 3.5rem;
-  background: white;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 8;
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in-out;
-}
-
-main aside nav {
-  padding: 1rem;
-}
-
-main aside.open {
-  transform: translateX(0);
 }
 
 article h1,
@@ -143,25 +119,72 @@ footer {
   }
 }
 
+main aside {
+  width: 50%;
+  height: 100%;
+  padding-top: 5rem;
+  background: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 8;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+main aside nav {
+  padding: 1rem;
+}
+
+main aside.open {
+  transform: translateX(0);
+}
+
 aside ul {
-  padding-left: 1rem;
+  padding-left: 0rem;
 }
 
 aside li {
   list-style-type: none;
+  border-left: 0.5rem solid white;
+  margin: 0.2rem 0;
+}
+
+aside li:hover,
+aside li:active {
+  border-left: 0.5rem solid #9b9b9b;
 }
 
 aside a {
   text-decoration: none;
   color: #525252;
   font-weight: bold;
-  padding-left: 0.5rem;
-  border-left: 0.5rem solid white;
 }
 
-aside a:hover,
-aside a:active {
-  border-left: 0.5rem solid #9b9b9b;
+aside li:has(> a.h1) {
+  padding-left: 0.5rem;
+}
+
+aside li:has(> a.h2) {
+  padding-left: 1rem;
+}
+
+aside li:has(> a.h3) {
+  padding-left: 1.5rem;
+}
+
+aside a.h1 {
+  color: black;
+  font-size: larger;
+}
+
+aside a.h2 {
+  font-size: large;
+}
+
+aside a.h3 {
+  padding-left: 1.5rem;
+  font-size: medium;
 }
 
 @media (min-width: 40rem) {
@@ -173,6 +196,10 @@ aside a:active {
     width: 70%;
     border-right: 1px solid #ccc;
     padding: 1rem;
+  }
+
+  article p img {
+    max-width: 28rem;
   }
 
   main aside {
@@ -188,9 +215,5 @@ aside a:active {
   aside h2 {
     margin-top: 0;
     padding-top: 0;
-  }
-
-  article p img {
-    max-width: 28rem;
   }
 }
