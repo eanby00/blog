@@ -2,15 +2,6 @@
 
 > Github Rest API를 통한 콘텐츠와 커밋 가져오기
 
-## 목차
-
-- [Octokit 설정](#octokit-설정)
-  - [테스트1](#)
-  - [테스트2](#)
-  - [테스트3](#)
-- [get Repository Content](#get-repository-content)
-- [get Commit Data](#get-commit-data)
-
 <br/>
 
 ## Octokit 설정
