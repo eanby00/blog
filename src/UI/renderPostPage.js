@@ -21,6 +21,8 @@ const parseAnchorID = (textContent) => {
 
 const setAnchorID = (tag) => {
   tag.id = parseAnchorID(tag.textContent);
+  tag.classList.add("anchor");
+  tag.classList.add(tag.tagName.toLowerCase());
 };
 
 const setAnchor = (targetElement, tag) => {
@@ -34,8 +36,15 @@ const renderAnchors = () => {
     setAnchor(mainElement, tagName);
   });
 
-  const anchorList = mainElement.querySelector("ul li a").closest("ul");
-  navElement.append(anchorList);
+  const anchorList = mainElement.querySelectorAll(".anchor");
+  anchorList.forEach((anchor) => {
+    const anchorLi = createElement(".template-anchor", "li");
+    anchorLi.querySelector("a").textContent = anchor.textContent;
+    anchorLi.querySelector("a").href = `#${anchor.id}`;
+    anchorLi.querySelector("a").className = anchor.className;
+    navElement.querySelector("ul").append(anchorLi);
+  });
+
   $("aside").append(navElement);
 };
 
