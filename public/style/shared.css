@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 * {
-  --primary-light-color: #dcf2f1;
-  --primary-main-color: #7fc7d9;
-  --primary-dark-color: #365486;
+  --primary-light-color: #ebebeb;
+  --primary-main-color: #ccc;
+  --primary-dark-color: #525252;
+  --primary-darkest-color: black;
   --primary-text-color: white;
-  --secondary-light-color: #ffbb5c;
-  --secondary-main-color: #e25e3e;
-  --secondary-dark-color: #c63d2f;
+  --secondary-light-color: #ebebeb;
+  --secondary-main-color: #ccc;
+  --secondary-dark-color: #525252;
   --secondary-text-color: black;
   box-sizing: border-box;
 
@@ -27,7 +28,7 @@ body {
   position: relative;
   z-index: 10;
   display: flex;
-  background: var(--primary-main-color);
+  background: var(--primary-dark-color);
   color: var(--primary-text-color);
   padding: 1rem 2rem;
   width: 100%;
@@ -101,7 +102,7 @@ body {
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  border: 0.1rem solid var(--primary-dark-color);
 }
 
 main {
@@ -138,7 +139,7 @@ svg circle {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: #00a1ff;
+  stroke: var(--primary-dark-color);
   stroke-width: 10;
   stroke-linecap: round;
   stroke-dasharray: 440;
