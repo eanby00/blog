@@ -1,51 +1,3 @@
-.backdrop {
-  position: fixed;
-  z-index: 5;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-}
-
-.mobile-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-  background: none;
-  border: 0px;
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-}
-
-.mobile-menu span {
-  display: block;
-  position: relative;
-  width: 2rem;
-  height: 0.3rem;
-  border-radius: 0.1rem;
-  background: var(--primary-text-color);
-  transition: transform 0.3s;
-}
-
-.mobile-menu:active,
-.mobile-menu:hover,
-.mobile-menu.open {
-  span:nth-child(1) {
-    transform: translate(0, 0.7rem) rotateZ(45deg);
-  }
-
-  span:nth-child(2) {
-    transform: rotateY(90deg);
-  }
-
-  span:nth-child(3) {
-    transform: translate(0, -0.7rem) rotateZ(-45deg);
-  }
-}
-
 .tag-container {
   width: 100%;
   background: var(--primary-text-color);
@@ -53,17 +5,15 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  position: absolute;
-  visibility: hidden;
-  transition: transform 0.5s, visibility 0.5s;
+  position: fixed;
+  transition: transform 0.5s;
   transform: translateY(-100%);
 }
 
 .display-tag {
   padding: 1rem 0;
   z-index: 8;
-  visibility: visible;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .tag {
@@ -124,74 +74,19 @@
   -webkit-box-orient: vertical;
 }
 
-.display-block {
-  display: block;
-}
-
-.spinner {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.close {
-  display: none;
-}
-
-svg {
-  position: relative;
-  width: 10rem;
-  height: 10rem;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-svg circle {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: #00a1ff;
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 440;
-  stroke-dashoffset: 440;
-  transform: translate(10px, 10px);
-  animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-  0%,
-  100% {
-    stroke-dashoffset: 440;
-  }
-  50% {
-    stroke-dashoffset: 0;
-  }
-  50.1% {
-    stroke-dashoffset: 880;
-  }
-}
-
 @media (min-width: 40rem) {
-  .mobile-menu {
-    display: none;
+  main {
+    margin: 0 auto;
+    width: 70%;
   }
 
   .tag-container {
     position: relative;
-    visibility: visible;
     transform: translateX(0);
     display: flex;
     margin: 2rem auto;
     width: 70%;
+    transition: initial;
   }
 
   .post-container {

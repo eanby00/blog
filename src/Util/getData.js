@@ -4,30 +4,14 @@ import { isFolder, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
 import { generateID } from "./Helper";
-import { getCommit, getContent, parseMD } from "./request";
-
-const getRawPosts = async (path) => {
-  const posts = [];
-  const queue = [];
-  queue.push(path);
-
-  while (queue.length > 0) {
-    const target = queue.shift();
-    const response = await getContent(target);
-    if (isFolder(response.data)) {
-      response.data.forEach((element) => {
-        queue.push(element.path);
-      });
-    } else if (isMDFile(response.data)) {
-      posts.push(response);
-    }
-  }
-
-  return posts;
-};
+import { getCommit, getContent } from "./request";
 
 const getTag = (path) => {
   return path.split("/")[GITHUB_API.TAG_DEPTH];
+};
+
+const getPath = (path) => {
+  return path.split("/").slice(0, -1).join("/");
 };
 
 const getDate = async (path) => {
@@ -42,26 +26,62 @@ const formatDate = (day) => {
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-const trimPost = async (post, tag) => {
-  const raw = decodeBase64(post.content);
-  const date = await getDate(post.path);
-  const title = post.name.slice(0, post.name.length - 3);
+const modifyPost = async ({ content, path, name, html_url }) => {
+  const raw = decodeBase64(content);
+  const date = await getDate(path);
+  const title = name.slice(0, -3);
 
   return {
     id: generateID(title),
     title,
-    tag,
+    tag: getTag(path),
+    path: getPath(path),
     date: formatDate(date),
-    "html-url": post["html_url"],
+    html_url,
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
   };
 };
 
-const trimPosts = (posts) => {
-  return Promise.all(
-    posts.map(async (post) => await trimPost(post.data, getTag(post.data.path)))
-  );
+const modifyImage = ({ name, content, path }) => {
+  return {
+    name,
+    content,
+    path: getPath(path),
+    type: name.split(".").pop(),
+  };
+};
+
+const getRawPosts = async (path) => {
+  const posts = [];
+  const images = [];
+  const queue = [];
+  queue.push(path);
+
+  while (queue.length > 0) {
+    const target = queue.shift();
+    const { data } = await getContent(target);
+    if (isFolder(data)) {
+      data.forEach((element) => {
+        queue.push(element.path);
+      });
+    } else if (isMDFile(data)) {
+      posts.push(await modifyPost(data));
+    } else {
+      images.push(modifyImage(data));
+    }
+  }
+
+  return { posts, images };
+};
+
+const connectImages = (posts, images) => {
+  return posts.map((post) => {
+    return {
+      ...post,
+      images: images.filter((image) => post.path === image.path),
+    };
+  });
 };
 
 const sortPosts = (posts) => {
@@ -72,11 +92,11 @@ const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const getPostsAndTags = async () => {
+const getData = async () => {
   try {
-    const rawPosts = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const modifiedPosts = await trimPosts(rawPosts);
-    const sortedPosts = sortPosts(modifiedPosts);
+    const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
+    const postsWithImage = connectImages(posts, images);
+    const sortedPosts = sortPosts(postsWithImage);
     const tags = getTags(sortedPosts);
     return { posts: sortedPosts, tags };
   } catch (error) {
@@ -84,13 +104,13 @@ const getPostsAndTags = async () => {
   }
 };
 
-export const getData = async () => {
+export const getDatas = async () => {
   if (hasData()) {
     const { posts, tags } = loadData();
     return { posts: sortPosts(posts), tags };
   }
 
-  const { posts, tags } = await getPostsAndTags();
+  const { posts, tags } = await getData();
   saveData(posts, tags);
   return { posts, tags };
 };
