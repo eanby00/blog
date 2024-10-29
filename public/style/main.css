@@ -1,6 +1,5 @@
 .tag-container {
   width: 100%;
-  background: var(--primary-text-color);
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -19,9 +18,9 @@
 .tag {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: var(--secondary-dark-color);
-  color: var(--primary-text-color);
-  border: 0.1rem solid var(--secondary-dark-color);
+  background: var(--primary-dark-color);
+  color: var(--primary-text-alter-color);
+  border: 0.2rem solid var(--primary-dark-color);
   font-weight: bold;
   cursor: pointer;
 }
@@ -29,9 +28,9 @@
 .tag:hover,
 .tag:active,
 .tag-open {
-  background: var(--primary-text-color);
-  color: var(--secondary-dark-color);
-  border: 0.1rem solid var(--secondary-dark-color);
+  background: var(--primary-text-alter-color);
+  color: var(--primary-dark-color);
+  border: 0.2rem solid var(--primary-dark-color);
 }
 
 .post-container {
@@ -45,6 +44,9 @@
 .post {
   width: 95%;
   height: 30vh;
+  border: 0.2rem solid var(--primary-dark-color);
+  color: var(--primary-text-color);
+  background: var(--primary-text-alter-color);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -52,6 +54,11 @@
   padding: 1.5rem;
   gap: 0.5rem;
   cursor: pointer;
+}
+
+.post:hover,
+.post:active {
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .post h2 {

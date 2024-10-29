@@ -2,6 +2,7 @@ main {
   padding: 0;
   display: flex;
   position: relative;
+  color: var(--primary-text-color);
 }
 
 main article {
@@ -24,9 +25,9 @@ article h1:first-of-type {
 
 article blockquote {
   font-weight: bold;
-  color: #525252;
-  border-left: 0.5rem solid #9b9b9b;
-  background: #ebebeb;
+  color: var(--primary-dark-color);
+  border-left: 0.5rem solid var(--primary-dark-color);
+  background: var(--primary-light-color);
   margin: 0 1rem;
   padding: 0.2rem;
 }
@@ -38,7 +39,7 @@ article p {
 article pre {
   display: flex;
   justify-content: space-between;
-  background: #ebebeb;
+  background: var(--primary-light-color);
   padding: 1rem;
   border-radius: 0.5rem;
 }
@@ -51,20 +52,21 @@ article pre code {
 .copy-icon {
   width: 2rem;
   height: 2rem;
-  fill: black;
+  fill: var(--primary-text-color);
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: #9b9b9b;
+  background: var(--primary-main-color);
+  fill: var(--primary-text-alter-color);
 }
 
 .copy-icon-done {
   width: 2rem;
   height: 2rem;
-  fill: black;
+  fill: var(--primary-text-color);
   border-radius: 0.5rem;
 }
 
@@ -74,7 +76,7 @@ article li {
 }
 
 article li code {
-  background: #ebebeb;
+  background: var(--primary-light-color);
   padding: 0.1rem 0.2rem;
   border-radius: 0.5rem;
 }
@@ -89,14 +91,15 @@ article input[type="checkbox"] + label {
   align-items: center;
   width: 1rem;
   height: 1rem;
-  border: 0.125rem solid black;
+  border: 0.125rem solid var(--primary-text-color);
+  background: var(--primary-text-alter-color);
   border-radius: 0.2rem;
 }
 
 article input[type="checkbox"]:checked + label::after {
   content: "✔";
   font-size: 0.8rem;
-  color: black;
+  color: var(--primary-text-color);
   font-weight: bold;
 }
 
@@ -116,10 +119,14 @@ footer {
 .link-github svg {
   width: 2rem;
   height: 2rem;
+
+  path {
+    fill: var(--primary-text-color);
+  }
 }
 
 .upToTop {
-  background: var(--secondary-main-color);
+  background: var(--primary-dark-color);
   border: 0px;
   border-radius: 50%;
   position: fixed;
@@ -133,11 +140,11 @@ footer {
 
 .upToTop:active,
 .upToTop:hover {
-  background: var(--primary-text-color);
-  border: 0.1rem solid var(--secondary-main-color);
+  background: var(--primary-text-alter-color);
+  border: 0.15rem solid var(--primary-dark-color);
 
   svg {
-    fill: var(--secondary-main-color);
+    fill: var(--primary-dark-color);
   }
 }
 
@@ -145,7 +152,7 @@ main aside {
   width: 50%;
   height: 100%;
   padding-top: 5rem;
-  background: white;
+  background: var(--primary-text-alter-color);
   position: fixed;
   top: 0;
   right: 0;
@@ -168,18 +175,18 @@ aside ul {
 
 aside li {
   list-style-type: none;
-  border-left: 0.5rem solid white;
+  border-left: 0.5rem solid var(--primary-text-alter-color);
   margin: 0.2rem 0;
 }
 
 aside li:hover,
 aside li:active {
-  border-left: 0.5rem solid #9b9b9b;
+  border-left: 0.5rem solid var(--primary-dark-color);
 }
 
 aside a {
   text-decoration: none;
-  color: #525252;
+  color: var(--primary-dark-color);
   font-weight: bold;
 }
 
@@ -196,7 +203,7 @@ aside li:has(> a.h3) {
 }
 
 aside a.h1 {
-  color: black;
+  color: var(--primary-text-color);
   font-size: larger;
 }
 
@@ -205,7 +212,6 @@ aside a.h2 {
 }
 
 aside a.h3 {
-  padding-left: 1.5rem;
   font-size: medium;
 }
 
@@ -216,7 +222,7 @@ aside a.h3 {
 
   main article {
     width: 70%;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid var(--primary-main-color);
     padding: 1rem;
   }
 
