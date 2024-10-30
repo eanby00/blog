@@ -1,14 +1,14 @@
 main {
   padding: 0;
-  display: flex;
-  position: relative;
   color: var(--primary-text-color);
+  position: relative;
+  display: flex;
 }
 
 main article {
-  padding: 0.5rem;
-  margin-top: 1rem;
   width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
 }
 
 article h1,
@@ -24,12 +24,12 @@ article h1:first-of-type {
 }
 
 article blockquote {
-  font-weight: bold;
-  color: var(--primary-dark-color);
-  border-left: 0.5rem solid var(--primary-dark-color);
-  background: var(--primary-light-color);
   margin: 0 1rem;
   padding: 0.2rem;
+  border-left: 0.5rem solid var(--primary-dark-color);
+  background: var(--primary-light-color);
+  color: var(--primary-dark-color);
+  font-weight: bold;
 }
 
 article p {
@@ -37,11 +37,11 @@ article p {
 }
 
 article pre {
+  padding: 1rem;
+  background: var(--primary-light-color);
+  border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
-  background: var(--primary-light-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
 }
 
 article pre code {
@@ -71,13 +71,13 @@ article pre code {
 }
 
 article li {
-  list-style-type: none;
   margin: 0.32rem 0;
+  list-style-type: none;
 }
 
 article li code {
-  background: var(--primary-light-color);
   padding: 0.1rem 0.2rem;
+  background: var(--primary-light-color);
   border-radius: 0.5rem;
 }
 
@@ -86,31 +86,31 @@ article input[type="checkbox"] {
 }
 
 article input[type="checkbox"] + label {
+  width: 1rem;
+  height: 1rem;
+  background: var(--primary-text-alter-color);
+  border: 0.125rem solid var(--primary-text-color);
+  border-radius: 0.2rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 1rem;
-  height: 1rem;
-  border: 0.125rem solid var(--primary-text-color);
-  background: var(--primary-text-alter-color);
-  border-radius: 0.2rem;
 }
 
 article input[type="checkbox"]:checked + label::after {
   content: "✔";
-  font-size: 0.8rem;
   color: var(--primary-text-color);
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
 article p img {
-  margin-top: 1rem;
   width: 100%;
+  margin-top: 1rem;
 }
 
 footer {
-  display: flex;
   padding: 1rem;
+  display: flex;
   gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -126,15 +126,15 @@ footer {
 }
 
 .upToTop {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
   background: var(--primary-dark-color);
   border: 0px;
   border-radius: 50%;
   position: fixed;
   bottom: 1rem;
   right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
   cursor: pointer;
 }
 
@@ -174,9 +174,9 @@ aside ul {
 }
 
 aside li {
-  list-style-type: none;
-  border-left: 0.5rem solid var(--primary-text-alter-color);
   margin: 0.2rem 0;
+  border-left: 0.5rem solid var(--primary-text-alter-color);
+  list-style-type: none;
 }
 
 aside li:hover,
@@ -185,9 +185,9 @@ aside li:active {
 }
 
 aside a {
-  text-decoration: none;
   color: var(--primary-dark-color);
   font-weight: bold;
+  text-decoration: none;
 }
 
 aside li:has(> a.h1) {
@@ -222,8 +222,8 @@ aside a.h3 {
 
   main article {
     width: 70%;
-    border-right: 1px solid var(--primary-main-color);
     padding: 1rem;
+    border-right: 1px solid var(--primary-main-color);
   }
 
   article p img {
@@ -232,8 +232,8 @@ aside a.h3 {
 
   main aside {
     width: 30%;
-    height: max-content;
     min-width: 12rem;
+    height: max-content;
     padding-top: 0.5rem;
     position: sticky;
     transform: translateX(0);
