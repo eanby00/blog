@@ -31,7 +31,7 @@ const setAnchor = (targetElement, tag) => {
 
 const renderAnchors = () => {
   const mainElement = $("main article");
-  const navElement = createElement(".nav-anchor", "nav");
+  const navElement = createElement(".template-nav-anchor", "nav");
   INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
     setAnchor(mainElement, tagName);
   });
@@ -149,8 +149,8 @@ const copyText = async (tag, copyButton, copyDone) => {
 
 const renderContentCopy = () => {
   document.querySelectorAll("pre").forEach((tag) => {
-    const copyButton = createElement(".content-copy", "svg");
-    const copyDone = createElement(".content-copy-done", "svg");
+    const copyButton = createElement(".template-content-copy", "svg");
+    const copyDone = createElement(".template-content-copy-done", "svg");
     copyButton.addEventListener(
       "click",
       copyText.bind(null, tag, copyButton, copyDone)

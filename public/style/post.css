@@ -45,7 +45,6 @@ article pre {
 }
 
 article pre code {
-  max-width: 28rem;
   overflow-x: auto;
 }
 
