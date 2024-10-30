@@ -1,5 +1,18 @@
+main {
+  padding: 1rem;
+}
+
+.card {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid var(--primary-dark-color);
+}
+
 .tag-container {
   width: 100%;
+  background: var(--primary-text-alter-color);
+  padding: 1rem 0;
+  z-index: 8;
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -10,9 +23,7 @@
 }
 
 .tag-container.open {
-  padding: 1rem 0;
-  z-index: 8;
-  transform: translateY(0);
+  transform: translate(0);
 }
 
 .tag {
@@ -20,17 +31,15 @@
   padding: 0.5rem 1rem;
   background: var(--primary-dark-color);
   color: var(--primary-text-alter-color);
-  border: 0.2rem solid var(--primary-dark-color);
   font-weight: bold;
   cursor: pointer;
 }
 
 .tag:hover,
 .tag:active,
-.tag-open {
+.tag.selected {
   background: var(--primary-text-alter-color);
   color: var(--primary-text-color);
-  border: 0.2rem solid var(--primary-dark-color);
 }
 
 .post-container {
@@ -44,7 +53,6 @@
 .post {
   width: 95%;
   height: 30vh;
-  border: 0.2rem solid var(--primary-dark-color);
   color: var(--primary-text-color);
   background: var(--primary-text-alter-color);
   overflow: hidden;
@@ -94,6 +102,7 @@
     transform: translateX(0);
     display: flex;
     margin: 2rem auto;
+    padding: 0rem;
     width: 70%;
     transition: initial;
   }

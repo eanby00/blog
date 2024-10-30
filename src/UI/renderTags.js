@@ -3,7 +3,7 @@ import { renderPosts } from "./renderPosts";
 
 const getSelectedTags = (tagElement) => {
   const tags = Array.from(tagElement.closest("nav").children);
-  return tags.filter((tag) => hasClass(tag, "tag-open"));
+  return tags.filter((tag) => hasClass(tag, "selected"));
 };
 
 const isSelectedTag = (tags, tagElement) => {
@@ -12,19 +12,19 @@ const isSelectedTag = (tags, tagElement) => {
 
 const removeSelectedTag = (tags) => {
   tags.forEach((tag) => {
-    tag.classList.remove("tag-open");
+    tag.classList.remove("selected");
   });
 };
 
 const filterPosts = (tagElement, posts) => {
   const selectedTags = getSelectedTags(tagElement);
   if (isSelectedTag(selectedTags, tagElement)) {
-    selectedTags[0].classList.remove("tag-open");
+    selectedTags[0].classList.remove("selected");
     return posts;
   }
 
   removeSelectedTag(selectedTags);
-  tagElement.classList.add("tag-open");
+  tagElement.classList.add("selected");
   return posts.filter((post) => post.tag === tagElement.textContent);
 };
 

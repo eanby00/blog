@@ -166,7 +166,7 @@ main aside nav {
 }
 
 main aside.open {
-  transform: translateX(0);
+  transform: translate(0);
 }
 
 aside ul {
