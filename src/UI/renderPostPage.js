@@ -77,7 +77,7 @@ export const renderHeader = () => {
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
-    backdrop.classList.toggle("display-block");
+    backdrop.classList.toggle("open");
     aside.classList.toggle("open");
   };
 
@@ -86,7 +86,7 @@ export const renderHeader = () => {
   media.addEventListener("change", () => {
     if (media.matches) {
       mobileMenu.classList.remove("open");
-      backdrop.classList.remove("display-block");
+      backdrop.classList.remove("open");
       aside.classList.remove("open");
     }
   });

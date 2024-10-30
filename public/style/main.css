@@ -29,7 +29,7 @@
 .tag:active,
 .tag-open {
   background: var(--primary-text-alter-color);
-  color: var(--primary-dark-color);
+  color: var(--primary-text-color);
   border: 0.2rem solid var(--primary-dark-color);
 }
 
@@ -58,7 +58,9 @@
 
 .post:hover,
 .post:active {
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  background: var(--primary-dark-color);
+  color: var(--primary-text-alter-color);
+  border: 0.2rem solid var(--primary-dark-color);
 }
 
 .post h2 {

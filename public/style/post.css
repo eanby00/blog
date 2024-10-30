@@ -59,7 +59,7 @@ article pre code {
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: var(--primary-main-color);
+  background: var(--primary-dark-color);
   fill: var(--primary-text-alter-color);
 }
 
