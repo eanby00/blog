@@ -4,12 +4,12 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  position: fixed;
+  position: absolute;
   transition: transform 0.5s;
   transform: translateY(-100%);
 }
 
-.display-tag {
+.tag-container.open {
   padding: 1rem 0;
   z-index: 8;
   transform: translateY(0);

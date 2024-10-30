@@ -57,10 +57,6 @@ body {
   display: none;
 }
 
-.backdrop.open {
-  display: block;
-}
-
 .mobile-menu {
   display: flex;
   flex-direction: column;
@@ -110,12 +106,8 @@ main {
 }
 
 .spinner {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.close {
+  margin: 0 auto;
+  width: max-content;
   display: none;
 }
 
@@ -158,6 +150,10 @@ svg circle {
   50.1% {
     stroke-dashoffset: 880;
   }
+}
+
+.display {
+  display: block;
 }
 
 @media (min-width: 40rem) {

@@ -8,8 +8,8 @@ export const renderHeader = () => {
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
-    backdrop.classList.toggle("open");
-    tagContainer.classList.toggle("display-tag");
+    backdrop.classList.toggle("display");
+    tagContainer.classList.toggle("open");
   };
 
   mobileMenu.addEventListener("click", toggleMenu);
@@ -17,8 +17,8 @@ export const renderHeader = () => {
   media.addEventListener("change", () => {
     if (media.matches) {
       mobileMenu.classList.remove("open");
-      backdrop.classList.remove("open");
-      tagContainer.classList.remove("display-tag");
+      backdrop.classList.remove("display");
+      tagContainer.classList.remove("open");
     }
   });
 };
