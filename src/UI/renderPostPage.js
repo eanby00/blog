@@ -113,9 +113,9 @@ const renderGithubIcon = (href) => {
 const observeHeader = (targetEl, entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      targetEl.classList.add("close");
+      targetEl.classList.remove("display");
     } else {
-      targetEl.classList.remove("close");
+      targetEl.classList.add("display");
     }
   });
 };
