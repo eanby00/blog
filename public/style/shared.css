@@ -4,14 +4,12 @@
   --primary-light-color: #ebebeb;
   --primary-main-color: #ccc;
   --primary-dark-color: #525252;
-  --primary-darkest-color: black;
   --primary-text-color: black;
   --primary-text-alter-color: white;
 
   --secondary-light-color: #ccc;
   --secondary-main-color: #525252;
   --secondary-dark-color: #2c2c2c;
-  --secondary-darkest-color: black;
   --secondary-text-color: white;
 
   box-sizing: border-box;
@@ -30,59 +28,54 @@ body {
 }
 
 .main-header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--primary-dark-color);
   position: relative;
   z-index: 10;
   display: flex;
-  background: var(--primary-dark-color);
-  padding: 1rem 2rem;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
 .main-header h1 {
-  font-size: 2rem;
   margin: 0;
+  font-size: 2rem;
 }
 
 .main-header a {
-  text-decoration: none;
   color: var(--primary-text-alter-color);
+  text-decoration: none;
 }
 
 .backdrop {
-  position: fixed;
-  z-index: 5;
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 5;
   display: none;
 }
 
-.display-block {
-  display: block;
-}
-
 .mobile-menu {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: 0px;
   display: flex;
+  gap: 0.4rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.4rem;
-  background: none;
-  border: 0px;
   cursor: pointer;
-  width: 3rem;
-  height: 3rem;
 }
 
 .mobile-menu span {
-  display: block;
-  position: relative;
   width: 2rem;
   height: 0.3rem;
-  border-radius: 0.1rem;
   background: var(--primary-text-alter-color);
+  border-radius: 0.1rem;
+  display: block;
   transition: transform 0.3s;
 }
 
@@ -102,28 +95,13 @@ body {
   }
 }
 
-.card {
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-main {
-  padding: 1rem;
-}
-
 .spinner {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.close {
+  margin: 0 auto;
+  width: max-content;
   display: none;
 }
 
 .spinner svg {
-  position: relative;
   width: 10rem;
   height: 10rem;
   animation: spin 2s linear infinite;
@@ -162,6 +140,14 @@ svg circle {
   50.1% {
     stroke-dashoffset: 880;
   }
+}
+
+.display {
+  display: block;
+}
+
+.close {
+  display: none;
 }
 
 @media (min-width: 40rem) {

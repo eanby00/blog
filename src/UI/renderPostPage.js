@@ -31,7 +31,7 @@ const setAnchor = (targetElement, tag) => {
 
 const renderAnchors = () => {
   const mainElement = $("main article");
-  const navElement = createElement(".nav-anchor", "nav");
+  const navElement = createElement(".template-nav-anchor", "nav");
   INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
     setAnchor(mainElement, tagName);
   });
@@ -77,7 +77,7 @@ export const renderHeader = () => {
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
-    backdrop.classList.toggle("display-block");
+    backdrop.classList.toggle("display");
     aside.classList.toggle("open");
   };
 
@@ -86,7 +86,7 @@ export const renderHeader = () => {
   media.addEventListener("change", () => {
     if (media.matches) {
       mobileMenu.classList.remove("open");
-      backdrop.classList.remove("display-block");
+      backdrop.classList.remove("display");
       aside.classList.remove("open");
     }
   });
@@ -113,9 +113,9 @@ const renderGithubIcon = (href) => {
 const observeHeader = (targetEl, entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      targetEl.classList.add("close");
+      targetEl.classList.remove("display");
     } else {
-      targetEl.classList.remove("close");
+      targetEl.classList.add("display");
     }
   });
 };
@@ -149,8 +149,8 @@ const copyText = async (tag, copyButton, copyDone) => {
 
 const renderContentCopy = () => {
   document.querySelectorAll("pre").forEach((tag) => {
-    const copyButton = createElement(".content-copy", "svg");
-    const copyDone = createElement(".content-copy-done", "svg");
+    const copyButton = createElement(".template-content-copy", "svg");
+    const copyDone = createElement(".template-content-copy-done", "svg");
     copyButton.addEventListener(
       "click",
       copyText.bind(null, tag, copyButton, copyDone)
