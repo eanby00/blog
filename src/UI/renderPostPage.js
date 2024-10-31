@@ -2,32 +2,38 @@ import { INDEX_ANCHOR } from "../constants/MD";
 import { $, createElement } from "../Util/Helper";
 import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
-const splitH1Section = (tagName) => {
+const splitSection = () => {
   const article = $("main article");
   const nodes = Array.from(article.children);
   let tagIndex = null;
   const sections = [];
 
   nodes.forEach((node, index) => {
-    if (node.tagName === tagName) {
-      if (tagIndex) {
+    if (
+      node.tagName === "H1" ||
+      node.tagName === "H2" ||
+      node.tagName === "H3"
+    ) {
+      if (tagIndex !== null) {
         sections.push(nodes.slice(tagIndex, index));
       }
 
       tagIndex = index;
     }
   });
+  sections.push(nodes.slice(tagIndex));
 
-  if (tagIndex !== null) {
-    sections.push(nodes.slice(tagIndex));
-    tagIndex = null;
-  }
+  return sections;
+};
+
+const renderSection = (sections) => {
+  const article = $("main article");
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
     const id = parseAnchorID(section[0].textContent);
     sectionElement.id = id;
-    sectionElement.className = tagName.toLowerCase();
+    sectionElement.className = section[0].tagName.toLowerCase();
     sectionElement.append(...section);
 
     const observer = new IntersectionObserver((entries) => {
@@ -45,10 +51,9 @@ const splitH1Section = (tagName) => {
   });
 };
 
-const splitSections = () => {
-  splitH1Section("H3");
-  splitH1Section("H2");
-  splitH1Section("H1");
+const renderSections = () => {
+  const sections = splitSection();
+  renderSection(sections);
 };
 
 const parseAnchorID = (textContent) => {
@@ -202,7 +207,7 @@ const renderContentCopy = () => {
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderHeader();
-  splitSections();
+  renderSections();
   renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);
