@@ -2,6 +2,42 @@ import { INDEX_ANCHOR } from "../constants/MD";
 import { $, createElement } from "../Util/Helper";
 import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
+const splitH1Section = (tagName) => {
+  const article = $("main article");
+  const nodes = Array.from(article.children);
+  console.log(nodes);
+  let tagIndex = null;
+  const sections = [];
+
+  nodes.forEach((node, index) => {
+    if (node.tagName === tagName) {
+      if (tagIndex) {
+        sections.push(nodes.slice(tagIndex, index));
+      }
+
+      tagIndex = index;
+    }
+  });
+
+  if (tagIndex !== null) {
+    sections.push(nodes.slice(tagIndex));
+    tagIndex = null;
+  }
+
+  sections.forEach((section) => {
+    const sectionElement = document.createElement("section");
+    sectionElement.id = section[0].id;
+    sectionElement.append(...section);
+    article.append(sectionElement);
+  });
+};
+
+const splitSections = () => {
+  splitH1Section("H3");
+  splitH1Section("H2");
+  splitH1Section("H1");
+};
+
 const parseAnchorID = (textContent) => {
   const textList = textContent.toLowerCase().split("");
   const replacedText = textList.map((text) => {
@@ -166,6 +202,7 @@ export const renderPostPage = (post) => {
   renderPostContent(post);
   renderHeader();
   renderAnchors();
+  splitSections();
   renderImage(post);
   renderGithubIcon(post.html_url);
   renderUpToTop();
