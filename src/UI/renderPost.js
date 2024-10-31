@@ -1,4 +1,7 @@
 import { $ } from "../Util/Helper";
+import { renderAnchors } from "./renderAnchor";
+import { renderContentCopy } from "./renderIcons";
+import { renderSections } from "./renderSections";
 
 const replaceCheckbox = (html) => {
   return html
@@ -12,7 +15,7 @@ const replaceCheckbox = (html) => {
     );
 };
 
-export const renderPostContent = (post) => {
+const renderPostContent = (post) => {
   const mainElement = $("main article");
   document.title = post.title.toUpperCase();
 
@@ -21,7 +24,7 @@ export const renderPostContent = (post) => {
   mainElement.insertAdjacentHTML("afterbegin", replacedHtml);
 };
 
-export const renderImage = (post) => {
+const renderImage = (post) => {
   const imageElements = document.querySelectorAll("img");
   const images = post.images;
   imageElements.forEach((imageElement) => {
@@ -31,4 +34,12 @@ export const renderImage = (post) => {
       imageElement.src = `data:image/${image.type};base64, ${image.content}`;
     }
   });
+};
+
+export const renderPost = (post) => {
+  renderPostContent(post);
+  renderSections();
+  renderAnchors();
+  renderImage(post);
+  renderContentCopy();
 };
