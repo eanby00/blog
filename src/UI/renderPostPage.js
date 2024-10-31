@@ -25,8 +25,10 @@ const splitH1Section = (tagName) => {
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
-    sectionElement.id = section[0].id;
+    sectionElement.id = parseAnchorID(section[0].textContent);
+    sectionElement.className = tagName.toLowerCase();
     sectionElement.append(...section);
+    console.log(sectionElement);
     article.append(sectionElement);
   });
 };
@@ -54,27 +56,14 @@ const parseAnchorID = (textContent) => {
   return replacedText.join("");
 };
 
-const setAnchorID = (tag) => {
-  tag.id = parseAnchorID(tag.textContent);
-  tag.classList.add("anchor");
-  tag.classList.add(tag.tagName.toLowerCase());
-};
-
-const setAnchor = (targetElement, tag) => {
-  targetElement.querySelectorAll(tag).forEach(setAnchorID);
-};
-
 const renderAnchors = () => {
   const mainElement = $("main article");
   const navElement = createElement(".template-nav-anchor", "nav");
-  INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
-    setAnchor(mainElement, tagName);
-  });
 
-  const anchorList = mainElement.querySelectorAll(".anchor");
+  const anchorList = mainElement.querySelectorAll("section");
   anchorList.forEach((anchor) => {
     const anchorLi = createElement(".template-anchor", "li");
-    anchorLi.querySelector("a").textContent = anchor.textContent;
+    anchorLi.querySelector("a").textContent = anchor.children[0].textContent;
     anchorLi.querySelector("a").href = `#${anchor.id}`;
     anchorLi.querySelector("a").className = anchor.className;
     navElement.querySelector("ul").append(anchorLi);
@@ -200,8 +189,8 @@ const renderContentCopy = () => {
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderHeader();
-  renderAnchors();
   splitSections();
+  renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);
   renderUpToTop();
