@@ -2,6 +2,60 @@ import { INDEX_ANCHOR } from "../constants/MD";
 import { $, createElement } from "../Util/Helper";
 import { removeLoadingSpinner } from "./renderLoadingSpinner";
 
+const splitSection = () => {
+  const article = $("main article");
+  const nodes = Array.from(article.children);
+  let tagIndex = null;
+  const sections = [];
+
+  nodes.forEach((node, index) => {
+    if (
+      node.tagName === "H1" ||
+      node.tagName === "H2" ||
+      node.tagName === "H3"
+    ) {
+      if (tagIndex !== null) {
+        sections.push(nodes.slice(tagIndex, index));
+      }
+
+      tagIndex = index;
+    }
+  });
+  sections.push(nodes.slice(tagIndex));
+
+  return sections;
+};
+
+const renderSection = (sections) => {
+  const article = $("main article");
+
+  sections.forEach((section) => {
+    const sectionElement = document.createElement("section");
+    const id = parseAnchorID(section[0].textContent);
+    sectionElement.id = id;
+    sectionElement.className = section[0].tagName.toLowerCase();
+    sectionElement.append(...section);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log(entry);
+          $(`.${id}`).classList.add("open");
+        } else {
+          $(`.${id}`).classList.remove("open");
+        }
+      });
+    });
+    observer.observe(sectionElement);
+    article.append(sectionElement);
+  });
+};
+
+const renderSections = () => {
+  const sections = splitSection();
+  renderSection(sections);
+};
+
 const parseAnchorID = (textContent) => {
   const textList = textContent.toLowerCase().split("");
   const replacedText = textList.map((text) => {
@@ -19,29 +73,17 @@ const parseAnchorID = (textContent) => {
   return replacedText.join("");
 };
 
-const setAnchorID = (tag) => {
-  tag.id = parseAnchorID(tag.textContent);
-  tag.classList.add("anchor");
-  tag.classList.add(tag.tagName.toLowerCase());
-};
-
-const setAnchor = (targetElement, tag) => {
-  targetElement.querySelectorAll(tag).forEach(setAnchorID);
-};
-
 const renderAnchors = () => {
   const mainElement = $("main article");
   const navElement = createElement(".template-nav-anchor", "nav");
-  INDEX_ANCHOR.H_TAG_NAME.forEach((tagName) => {
-    setAnchor(mainElement, tagName);
-  });
 
-  const anchorList = mainElement.querySelectorAll(".anchor");
+  const anchorList = mainElement.querySelectorAll("section");
   anchorList.forEach((anchor) => {
     const anchorLi = createElement(".template-anchor", "li");
-    anchorLi.querySelector("a").textContent = anchor.textContent;
+    anchorLi.querySelector("a").textContent = anchor.children[0].textContent;
     anchorLi.querySelector("a").href = `#${anchor.id}`;
     anchorLi.querySelector("a").className = anchor.className;
+    anchorLi.className = anchor.id;
     navElement.querySelector("ul").append(anchorLi);
   });
 
@@ -165,6 +207,7 @@ const renderContentCopy = () => {
 export const renderPostPage = (post) => {
   renderPostContent(post);
   renderHeader();
+  renderSections();
   renderAnchors();
   renderImage(post);
   renderGithubIcon(post.html_url);
