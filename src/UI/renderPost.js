@@ -1,6 +1,6 @@
 import { $ } from "../Util/Helper";
 import { renderAnchors } from "./renderAnchor";
-import { renderContentCopy } from "./renderIcons";
+import { renderContentCopy } from "./renderContentCopy";
 import { renderSections } from "./renderSections";
 
 const replaceCheckbox = (html) => {

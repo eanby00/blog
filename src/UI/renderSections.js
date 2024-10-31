@@ -52,18 +52,6 @@ const renderSection = (sections) => {
     sectionElement.className = section[0].tagName.toLowerCase();
     sectionElement.append(...section);
 
-    const navEl = $(`.${id}`);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navEl.classList.add("open");
-        } else {
-          navEl.classList.remove("open");
-        }
-      });
-    });
-    observer.observe(sectionElement);
     article.append(sectionElement);
   });
 };
