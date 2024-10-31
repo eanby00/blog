@@ -5,7 +5,6 @@ import { removeLoadingSpinner } from "./renderLoadingSpinner";
 const splitH1Section = (tagName) => {
   const article = $("main article");
   const nodes = Array.from(article.children);
-  console.log(nodes);
   let tagIndex = null;
   const sections = [];
 
