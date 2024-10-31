@@ -196,7 +196,8 @@ aside li {
 }
 
 aside li:hover,
-aside li:active {
+aside li:active,
+aside li.open {
   border-left: 0.5rem solid var(--primary-dark-color);
 }
 

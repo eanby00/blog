@@ -25,10 +25,22 @@ const splitH1Section = (tagName) => {
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
-    sectionElement.id = parseAnchorID(section[0].textContent);
+    const id = parseAnchorID(section[0].textContent);
+    sectionElement.id = id;
     sectionElement.className = tagName.toLowerCase();
     sectionElement.append(...section);
-    console.log(sectionElement);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log(entry);
+          $(`.${id}`).classList.add("open");
+        } else {
+          $(`.${id}`).classList.remove("open");
+        }
+      });
+    });
+    observer.observe(sectionElement);
     article.append(sectionElement);
   });
 };
@@ -66,6 +78,7 @@ const renderAnchors = () => {
     anchorLi.querySelector("a").textContent = anchor.children[0].textContent;
     anchorLi.querySelector("a").href = `#${anchor.id}`;
     anchorLi.querySelector("a").className = anchor.className;
+    anchorLi.className = anchor.id;
     navElement.querySelector("ul").append(anchorLi);
   });
 
