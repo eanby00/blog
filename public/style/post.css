@@ -1,6 +1,6 @@
 main {
   padding: 0;
-  color: var(--post-article-content-color);
+  color: var(--article-content-color);
   position: relative;
   display: flex;
 }
@@ -38,9 +38,9 @@ article h1:first-of-type {
 article blockquote {
   margin: 0 1rem;
   padding: 0.2rem;
-  background: var(--post-article-bq-color);
-  border-left: 0.5rem solid var(--post-article-bq-border-color);
-  color: var(--post-article-bq-content-color);
+  background: var(--code-color);
+  border-left: 0.5rem solid var(--code-border-color);
+  color: var(--code-content-color);
   font-weight: bold;
 }
 
@@ -50,7 +50,7 @@ article p {
 
 article pre {
   padding: 1rem;
-  background: var(--post-article-pre-color);
+  background: var(--code-color);
   border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -63,21 +63,21 @@ article pre code {
 .copy-icon {
   width: 2rem;
   height: 2rem;
-  fill: var(--post-article-copy-content-color);
+  fill: var(--icon-content-color);
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: var(--post-article-copy-color-alter);
-  fill: var(--post-article-copy-content-color-alter);
+  background: var(--icon-color-alter);
+  fill: var(--icon-content-color-alter);
 }
 
 .copy-icon-done {
   width: 2rem;
   height: 2rem;
-  fill: var(--post-article-copy-content-color);
+  fill: var(--icon-content-color);
   border-radius: 0.5rem;
 }
 
@@ -88,7 +88,7 @@ article li {
 
 article li code {
   padding: 0.1rem 0.2rem;
-  background: var(--post-article-pre-color);
+  background: var(--code-color);
   border-radius: 0.5rem;
 }
 
@@ -99,8 +99,8 @@ article input[type="checkbox"] {
 article input[type="checkbox"] + label {
   width: 1rem;
   height: 1rem;
-  background: var(--post-article-checkbox-color);
-  border: 0.125rem solid var(--post-article-checkbox-border-color);
+  background: var(--icon-color);
+  border: 0.125rem solid var(--icon-border-color);
   border-radius: 0.2rem;
   display: inline-flex;
   justify-content: center;
@@ -109,7 +109,7 @@ article input[type="checkbox"] + label {
 
 article input[type="checkbox"]:checked + label::after {
   content: "✔";
-  color: var(--post-article-checkbox-content-color);
+  color: var(--icon-content-color);
   font-size: 0.8rem;
   font-weight: bold;
 }
@@ -132,7 +132,7 @@ footer {
   height: 2rem;
 
   path {
-    fill: var(--post-article-up-color);
+    fill: var(--icon-color-alter);
   }
 }
 
@@ -140,7 +140,7 @@ footer {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  background: var(--post-article-up-color);
+  background: var(--icon-color-alter);
   border: 0px;
   border-radius: 50%;
   position: fixed;
@@ -156,11 +156,11 @@ footer {
 
 .upToTop:active,
 .upToTop:hover {
-  background: var(--post-article-up-color-alter);
-  border: 0.15rem solid var(--post-article-up-color);
+  background: var(--icon-color);
+  border: 0.15rem solid var(--icon-color-alter);
 
   svg {
-    fill: var(--post-article-up-color);
+    fill: var(--icon-color-alter);
   }
 }
 
@@ -168,7 +168,7 @@ main aside {
   width: 50%;
   height: 100%;
   padding-top: 5rem;
-  background: var(--post-nav-color);
+  background: var(--nav-color);
   position: fixed;
   top: 0;
   right: 0;
@@ -191,18 +191,18 @@ aside ul {
 
 aside li {
   margin: 0.2rem 0;
-  border-left: 0.5rem solid var(--post-nav-border-color-alter);
+  border-left: 0.5rem solid var(--nav-border-color-alter);
   list-style-type: none;
 }
 
 aside li:hover,
 aside li:active,
 aside li.open {
-  border-left: 0.5rem solid var(--post-nav-border-color);
+  border-left: 0.5rem solid var(--nav-border-color);
 }
 
 aside a {
-  color: var(--post-nav-h2-content-color);
+  color: var(--nav-content-color);
   font-weight: bold;
   text-decoration: none;
 }
@@ -220,7 +220,7 @@ aside li:has(> a.h3) {
 }
 
 aside a.h1 {
-  color: var(--post-nav-h1-content-color);
+  color: var(--nav-content-color-bold);
   font-size: larger;
 }
 
@@ -240,7 +240,7 @@ aside a.h3 {
   main article {
     width: 70%;
     padding: 1rem;
-    border-right: 1px solid var(--post-article-border-color);
+    border-right: 1px solid var(--article-border-color);
   }
 
   article p img {

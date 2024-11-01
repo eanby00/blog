@@ -3,40 +3,37 @@
 * {
   --main-color: white;
 
-  --shared-header-color: #525252;
-  --shared-header-content-color: white;
-  --shared-backdrop-color: rgba(0, 0, 0, 0.5);
-  --shared-spinner-color: #525252;
+  --header-color: #525252;
+  --header-content-color: white;
+  --backdrop-color: rgba(0, 0, 0, 0.5);
+  --spinner-color: #525252;
 
-  --main-card-color: #525252;
-  --main-card-content-color: white;
-  --main-card-border-color: #525252;
-  --main-card-color-alter: white;
-  --main-card-content-color-alter: black;
+  --card-color: #525252;
+  --card-content-color: white;
+  --card-border-color: #525252;
+  --card-color-alter: white;
+  --card-content-color-alter: black;
 
-  --post-article-color: white;
-  --post-article-content-color: black;
-  --post-article-border-color: #525252;
-  --post-article-content-color-alter: #525252;
-  --post-article-bq-color: #ebebeb;
-  --post-article-bq-border-color: #525252;
-  --post-article-bq-content-color: #525252;
-  --post-article-pre-color: #ebebeb;
-  --post-article-copy-color: #ebebeb;
-  --post-article-copy-content-color: black;
-  --post-article-copy-color-alter: #525252;
-  --post-article-copy-content-color-alter: white;
-  --post-article-checkbox-color: white;
-  --post-article-checkbox-border-color: #525252;
-  --post-article-checkbox-content-color: black;
-  --post-article-up-color: #525252;
-  --post-article-up-color-alter: white;
+  --article-color: white;
+  --article-content-color: black;
+  --article-border-color: #ebebeb;
+  --article-content-color-alter: #525252;
 
-  --post-nav-color: white;
-  --post-nav-h1-content-color: black;
-  --post-nav-h2-content-color: #525252;
-  --post-nav-border-color: #525252;
-  --post-nav-border-color-alter: white;
+  --code-color: #ebebeb;
+  --code-border-color: #525252;
+  --code-content-color: #525252;
+
+  --icon-color: #ebebeb;
+  --icon-border-color: #525252;
+  --icon-content-color: black;
+  --icon-color-alter: #525252;
+  --icon-content-color-alter: white;
+
+  --nav-color: white;
+  --nav-content-color-bold: black;
+  --nav-content-color: #525252;
+  --nav-border-color: #525252;
+  --nav-border-color-alter: white;
 
   box-sizing: border-box;
 
@@ -56,7 +53,7 @@ body {
 .main-header {
   width: 100%;
   padding: 1rem 2rem;
-  background: var(--shared-header-color);
+  background: var(--header-color);
   position: relative;
   z-index: 10;
   display: flex;
@@ -70,14 +67,14 @@ body {
 }
 
 .main-header a {
-  color: var(--shared-header-content-color);
+  color: var(--header-content-color);
   text-decoration: none;
 }
 
 .backdrop {
   width: 100%;
   height: 100vh;
-  background: var(--shared-backdrop-color);
+  background: var(--backdrop-color);
   position: fixed;
   z-index: 5;
   display: none;
@@ -99,7 +96,7 @@ body {
 .mobile-menu span {
   width: 2rem;
   height: 0.3rem;
-  background: var(--shared-header-content-color);
+  background: var(--header-content-color);
   border-radius: 0.1rem;
   display: block;
   transition: transform 0.3s;
@@ -146,7 +143,7 @@ svg circle {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: var(--shared-spinner-color);
+  stroke: var(--spinner-color);
   stroke-width: 10;
   stroke-linecap: round;
   stroke-dasharray: 440;
