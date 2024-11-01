@@ -89,7 +89,7 @@ article li {
 article li code {
   padding: 0.1rem 0.2rem;
   background: var(--code-bg);
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
 }
 
 article input[type="checkbox"] {
@@ -104,6 +104,7 @@ article input[type="checkbox"] + label {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  vertical-align: middle;
 }
 
 article input[type="checkbox"]:checked + label::after {
