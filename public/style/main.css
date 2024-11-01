@@ -5,15 +5,15 @@ main {
 .card {
   margin: 0.5rem;
   border-radius: 0.5rem;
-  background: var(--card-color);
-  color: var(--card-content-color);
-  border: 0.2rem solid var(--card-border-color);
+  background: var(--card-bg);
+  color: var(--card-content);
+  border: 0.2rem solid var(--card-border);
 }
 
 .tag-container {
   width: 100%;
   padding: 1rem 0;
-  background: var(--color);
+  background: var(-);
   position: absolute;
   z-index: 8;
   display: flex;
@@ -38,8 +38,8 @@ main {
 .tag:hover,
 .tag:active,
 .tag.selected {
-  background: var(--card-color-alter);
-  color: var(--card-content-color-alter);
+  background: var(--card-bg-alter);
+  color: var(--card-content-alter);
 }
 
 .post-container {
@@ -54,8 +54,8 @@ main {
   width: 95%;
   height: 30vh;
   padding: 1.5rem;
-  background: var(--card-color-alter);
-  color: var(--card-content-color-alter);
+  background: var(--card-bg-alter);
+  color: var(--card-content-alter);
   overflow: hidden;
   display: flex;
   gap: 0.5rem;
@@ -66,8 +66,8 @@ main {
 
 .post:hover,
 .post:active {
-  background: var(--card-color);
-  color: var(--card-content-color);
+  background: var(--card-bg);
+  color: var(--card-content);
 }
 
 .post h2 {

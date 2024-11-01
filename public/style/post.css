@@ -1,6 +1,6 @@
 main {
   padding: 0;
-  color: var(--article-content-color);
+  color: var(--article-content);
   position: relative;
   display: flex;
 }
@@ -38,9 +38,9 @@ article h1:first-of-type {
 article blockquote {
   margin: 0 1rem;
   padding: 0.2rem;
-  background: var(--code-color);
-  border-left: 0.5rem solid var(--code-border-color);
-  color: var(--code-content-color);
+  background: var(--code-bg);
+  border-left: 0.5rem solid var(--code-border);
+  color: var(--code-content);
   font-weight: bold;
 }
 
@@ -50,7 +50,7 @@ article p {
 
 article pre {
   padding: 1rem;
-  background: var(--code-color);
+  background: var(--code-bg);
   border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -63,21 +63,21 @@ article pre code {
 .copy-icon {
   width: 2rem;
   height: 2rem;
-  fill: var(--icon-content-color);
+  fill: var(--icon-content);
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: var(--icon-color-alter);
-  fill: var(--icon-content-color-alter);
+  background: var(--icon-bg-alter);
+  fill: var(--icon-content-alter);
 }
 
 .copy-icon-done {
   width: 2rem;
   height: 2rem;
-  fill: var(--icon-content-color);
+  fill: var(--icon-content);
   border-radius: 0.5rem;
 }
 
@@ -88,7 +88,7 @@ article li {
 
 article li code {
   padding: 0.1rem 0.2rem;
-  background: var(--code-color);
+  background: var(--code-bg);
   border-radius: 0.5rem;
 }
 
@@ -99,8 +99,8 @@ article input[type="checkbox"] {
 article input[type="checkbox"] + label {
   width: 1rem;
   height: 1rem;
-  background: var(--icon-color);
-  border: 0.125rem solid var(--icon-border-color);
+  background: var(--icon-bg);
+  border: 0.125rem solid var(--icon-border);
   border-radius: 0.2rem;
   display: inline-flex;
   justify-content: center;
@@ -109,7 +109,7 @@ article input[type="checkbox"] + label {
 
 article input[type="checkbox"]:checked + label::after {
   content: "✔";
-  color: var(--icon-content-color);
+  color: var(--icon-content);
   font-size: 0.8rem;
   font-weight: bold;
 }
@@ -132,7 +132,7 @@ footer {
   height: 2rem;
 
   path {
-    fill: var(--icon-color-alter);
+    fill: var(--icon-bg-alter);
   }
 }
 
@@ -140,7 +140,7 @@ footer {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  background: var(--icon-color-alter);
+  background: var(--icon-bg-alter);
   border: 0px;
   border-radius: 50%;
   position: fixed;
@@ -156,11 +156,11 @@ footer {
 
 .upToTop:active,
 .upToTop:hover {
-  background: var(--icon-color);
-  border: 0.15rem solid var(--icon-color-alter);
+  background: var(--icon-bg);
+  border: 0.15rem solid var(--icon-bg-alter);
 
   svg {
-    fill: var(--icon-color-alter);
+    fill: var(--icon-bg-alter);
   }
 }
 
@@ -168,7 +168,7 @@ main aside {
   width: 50%;
   height: 100%;
   padding-top: 5rem;
-  background: var(--nav-color);
+  background: var(--nav-bg);
   position: fixed;
   top: 0;
   right: 0;
@@ -191,18 +191,18 @@ aside ul {
 
 aside li {
   margin: 0.2rem 0;
-  border-left: 0.5rem solid var(--nav-border-color-alter);
+  border-left: 0.5rem solid var(--nav-border-alter);
   list-style-type: none;
 }
 
 aside li:hover,
 aside li:active,
 aside li.open {
-  border-left: 0.5rem solid var(--nav-border-color);
+  border-left: 0.5rem solid var(--nav-border);
 }
 
 aside a {
-  color: var(--nav-content-color);
+  color: var(--nav-content);
   font-weight: bold;
   text-decoration: none;
 }
@@ -220,7 +220,7 @@ aside li:has(> a.h3) {
 }
 
 aside a.h1 {
-  color: var(--nav-content-color-bold);
+  color: var(--nav-content-bold);
   font-size: larger;
 }
 
@@ -240,7 +240,7 @@ aside a.h3 {
   main article {
     width: 70%;
     padding: 1rem;
-    border-right: 1px solid var(--article-border-color);
+    border-right: 1px solid var(--article-border);
   }
 
   article p img {

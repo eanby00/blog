@@ -1,37 +1,36 @@
 * {
-  --main-color: white;
+  --main-bg: white;
 
-  --header-color: #525252;
-  --header-content-color: white;
-  --backdrop-color: rgba(0, 0, 0, 0.5);
-  --spinner-color: #525252;
+  --header-bg: #525252;
+  --header-content: white;
+  --backdrop: rgba(0, 0, 0, 0.5);
+  --spinner: #525252;
 
-  --card-color: #525252;
-  --card-content-color: white;
-  --card-border-color: #525252;
-  --card-color-alter: white;
-  --card-content-color-alter: black;
+  --card-bg: #525252;
+  --card-content: white;
+  --card-border: #525252;
+  --card-bg-alter: white;
+  --card-content-alter: black;
 
-  --article-color: white;
-  --article-content-color: black;
-  --article-border-color: #ebebeb;
-  --article-content-color-alter: #525252;
+  --article-content: black;
+  --article-border: #ebebeb;
+  --article-content-alter: #525252;
 
-  --code-color: #ebebeb;
-  --code-border-color: #525252;
-  --code-content-color: #525252;
+  --code-bg: #ebebeb;
+  --code-border: #525252;
+  --code-content: #525252;
 
-  --icon-color: #ebebeb;
-  --icon-border-color: #525252;
-  --icon-content-color: black;
-  --icon-color-alter: #525252;
-  --icon-content-color-alter: white;
+  --icon-bg: #ebebeb;
+  --icon-border: #525252;
+  --icon-content: black;
+  --icon-bg-alter: #525252;
+  --icon-content-alter: white;
 
-  --nav-color: white;
-  --nav-content-color-bold: black;
-  --nav-content-color: #525252;
-  --nav-border-color: #525252;
-  --nav-border-color-alter: white;
+  --nav-bg: white;
+  --nav-content-bold: black;
+  --nav-content: #525252;
+  --nav-border: #525252;
+  --nav-border-alter: white;
 }
 
 @media (prefers-color-scheme: dark) {
