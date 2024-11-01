@@ -45,6 +45,36 @@ body {
   display: none;
 }
 
+.main-header div {
+  display: flex;
+}
+
+.dark {
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+  svg {
+    fill: var(--header-content);
+  }
+}
+
+.light {
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+  svg {
+    fill: var(--header-content);
+  }
+}
+
 .mobile-menu {
   width: 3rem;
   height: 3rem;
