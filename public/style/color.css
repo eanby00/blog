@@ -22,7 +22,7 @@
   --card-bg-alter: var(--color-brand-secondary);
   --card-content-alter: var(--color-text-primary);
 
-  --article-border: var(--color-brand-secondary);
+  --article-border: var(--color-brand-primary);
   --article-content: var(--color-text-primary);
 
   --code-bg: var(--color-brand-quaternary);
@@ -41,5 +41,12 @@
 
 @media (prefers-color-scheme: dark) {
   * {
+    --color-brand-primary: #31304d;
+    --color-brand-secondary: black;
+    --color-brand-tertiary: #31304d;
+    --color-brand-quaternary: #161a30;
+
+    --color-text-primary: white;
+    --color-text-alter: white;
   }
 }

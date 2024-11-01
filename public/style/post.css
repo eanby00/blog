@@ -64,7 +64,7 @@ article pre code {
   width: 2rem;
   height: 2rem;
   fill: var(--icon-content);
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 
@@ -78,7 +78,6 @@ article pre code {
   width: 2rem;
   height: 2rem;
   fill: var(--icon-content);
-  border-radius: 0.5rem;
 }
 
 article li {
@@ -157,10 +156,10 @@ footer {
 .upToTop:active,
 .upToTop:hover {
   background: initial;
-  border: 0.15rem solid var(--icon-bg);
+  border: 0.2rem solid var(--icon-border);
 
   svg {
-    fill: var(--icon-bg);
+    fill: var(--icon-content);
   }
 }
 
