@@ -70,7 +70,7 @@ article pre code {
 
 .copy-icon:hover,
 .copy-icon:active {
-  background: var(--icon-bg-alter);
+  background: var(--icon-bg);
   fill: var(--icon-content-alter);
 }
 
@@ -99,7 +99,6 @@ article input[type="checkbox"] {
 article input[type="checkbox"] + label {
   width: 1rem;
   height: 1rem;
-  background: var(--icon-bg);
   border: 0.125rem solid var(--icon-border);
   border-radius: 0.2rem;
   display: inline-flex;
@@ -132,7 +131,7 @@ footer {
   height: 2rem;
 
   path {
-    fill: var(--icon-bg-alter);
+    fill: var(--icon-content);
   }
 }
 
@@ -140,7 +139,7 @@ footer {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  background: var(--icon-bg-alter);
+  background: var(--icon-bg);
   border: 0px;
   border-radius: 50%;
   position: fixed;
@@ -156,11 +155,11 @@ footer {
 
 .upToTop:active,
 .upToTop:hover {
-  background: var(--icon-bg);
-  border: 0.15rem solid var(--icon-bg-alter);
+  background: initial;
+  border: 0.15rem solid var(--icon-bg);
 
   svg {
-    fill: var(--icon-bg-alter);
+    fill: var(--icon-bg);
   }
 }
 
@@ -191,7 +190,7 @@ aside ul {
 
 aside li {
   margin: 0.2rem 0;
-  border-left: 0.5rem solid var(--nav-border-alter);
+  border-left: 0.5rem solid var(--nav-bg);
   list-style-type: none;
 }
 
