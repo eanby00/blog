@@ -1,0 +1,40 @@
+* {
+  --main-color: white;
+
+  --header-color: #525252;
+  --header-content-color: white;
+  --backdrop-color: rgba(0, 0, 0, 0.5);
+  --spinner-color: #525252;
+
+  --card-color: #525252;
+  --card-content-color: white;
+  --card-border-color: #525252;
+  --card-color-alter: white;
+  --card-content-color-alter: black;
+
+  --article-color: white;
+  --article-content-color: black;
+  --article-border-color: #ebebeb;
+  --article-content-color-alter: #525252;
+
+  --code-color: #ebebeb;
+  --code-border-color: #525252;
+  --code-content-color: #525252;
+
+  --icon-color: #ebebeb;
+  --icon-border-color: #525252;
+  --icon-content-color: black;
+  --icon-color-alter: #525252;
+  --icon-content-color-alter: white;
+
+  --nav-color: white;
+  --nav-content-color-bold: black;
+  --nav-content-color: #525252;
+  --nav-border-color: #525252;
+  --nav-border-color-alter: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+  }
+}

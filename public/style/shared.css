@@ -1,42 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 * {
-  --main-color: white;
-
-  --header-color: #525252;
-  --header-content-color: white;
-  --backdrop-color: rgba(0, 0, 0, 0.5);
-  --spinner-color: #525252;
-
-  --card-color: #525252;
-  --card-content-color: white;
-  --card-border-color: #525252;
-  --card-color-alter: white;
-  --card-content-color-alter: black;
-
-  --article-color: white;
-  --article-content-color: black;
-  --article-border-color: #ebebeb;
-  --article-content-color-alter: #525252;
-
-  --code-color: #ebebeb;
-  --code-border-color: #525252;
-  --code-content-color: #525252;
-
-  --icon-color: #ebebeb;
-  --icon-border-color: #525252;
-  --icon-content-color: black;
-  --icon-color-alter: #525252;
-  --icon-content-color-alter: white;
-
-  --nav-color: white;
-  --nav-content-color-bold: black;
-  --nav-content-color: #525252;
-  --nav-border-color: #525252;
-  --nav-border-color-alter: white;
-
   box-sizing: border-box;
-
   font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -176,10 +141,5 @@ svg circle {
 @media (min-width: 40rem) {
   .mobile-menu {
     display: none;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  * {
   }
 }
