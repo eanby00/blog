@@ -4,17 +4,12 @@
   --color-brand-tertiary: #393e46;
   --color-brand-quaternary: #eeeeee;
 
-  --color-brand-primary: #00adb5;
-  --color-brand-tertiary: white;
-  --color-brand-quaternary: #393e46;
-  --color-brand-secondary: #eeeeee;
-
   --color-text-primary: black;
   --color-text-alter: white;
 
   --opaque: rgba(0, 0, 0, 0.5);
 
-  --main-bg: var(--color-brand-tertiary);
+  --main-bg: var(--color-brand-secondary);
 
   --header-bg: var(--color-brand-primary);
   --header-content: var(--color-text-alter);
@@ -24,22 +19,22 @@
   --card-bg: var(--color-brand-primary);
   --card-border: var(--color-brand-primary);
   --card-content: var(--color-text-alter);
-  --card-bg-alter: var(--color-brand-tertiary);
+  --card-bg-alter: var(--color-brand-secondary);
   --card-content-alter: var(--color-text-primary);
 
-  --article-border: var(--color-brand-tertiary);
+  --article-border: var(--color-brand-secondary);
   --article-content: var(--color-text-primary);
 
-  --code-bg: var(--color-brand-secondary);
+  --code-bg: var(--color-brand-quaternary);
   --code-border: var(--color-brand-primary);
   --code-content: var(--color-text-primary);
 
-  --icon-bg: var(--color-brand-quaternary);
-  --icon-border: var(--color-brand-quaternary);
+  --icon-bg: var(--color-brand-tertiary);
+  --icon-border: var(--color-brand-tertiary);
   --icon-content: var(--color-text-primary);
   --icon-content-alter: var(--color-text-alter);
 
-  --nav-bg: var(--color-brand-tertiary);
+  --nav-bg: var(--color-brand-secondary);
   --nav-border: var(--color-brand-primary);
   --nav-content: var(--color-text-primary);
 }
