@@ -219,7 +219,6 @@ aside li:has(> a.h3) {
 }
 
 aside a.h1 {
-  color: var(--nav-content-bold);
   font-size: larger;
 }
 
