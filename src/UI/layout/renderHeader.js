@@ -11,15 +11,26 @@ export const renderHeader = (sidebarSelector) => {
   const isDarkModeOS = matchMedia("(prefers-color-scheme: dark)");
   let isDarkModeWeb = localStorage.getItem("dark") === "true";
 
-  if (isDarkModeOS.matches || isDarkModeWeb) {
-    lightButton.classList.toggle("close");
-    body.classList.toggle("dark-mode");
+  const setDarkMode = () => {
+    lightButton.classList.remove("close");
+    darkButton.classList.add("close");
+    body.classList.add("dark-mode");
     localStorage.setItem("dark", true);
     isDarkModeWeb = true;
-  } else {
-    darkButton.classList.toggle("close");
+  };
+
+  const setWhiteMode = () => {
+    lightButton.classList.add("close");
+    darkButton.classList.remove("close");
+    body.classList.remove("dark-mode");
     localStorage.setItem("dark", false);
     isDarkModeWeb = false;
+  };
+
+  if (isDarkModeOS.matches || isDarkModeWeb) {
+    setDarkMode();
+  } else {
+    setWhiteMode();
   }
 
   const toggleMenu = () => {
@@ -28,18 +39,10 @@ export const renderHeader = (sidebarSelector) => {
     sidebar.classList.toggle("open");
   };
 
-  const toggleDarkMode = () => {
-    lightButton.classList.toggle("close");
-    darkButton.classList.toggle("close");
-    body.classList.toggle("dark-mode");
-    localStorage.setItem("dark", !isDarkModeWeb);
-    isDarkModeWeb = !isDarkModeWeb;
-  };
-
   mobileMenu.addEventListener("click", toggleMenu);
   backdrop.addEventListener("click", toggleMenu);
-  lightButton.addEventListener("click", toggleDarkMode);
-  darkButton.addEventListener("click", toggleDarkMode);
+  lightButton.addEventListener("click", setWhiteMode);
+  darkButton.addEventListener("click", setDarkMode);
   isDesktopView.addEventListener("change", () => {
     if (isDesktopView.matches) {
       mobileMenu.classList.remove("open");
@@ -49,17 +52,9 @@ export const renderHeader = (sidebarSelector) => {
   });
   isDarkModeOS.addEventListener("change", () => {
     if (isDarkModeOS.matches) {
-      lightButton.classList.add("close");
-      darkButton.classList.remove("close");
-      body.classList.add("dark-mode");
-      localStorage.setItem("dark", true);
-      isDarkModeWeb = true;
+      setWhiteMode();
     } else {
-      lightButton.classList.remove("close");
-      darkButton.classList.add("close");
-      body.classList.remove("dark-mode");
-      localStorage.setItem("dark", false);
-      isDarkModeWeb = false;
+      setDarkMode();
     }
   });
 };
