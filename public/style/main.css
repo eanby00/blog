@@ -2,11 +2,11 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 main {
-  padding: 1rem;
+  padding: 0;
+  height: calc(100% - 80px);
 }
 
 .card {
