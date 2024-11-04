@@ -5,7 +5,7 @@ main {
   display: flex;
 }
 
-main article {
+main > div {
   width: 100%;
   margin-top: 1rem;
   padding: 0.5rem;
@@ -118,51 +118,6 @@ article p img {
   margin-top: 1rem;
 }
 
-footer {
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.link-github svg {
-  width: 2rem;
-  height: 2rem;
-
-  path {
-    fill: var(--icon-content);
-  }
-}
-
-.upToTop {
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  background: var(--icon-bg);
-  border: 0px;
-  border-radius: 50%;
-  position: fixed;
-  bottom: 1rem;
-  right: 2rem;
-  display: none;
-  cursor: pointer;
-}
-
-.upToTop.display {
-  display: block;
-}
-
-.upToTop:active,
-.upToTop:hover {
-  background: initial;
-  border: 0.2rem solid var(--icon-border);
-
-  svg {
-    fill: var(--icon-content);
-  }
-}
-
 main aside {
   width: 50%;
   height: 100%;
@@ -235,7 +190,7 @@ aside a.h3 {
     width: 100%;
   }
 
-  main article {
+  main > div {
     width: 70%;
     padding: 1rem;
     border-right: 1px solid var(--article-border);

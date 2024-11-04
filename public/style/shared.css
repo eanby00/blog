@@ -160,6 +160,50 @@ svg circle {
   }
 }
 
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-github svg {
+  width: 2rem;
+  height: 2rem;
+
+  path {
+    fill: var(--icon-content);
+  }
+}
+
+.upToTop {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  background: var(--icon-bg);
+  border: 0px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  display: none;
+  cursor: pointer;
+}
+
+.upToTop.display {
+  display: block;
+}
+
+.upToTop:active,
+.upToTop:hover {
+  background: initial;
+  border: 0.2rem solid var(--icon-border);
+
+  svg {
+    fill: var(--icon-content);
+  }
+}
+
 .display {
   display: block;
 }
