@@ -1,4 +1,4 @@
-* {
+body {
   --color-brand-primary: #31304d;
   --color-brand-secondary: white;
   --color-brand-tertiary: #161a30;
@@ -39,8 +39,18 @@
   --nav-content: var(--color-text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  * {
+body.dark-mode {
+  --color-brand-primary: #31304d;
+  --color-brand-secondary: black;
+  --color-brand-tertiary: #31304d;
+  --color-brand-quaternary: #161a30;
+
+  --color-text-primary: white;
+  --color-text-alter: white;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  body {
     --color-brand-primary: #31304d;
     --color-brand-secondary: black;
     --color-brand-tertiary: #31304d;
@@ -49,4 +59,4 @@
     --color-text-primary: white;
     --color-text-alter: white;
   }
-}
+} */
