@@ -4,7 +4,7 @@ import { renderPosts } from "./renderPosts";
 import { renderTags } from "./renderTags";
 
 export const render = (posts, tags) => {
-  renderLayout();
+  renderLayout(".tag-container");
   renderTags(posts, tags);
   renderPosts(posts);
   removeLoadingSpinner();

@@ -1,9 +1,9 @@
 import { $ } from "../Util/Helper";
 
-export const renderHeader = () => {
+export const renderHeader = (sidebarSelector) => {
   const mobileMenu = $(".mobile-menu");
   const backdrop = $(".backdrop");
-  const tagContainer = $(".tag-container");
+  const sidebar = $(sidebarSelector);
   const lightButton = $(".light");
   const darkButton = $(".dark");
   const body = $("body");
@@ -25,7 +25,7 @@ export const renderHeader = () => {
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
     backdrop.classList.toggle("display");
-    tagContainer.classList.toggle("open");
+    sidebar.classList.toggle("open");
   };
 
   const toggleDarkMode = () => {
@@ -44,7 +44,7 @@ export const renderHeader = () => {
     if (isDesktopView.matches) {
       mobileMenu.classList.remove("open");
       backdrop.classList.remove("display");
-      tagContainer.classList.remove("open");
+      sidebar.classList.remove("open");
     }
   });
   isDarkModeOS.addEventListener("change", () => {

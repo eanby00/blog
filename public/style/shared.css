@@ -7,12 +7,22 @@
 
 html {
   font-family: sans-serif;
+  scrollbar-width: none;
 }
 
 body {
   margin: 0;
   min-width: 25rem;
   background: var(--main-bg);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  padding: 0;
+  flex-grow: 1;
 }
 
 .main-header {
@@ -216,5 +226,9 @@ footer {
 @media (min-width: 40rem) {
   .mobile-menu {
     display: none;
+  }
+
+  .upToTop {
+    z-index: 8;
   }
 }

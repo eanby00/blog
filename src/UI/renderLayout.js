@@ -35,8 +35,8 @@ const renderUpToTop = () => {
   observer.observe(header);
 };
 
-export const renderLayout = (url) => {
-  renderHeader();
+export const renderLayout = (sidebarSelector, url) => {
+  renderHeader(sidebarSelector);
   renderGithubIcon(url);
   renderUpToTop();
 };
