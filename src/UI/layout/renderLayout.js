@@ -1,5 +1,5 @@
-import { GITHUB_API } from "../constants/API";
-import { $ } from "../Util/Helper";
+import { GITHUB_API } from "../../constants/API";
+import { $ } from "../../Util/Helper";
 import { renderHeader } from "./renderHeader";
 
 const renderGithubIcon = (url) => {

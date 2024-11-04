@@ -1,4 +1,4 @@
-import { $, createElement } from "../Util/Helper";
+import { $, createElement } from "../../Util/Helper";
 
 export const renderAnchors = () => {
   const mainElement = $("main article");

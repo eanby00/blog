@@ -1,4 +1,4 @@
-import { $, createElement } from "../Util/Helper";
+import { $, createElement } from "../../Util/Helper";
 
 const changeURLToPost = (event) => {
   const id = event.target.closest("section").dataset.id;

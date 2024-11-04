@@ -1,4 +1,4 @@
-import { createElement } from "../Util/Helper";
+import { createElement } from "../../Util/Helper";
 
 const copyText = async (tag, copyButton, copyDone) => {
   await navigator.clipboard.writeText(tag.querySelector("code").textContent);

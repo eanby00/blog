@@ -1,5 +1,5 @@
-import { INDEX_ANCHOR } from "../constants/MD";
-import { $ } from "../Util/Helper";
+import { INDEX_ANCHOR } from "../../constants/MD";
+import { $ } from "../../Util/Helper";
 
 const splitSection = () => {
   const article = $("main article");

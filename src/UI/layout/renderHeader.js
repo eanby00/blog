@@ -1,4 +1,4 @@
-import { $ } from "../Util/Helper";
+import { $ } from "../../Util/Helper";
 
 export const renderHeader = (sidebarSelector) => {
   const mobileMenu = $(".mobile-menu");
