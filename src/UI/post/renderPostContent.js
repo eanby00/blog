@@ -1,4 +1,4 @@
-import { $ } from "../../Util/Helper";
+import { $, $All } from "../../Util/Helper";
 import { renderAnchors } from "./renderAnchor";
 import { renderContentCopy } from "./renderContentCopy";
 import { renderSections } from "./renderSections";
@@ -24,7 +24,7 @@ const renderContent = ({ title, html }) => {
 };
 
 const renderImage = (images) => {
-  const imageElements = document.querySelectorAll("img");
+  const imageElements = $All("img");
   imageElements.forEach((imageElement) => {
     imageElement.id = imageElement.src.split("/").pop().replaceAll("%20", " ");
     const image = images.find((image) => image.name === imageElement.id);

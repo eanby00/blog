@@ -1,7 +1,7 @@
-import { createElement } from "../../Util/Helper";
+import { $, $All, createElement } from "../../Util/Helper";
 
 const copyText = async (tag, copyButton, copyDone) => {
-  await navigator.clipboard.writeText(tag.querySelector("code").textContent);
+  await navigator.clipboard.writeText($("code", tag).textContent);
   copyDone.classList.toggle("close");
   copyButton.classList.toggle("close");
   setTimeout(() => {
@@ -11,7 +11,7 @@ const copyText = async (tag, copyButton, copyDone) => {
 };
 
 export const renderContentCopy = () => {
-  document.querySelectorAll("pre").forEach((tag) => {
+  $All("pre").forEach((tag) => {
     const copyButton = createElement(".template-content-copy", "svg");
     const copyDone = createElement(".template-content-copy-done", "svg");
     copyButton.addEventListener(

@@ -8,9 +8,9 @@ const changeURLToPost = (event) => {
 const createPostElement = ({ id, title, date, description }) => {
   const postElement = createElement(".template-post", "section");
   postElement.dataset.id = id;
-  postElement.querySelector("h2").textContent = title;
-  postElement.querySelector(".post-date").textContent = date;
-  postElement.querySelector(".post-description").textContent =
+  $("h2", postElement).textContent = title;
+  $(".post-date", postElement).textContent = date;
+  $(".post-description", postElement).textContent =
     description || `${title}에 관한 포스트`;
 
   postElement.addEventListener("click", changeURLToPost);

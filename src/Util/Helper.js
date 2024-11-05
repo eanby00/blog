@@ -1,5 +1,13 @@
-export const $ = (identifier) => {
-  return document.querySelector(identifier);
+export const $ = (identifier, targetTag) => {
+  return targetTag
+    ? targetTag.querySelector(identifier)
+    : document.querySelector(identifier);
+};
+
+export const $All = (identifier, targetTag) => {
+  return targetTag
+    ? targetTag.querySelectorAll(identifier)
+    : document.querySelectorAll(identifier);
 };
 
 export const createElement = (selector, targetTag) => {

@@ -1,16 +1,16 @@
-import { $, createElement } from "../../Util/Helper";
+import { $, $All, createElement } from "../../Util/Helper";
 
 export const renderAnchors = () => {
   const mainElement = $("main article");
   const navElement = createElement(".template-nav-anchor", "nav");
 
-  const anchorList = mainElement.querySelectorAll("section");
+  const anchorList = $All("section", mainElement);
   anchorList.forEach(({ children, id, className }) => {
     const anchorLi = createElement(".template-anchor", "li");
-    anchorLi.querySelector("a").textContent = children[0].textContent;
-    anchorLi.querySelector("a").href = `#${id}`;
-    anchorLi.querySelector("a").className = className;
-    navElement.querySelector("ul").append(anchorLi);
+    $("a", anchorLi).textContent = children[0].textContent;
+    $("a", anchorLi).href = `#${id}`;
+    $("a", anchorLi).className = className;
+    $("ul", navElement).append(anchorLi);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
