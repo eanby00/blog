@@ -15,18 +15,16 @@ const replaceCheckbox = (html) => {
     );
 };
 
-const renderContent = (post) => {
+const renderContent = ({ title, html }) => {
   const mainElement = $("main article");
-  document.title = post.title.toUpperCase();
+  document.title = title.toUpperCase();
 
-  const html = post.html;
   const replacedHtml = replaceCheckbox(html);
   mainElement.insertAdjacentHTML("afterbegin", replacedHtml);
 };
 
-const renderImage = (post) => {
+const renderImage = (images) => {
   const imageElements = document.querySelectorAll("img");
-  const images = post.images;
   imageElements.forEach((imageElement) => {
     imageElement.id = imageElement.src.split("/").pop().replaceAll("%20", " ");
     const image = images.find((image) => image.name === imageElement.id);
@@ -40,6 +38,6 @@ export const renderPostContent = (post) => {
   renderContent(post);
   renderSections();
   renderAnchors();
-  renderImage(post);
+  renderImage(post.images);
   renderContentCopy();
 };

@@ -5,11 +5,11 @@ export const renderAnchors = () => {
   const navElement = createElement(".template-nav-anchor", "nav");
 
   const anchorList = mainElement.querySelectorAll("section");
-  anchorList.forEach((anchor) => {
+  anchorList.forEach(({ children, id, className }) => {
     const anchorLi = createElement(".template-anchor", "li");
-    anchorLi.querySelector("a").textContent = anchor.children[0].textContent;
-    anchorLi.querySelector("a").href = `#${anchor.id}`;
-    anchorLi.querySelector("a").className = anchor.className;
+    anchorLi.querySelector("a").textContent = children[0].textContent;
+    anchorLi.querySelector("a").href = `#${id}`;
+    anchorLi.querySelector("a").className = className;
     navElement.querySelector("ul").append(anchorLi);
 
     const observer = new IntersectionObserver((entries) => {
@@ -22,7 +22,7 @@ export const renderAnchors = () => {
       });
     });
 
-    observer.observe($(`section#${anchor.id}`));
+    observer.observe($(`section#${id}`));
   });
 
   $("aside").append(navElement);

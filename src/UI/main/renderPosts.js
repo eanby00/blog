@@ -5,13 +5,13 @@ const changeURLToPost = (event) => {
   location.href = `${location.href}post/?id=${id}`;
 };
 
-const createPostElement = (post) => {
+const createPostElement = ({ id, title, date, description }) => {
   const postElement = createElement(".template-post", "section");
-  postElement.dataset.id = post.id;
-  postElement.querySelector("h2").textContent = post.title;
-  postElement.querySelector(".post-date").textContent = post.date;
+  postElement.dataset.id = id;
+  postElement.querySelector("h2").textContent = title;
+  postElement.querySelector(".post-date").textContent = date;
   postElement.querySelector(".post-description").textContent =
-    post.description || `${post.title}에 관한 포스트`;
+    description || `${title}에 관한 포스트`;
 
   postElement.addEventListener("click", changeURLToPost);
   return postElement;

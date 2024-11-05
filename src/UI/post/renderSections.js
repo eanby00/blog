@@ -47,9 +47,10 @@ const renderSection = (sections) => {
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
-    const id = parseSectionId(section[0].textContent);
+    const header = section[0];
+    const id = parseSectionId(header.textContent);
     sectionElement.id = id;
-    sectionElement.className = section[0].tagName.toLowerCase();
+    sectionElement.className = header.tagName.toLowerCase();
     sectionElement.append(...section);
 
     article.append(sectionElement);
