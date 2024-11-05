@@ -122,13 +122,14 @@ main {
 
 .anchor-container {
   width: 50%;
-  height: 100%;
+  height: 100vh;
   padding-top: 5rem;
   background: var(--nav-bg);
   position: fixed;
   top: 0;
+  bottom: 0;
   right: 0;
-  z-index: 8;
+  z-index: 5;
   transform: translateX(100%);
   transition: transform 0.5s ease-in-out;
   overflow-y: scroll;
@@ -220,5 +221,9 @@ main {
   .anchor-container h2 {
     margin-top: 0;
     padding-top: 0;
+  }
+
+  .upToTop {
+    z-index: 6;
   }
 }
