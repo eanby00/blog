@@ -10,6 +10,18 @@
     <script type="module" src="./script/main.js" defer></script>
   </head>
   <body>
+    <script>
+      const isDarkMode =
+        matchMedia("(prefers-color-scheme: dark)").matches ||
+        localStorage.getItem("dark") === "true";
+      const body = document.querySelector("body");
+
+      isDarkMode
+        ? body.classList.add("dark-mode")
+        : body.classList.remove("dark-mode");
+
+      localStorage.setItem("dark", isDarkMode);
+    </script>
     <template class="template-tag">
       <div class="tag card"></div>
     </template>
