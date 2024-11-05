@@ -124,8 +124,8 @@ main {
 }
 
 .spinner {
-  margin: 0 auto;
   width: max-content;
+  margin: 2rem auto;
   display: none;
 }
 

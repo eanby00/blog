@@ -1,37 +1,47 @@
 import { $ } from "../../Util/Helper";
 
-export const renderHeader = (sidebarSelector) => {
-  const mobileMenu = $(".mobile-menu");
-  const backdrop = $(".backdrop");
-  const sidebar = $(sidebarSelector);
-  const lightButton = $(".light");
+const toggleDarkMode = () => {
   const darkButton = $(".dark");
+  const lightButton = $(".light");
   const body = $("body");
-  const isDesktopView = matchMedia("(min-width: 40rem)");
   const isDarkModeOS = matchMedia("(prefers-color-scheme: dark)");
   let isDarkModeWeb = localStorage.getItem("dark") === "true";
 
-  const setDarkMode = () => {
-    lightButton.classList.remove("close");
-    darkButton.classList.add("close");
-    body.classList.add("dark-mode");
-    localStorage.setItem("dark", true);
-    isDarkModeWeb = true;
+  const setMode = (trigger) => {
+    if (trigger) {
+      lightButton.classList.remove("close");
+      darkButton.classList.add("close");
+      body.classList.add("dark-mode");
+    } else {
+      lightButton.classList.add("close");
+      darkButton.classList.remove("close");
+      body.classList.remove("dark-mode");
+    }
+
+    localStorage.setItem("dark", trigger);
+    isDarkModeWeb = trigger;
   };
 
-  const setWhiteMode = () => {
-    lightButton.classList.add("close");
-    darkButton.classList.remove("close");
-    body.classList.remove("dark-mode");
-    localStorage.setItem("dark", false);
-    isDarkModeWeb = false;
+  const switchMode = (option) => {
+    if (isDarkModeOS.matches || option) {
+      setMode(true);
+    } else {
+      setMode(false);
+    }
   };
 
-  if (isDarkModeOS.matches || isDarkModeWeb) {
-    setDarkMode();
-  } else {
-    setWhiteMode();
-  }
+  switchMode(isDarkModeWeb);
+
+  darkButton.addEventListener("click", setMode.bind(null, true));
+  lightButton.addEventListener("click", setMode.bind(null, false));
+  isDarkModeOS.addEventListener("change", switchMode);
+};
+
+const renderSidebar = (sidebarSelector) => {
+  const mobileMenu = $(".mobile-menu");
+  const backdrop = $(".backdrop");
+  const sidebar = $(sidebarSelector);
+  const isDesktopView = matchMedia("(min-width: 40rem)");
 
   const toggleMenu = () => {
     mobileMenu.classList.toggle("open");
@@ -41,8 +51,7 @@ export const renderHeader = (sidebarSelector) => {
 
   mobileMenu.addEventListener("click", toggleMenu);
   backdrop.addEventListener("click", toggleMenu);
-  lightButton.addEventListener("click", setWhiteMode);
-  darkButton.addEventListener("click", setDarkMode);
+
   isDesktopView.addEventListener("change", () => {
     if (isDesktopView.matches) {
       mobileMenu.classList.remove("open");
@@ -50,11 +59,9 @@ export const renderHeader = (sidebarSelector) => {
       sidebar.classList.remove("open");
     }
   });
-  isDarkModeOS.addEventListener("change", () => {
-    if (isDarkModeOS.matches) {
-      setWhiteMode();
-    } else {
-      setDarkMode();
-    }
-  });
+};
+
+export const renderHeader = (sidebarSelector) => {
+  toggleDarkMode();
+  renderSidebar(sidebarSelector);
 };
