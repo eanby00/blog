@@ -1,8 +1,8 @@
-import { INDEX_ANCHOR } from "../constants/MD";
-import { $ } from "../Util/Helper";
+import { INDEX_ANCHOR } from "../../constants/MD";
+import { $ } from "../../Util/Helper";
 
 const splitSection = () => {
-  const article = $("main article");
+  const article = $(".content-container");
   const nodes = Array.from(article.children);
   let tagIndex = null;
   const sections = [];
@@ -43,13 +43,14 @@ const parseSectionId = (textContent) => {
 };
 
 const renderSection = (sections) => {
-  const article = $("main article");
+  const article = $(".content-container");
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
-    const id = parseSectionId(section[0].textContent);
+    const header = section[0];
+    const id = parseSectionId(header.textContent);
     sectionElement.id = id;
-    sectionElement.className = section[0].tagName.toLowerCase();
+    sectionElement.className = header.tagName.toLowerCase();
     sectionElement.append(...section);
 
     article.append(sectionElement);

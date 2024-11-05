@@ -1,10 +1,10 @@
-import { renderHeader } from "./renderHeader";
-import { removeLoadingSpinner } from "./renderLoadingSpinner";
-import { renderPosts } from "./renderPosts";
-import { renderTags } from "./renderTags";
+import { renderLayout } from "./layout/renderLayout";
+import { removeLoadingSpinner } from "./layout/renderLoadingSpinner";
+import { renderPosts } from "./main/renderPosts";
+import { renderTags } from "./main/renderTags";
 
 export const render = (posts, tags) => {
-  renderHeader();
+  renderLayout(".tag-container");
   renderTags(posts, tags);
   renderPosts(posts);
   removeLoadingSpinner();

@@ -1,4 +1,4 @@
-import { $, createElement, hasClass } from "../Util/Helper";
+import { $, createElement, hasClass } from "../../Util/Helper";
 import { renderPosts } from "./renderPosts";
 
 const getSelectedTags = (tagElement) => {

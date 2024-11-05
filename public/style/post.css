@@ -5,37 +5,37 @@ main {
   display: flex;
 }
 
-main article {
+.content-container {
   width: 100%;
   margin-top: 1rem;
   padding: 0.5rem;
 }
 
-article h1,
-article h2,
-article h3 {
+.content-container h1,
+.content-container h2,
+.content-container h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   padding-left: 0.5rem;
 }
 
-article h1 {
+.content-container h1 {
   font-size: 2rem;
 }
 
-article h2 {
+.content-container h2 {
   font-size: 1.5rem;
 }
 
-article h3 {
+.content-container h3 {
   font-size: 1rem;
 }
 
-article h1:first-of-type {
+.content-container h1:first-of-type {
   margin-top: 0;
 }
 
-article blockquote {
+.content-container blockquote {
   margin: 0 1rem;
   padding: 0.2rem;
   background: var(--code-bg);
@@ -44,11 +44,11 @@ article blockquote {
   font-weight: bold;
 }
 
-article p {
+.content-container p {
   text-align: center;
 }
 
-article pre {
+.content-container pre {
   padding: 1rem;
   background: var(--code-bg);
   border-radius: 0.5rem;
@@ -56,7 +56,7 @@ article pre {
   justify-content: space-between;
 }
 
-article pre code {
+.content-container pre code {
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--code-border) var(--code-bg);
@@ -82,22 +82,22 @@ article pre code {
   fill: var(--icon-content);
 }
 
-article li {
+.content-container li {
   margin: 0.32rem 0;
   list-style-type: none;
 }
 
-article li code {
+.content-container li code {
   padding: 0.1rem 0.2rem;
   background: var(--code-bg);
   border-radius: 0.2rem;
 }
 
-article input[type="checkbox"] {
+.content-container input[type="checkbox"] {
   display: none;
 }
 
-article input[type="checkbox"] + label {
+.content-container input[type="checkbox"] + label {
   width: 1rem;
   height: 1rem;
   border: 0.125rem solid var(--icon-border);
@@ -108,65 +108,19 @@ article input[type="checkbox"] + label {
   vertical-align: middle;
 }
 
-article input[type="checkbox"]:checked + label::after {
+.content-container input[type="checkbox"]:checked + label::after {
   content: "✔";
   color: var(--icon-content);
   font-size: 0.8rem;
   font-weight: bold;
 }
 
-article p img {
+.content-container p img {
   width: 100%;
   margin-top: 1rem;
 }
 
-footer {
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.link-github svg {
-  width: 2rem;
-  height: 2rem;
-
-  path {
-    fill: var(--icon-content);
-  }
-}
-
-.upToTop {
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  background: var(--icon-bg);
-  border: 0px;
-  border-radius: 50%;
-  position: fixed;
-  z-index: 4;
-  bottom: 1rem;
-  right: 2rem;
-  display: none;
-  cursor: pointer;
-}
-
-.upToTop.display {
-  display: block;
-}
-
-.upToTop:active,
-.upToTop:hover {
-  background: initial;
-  border: 0.2rem solid var(--icon-border);
-
-  svg {
-    fill: var(--icon-content);
-  }
-}
-
-main aside {
+.anchor-container {
   width: 50%;
   height: 100vh;
   padding-top: 5rem;
@@ -178,63 +132,63 @@ main aside {
   z-index: 5;
   transform: translateX(100%);
   transition: transform 0.5s ease-in-out;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--nav-border) var(--nav-bg);
 }
 
-main aside nav {
+.anchor-container nav {
   padding: 1rem;
 }
 
-main aside.open {
+.anchor-container.open {
   transform: translate(0);
 }
 
-aside ul {
+.anchor-container ul {
   padding-left: 0rem;
 }
 
-aside li {
+.anchor-container li {
   margin: 0.2rem 0;
   border-left: 0.5rem solid var(--nav-bg);
   list-style-type: none;
 }
 
-aside li:hover,
-aside li:active,
-aside li.open {
+.anchor-container li:hover,
+.anchor-container li:active,
+.anchor-container li.open {
   border-left: 0.5rem solid var(--nav-border);
 }
 
-aside a {
+.anchor-container a {
   color: var(--nav-content);
   font-weight: bold;
   text-decoration: none;
 }
 
-aside li:has(> a.h1) {
+.anchor-container li:has(> a.h1) {
   padding-left: 0.5rem;
 }
 
-aside li:has(> a.h2) {
+.anchor-container li:has(> a.h2) {
   padding-left: 1rem;
 }
 
-aside li:has(> a.h3) {
+.anchor-container li:has(> a.h3) {
   padding-left: 1.5rem;
 }
 
-aside a.h1 {
+.anchor-container a.h1 {
   font-size: larger;
 }
 
-aside a.h2 {
+.anchor-container a.h2 {
   font-size: large;
 }
 
-aside a.h3 {
+.anchor-container a.h3 {
   font-size: medium;
 }
 
@@ -243,27 +197,28 @@ aside a.h3 {
     width: 100%;
   }
 
-  main article {
+  .content-container {
     width: 70%;
     padding: 1rem;
     border-right: 1px solid var(--article-border);
   }
 
-  article p img {
+  .content-container p img {
     max-width: 28rem;
   }
 
-  main aside {
+  .anchor-container {
     width: 30%;
-    min-width: 12rem;
     height: 100vh;
+    min-width: 12rem;
     padding-top: 0.5rem;
     position: sticky;
     transform: translateX(0);
     transition: initial;
+    z-index: 5;
   }
 
-  aside h2 {
+  .anchor-container h2 {
     margin-top: 0;
     padding-top: 0;
   }

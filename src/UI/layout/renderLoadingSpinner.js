@@ -1,4 +1,4 @@
-import { $ } from "../Util/Helper";
+import { $ } from "../../Util/Helper";
 
 export const removeLoadingSpinner = () => {
   const loadingSpinner = $(".spinner");

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,13 +7,22 @@
 }
 
 html {
-  font-family: sans-serif;
+  scrollbar-width: none;
 }
 
 body {
   margin: 0;
   min-width: 25rem;
   background: var(--main-bg);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  padding: 0;
+  flex-grow: 1;
 }
 
 .main-header {
@@ -115,8 +124,8 @@ body {
 }
 
 .spinner {
-  margin: 0 auto;
   width: max-content;
+  margin: 2rem auto;
   display: none;
 }
 
@@ -161,6 +170,51 @@ svg circle {
   }
 }
 
+footer {
+  width: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-github svg {
+  width: 2rem;
+  height: 2rem;
+
+  path {
+    fill: var(--icon-content);
+  }
+}
+
+.upToTop {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  background: var(--icon-bg);
+  border: 0px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  display: none;
+  cursor: pointer;
+}
+
+.upToTop.display {
+  display: block;
+}
+
+.upToTop:active,
+.upToTop:hover {
+  background: initial;
+  border: 0.2rem solid var(--icon-border);
+
+  svg {
+    fill: var(--icon-content);
+  }
+}
+
 .display {
   display: block;
 }
@@ -172,5 +226,9 @@ svg circle {
 @media (min-width: 40rem) {
   .mobile-menu {
     display: none;
+  }
+
+  .upToTop {
+    z-index: 8;
   }
 }
