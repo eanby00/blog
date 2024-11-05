@@ -2,7 +2,13 @@ import { $, createElement } from "../../Util/Helper";
 
 const changeURLToPost = (event) => {
   const id = event.target.closest("section").dataset.id;
-  location.href = `${location.href}post/?id=${id}`;
+  const isLocal = location.href.includes("index.html");
+  isLocal
+    ? (location.href = `${location.href.replace(
+        "index.html",
+        ""
+      )}post/index.html?id=${id}`)
+    : (location.href = `${location.href}post/?id=${id}`);
 };
 
 const createPostElement = ({ id, title, date, description }) => {

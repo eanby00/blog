@@ -14,7 +14,7 @@ const getPosts = () => {
   const posts = [];
   for (let i = 0; i < sessionStorage.length; ++i) {
     const key = getKey(i);
-    if (key !== "tags") {
+    if (key !== "tags" && key !== "IsThisFirstTime_Log_From_LiveServer") {
       posts.push(JSON.parse(getStorage(key)));
     }
   }
