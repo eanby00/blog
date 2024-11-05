@@ -2,7 +2,7 @@ import { INDEX_ANCHOR } from "../../constants/MD";
 import { $ } from "../../Util/Helper";
 
 const splitSection = () => {
-  const article = $("main article");
+  const article = $(".content-container");
   const nodes = Array.from(article.children);
   let tagIndex = null;
   const sections = [];
@@ -43,7 +43,7 @@ const parseSectionId = (textContent) => {
 };
 
 const renderSection = (sections) => {
-  const article = $("main article");
+  const article = $(".content-container");
 
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");

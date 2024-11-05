@@ -16,7 +16,7 @@ const replaceCheckbox = (html) => {
 };
 
 const renderContent = ({ title, html }) => {
-  const mainElement = $("main article");
+  const mainElement = $(".content-container");
   document.title = title.toUpperCase();
 
   const replacedHtml = replaceCheckbox(html);

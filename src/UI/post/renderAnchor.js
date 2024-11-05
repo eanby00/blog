@@ -1,7 +1,7 @@
 import { $, $All, createElement } from "../../Util/Helper";
 
 export const renderAnchors = () => {
-  const mainElement = $("main article");
+  const mainElement = $(".content-container");
   const navElement = createElement(".template-nav-anchor", "nav");
 
   const anchorList = $All("section", mainElement);
@@ -25,5 +25,5 @@ export const renderAnchors = () => {
     observer.observe($(`section#${id}`));
   });
 
-  $("aside").append(navElement);
+  $(".anchor-container").append(navElement);
 };
