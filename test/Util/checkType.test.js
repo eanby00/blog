@@ -1,4 +1,4 @@
-import { isFolder, isMDFile } from "../../src/Util/checkType";
+import { isFolder, isImgFile, isMDFile } from "../../src/Util/checkType";
 
 describe("isFolder 함수 체크", () => {
   test("배열이 들어오는 경우: true", () => {
@@ -48,8 +48,43 @@ describe("isMDFile 함수 체크", () => {
     expect(test).toBeFalsy();
   });
 
+  test("배열이 들어오는 경우 : false", () => {
+    const test = isMDFile([]);
+    expect(test).toBeFalsy();
+  });
+
   test("매개변수가 비어 있는 경우 : false", () => {
     const test = isMDFile();
+    expect(test).toBeFalsy();
+  });
+});
+
+describe("isImgFile 함수 체크", () => {
+  test("png 파일이 들어오는 경우 : true", () => {
+    const test = isImgFile({ name: "test.png" });
+  });
+
+  test("jpg 파일이 들어오는 경우 : true", () => {
+    const test = isImgFile({ name: "test.jpg" });
+  });
+
+  test("txt 파일이 들어오는 경우 : false", () => {
+    const test = isImgFile({ name: "test.txt" });
+    expect(test).toBeFalsy();
+  });
+
+  test("name이 없는 경우 : false", () => {
+    const test = isImgFile({ id: 1 });
+    expect(test).toBeFalsy();
+  });
+
+  test("배열이 들어오는 경우 : false", () => {
+    const test = isImgFile([]);
+    expect(test).toBeFalsy();
+  });
+
+  test("매개변수가 비어 있는 경우 : false", () => {
+    const test = isImgFile();
     expect(test).toBeFalsy();
   });
 });

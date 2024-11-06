@@ -8,6 +8,6 @@ export const isMDFile = (data) => {
   return data?.name?.split(".").pop().toLowerCase() === "md";
 };
 
-export const isImgFile = ({ name }) => {
-  return name.slice(-2).toLowerCase() in FILE_FORMAT.IMAGE;
+export const isImgFile = (data) => {
+  return data?.name?.split(".").pop().toLowerCase() in FILE_FORMAT.IMAGE;
 };
