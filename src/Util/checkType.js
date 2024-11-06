@@ -5,7 +5,7 @@ export const isFolder = (data) => {
 };
 
 export const isMDFile = ({ name }) => {
-  return name.slice(-2).toLowerCase() === "md";
+  return name?.split(".").pop().toLowerCase() === "md";
 };
 
 export const isImgFile = ({ name }) => {
