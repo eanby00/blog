@@ -1,6 +1,6 @@
 import { GITHUB_API } from "../constants/API";
 import { hasData, loadData, saveData } from "../store/store";
-import { isFolder, isMDFile } from "./checkType";
+import { isFolder, isImgFile, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
 import { generateID } from "./Helper";
@@ -67,7 +67,7 @@ const getRawPosts = async (path) => {
       });
     } else if (isMDFile(data)) {
       posts.push(await modifyPost(data));
-    } else {
+    } else if (isImgFile(data)) {
       images.push(modifyImage(data));
     }
   }

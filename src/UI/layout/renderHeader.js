@@ -61,12 +61,15 @@ const renderSidebar = (sidebarSelector) => {
   });
 };
 
+const makeDomainUrl = (href) => {
+  if (href.includes("?"))
+    return href.slice(0, href.lastIndexOf("?")).replace("/post", "");
+  return href;
+};
+
 const setAnchor = () => {
   const anchor = $(".main-header h1 a");
-  let href = location.href;
-  if (href.includes("?"))
-    href = href.slice(0, href.lastIndexOf("?")).replace("/post", "");
-  anchor.href = href;
+  anchor.href = makeDomainUrl(location.href);
 };
 
 export const renderHeader = (sidebarSelector) => {

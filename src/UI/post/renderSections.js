@@ -7,12 +7,8 @@ const splitSection = () => {
   let tagIndex = null;
   const sections = [];
 
-  nodes.forEach((node, index) => {
-    if (
-      node.tagName === "H1" ||
-      node.tagName === "H2" ||
-      node.tagName === "H3"
-    ) {
+  nodes.forEach(({ tagName }, index) => {
+    if (tagName === "H1" || tagName === "H2" || tagName === "H3") {
       if (tagIndex !== null) {
         sections.push(nodes.slice(tagIndex, index));
       }
