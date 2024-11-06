@@ -4,8 +4,8 @@ export const isFolder = (data) => {
   return Array.isArray(data);
 };
 
-export const isMDFile = ({ name }) => {
-  return name?.split(".").pop().toLowerCase() === "md";
+export const isMDFile = (data) => {
+  return data?.name?.split(".").pop().toLowerCase() === "md";
 };
 
 export const isImgFile = ({ name }) => {

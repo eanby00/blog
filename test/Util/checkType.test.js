@@ -20,6 +20,11 @@ describe("isFolder 함수 체크", () => {
     const test = isFolder({});
     expect(test).toBeFalsy();
   });
+
+  test("매개변수가 비어 있는 경우: false", () => {
+    const test = isFolder();
+    expect(test).toBeFalsy();
+  });
 });
 
 describe("isMDFile 함수 체크", () => {
@@ -40,6 +45,11 @@ describe("isMDFile 함수 체크", () => {
 
   test("name이 없는 경우 : false", () => {
     const test = isMDFile({ id: 1 });
+    expect(test).toBeFalsy();
+  });
+
+  test("매개변수가 비어 있는 경우 : false", () => {
+    const test = isMDFile();
     expect(test).toBeFalsy();
   });
 });
