@@ -25,6 +25,7 @@
 }
 
 .tag {
+  min-width: max-content;
   padding: 0.5rem 1rem;
   font-weight: bold;
   display: inline-block;
@@ -49,7 +50,7 @@
 .post {
   width: 95%;
   height: 30vh;
-  padding: 1.5rem;
+  padding: 1rem;
   background: var(--card-bg-alter);
   color: var(--card-content-alter);
   overflow: hidden;
@@ -79,10 +80,10 @@
 .post-description {
   margin: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
