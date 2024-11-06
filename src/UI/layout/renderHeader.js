@@ -61,7 +61,16 @@ const renderSidebar = (sidebarSelector) => {
   });
 };
 
+const setAnchor = () => {
+  const anchor = $(".main-header h1 a");
+  let href = location.href;
+  if (href.includes("?"))
+    href = href.slice(0, href.lastIndexOf("?")).replace("/post", "");
+  anchor.href = href;
+};
+
 export const renderHeader = (sidebarSelector) => {
   toggleDarkMode();
   renderSidebar(sidebarSelector);
+  setAnchor();
 };
