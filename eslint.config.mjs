@@ -13,4 +13,10 @@ export default [
       "no-undef": "warn",
     },
   },
+  {
+    env: {
+      jest: true,
+      process: true,
+    },
+  },
 ];
