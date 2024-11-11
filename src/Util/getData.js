@@ -6,7 +6,7 @@ import { getDescription, getHTMLFromMD } from "./getHTML";
 import { generateID } from "./Helper";
 import { getCommit, getContent } from "./request";
 
-const getTag = (path) => {
+export const getTag = (path) => {
   return path.split("/")[GITHUB_API.TAG_DEPTH];
 };
 
