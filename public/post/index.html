@@ -12,8 +12,8 @@
   <body>
     <script>
       const isDarkMode =
-        matchMedia("(prefers-color-scheme: dark)").matches ||
-        localStorage.getItem("dark") === "true";
+        localStorage.getItem("dark") === "true" ??
+        matchMedia("(prefers-color-scheme: dark)").matches;
       const body = document.querySelector("body");
 
       isDarkMode
@@ -133,7 +133,7 @@
         </svg>
       </a>
     </footer>
-    
+
     <button class="upToTop">
       <svg
         xmlns="http://www.w3.org/2000/svg"

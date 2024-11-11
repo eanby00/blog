@@ -8,6 +8,9 @@ const toggleDarkMode = () => {
   let isDarkModeWeb = localStorage.getItem("dark") === "true";
 
   const setMode = (trigger) => {
+    localStorage.setItem("dark", trigger);
+    isDarkModeWeb = trigger;
+
     if (trigger) {
       lightButton.classList.remove("close");
       darkButton.classList.add("close");
@@ -17,9 +20,6 @@ const toggleDarkMode = () => {
       darkButton.classList.remove("close");
       body.classList.remove("dark-mode");
     }
-
-    localStorage.setItem("dark", trigger);
-    isDarkModeWeb = trigger;
   };
 
   const switchMode = (option) => {
