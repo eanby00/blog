@@ -10,7 +10,7 @@ export const getTag = (path) => {
   return path.split("/")[GITHUB_API.TAG_DEPTH];
 };
 
-const getPath = (path) => {
+export const getPath = (path) => {
   return path.split("/").slice(0, -1).join("/");
 };
 
