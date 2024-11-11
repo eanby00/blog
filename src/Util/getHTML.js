@@ -24,11 +24,11 @@ export const findDescription = (data) => {
 
 export const getDescription = (rawMD) => {
   const elementTree = getElementTreeFromMd(rawMD);
-  const blockquoteElements = elementTree.children.filter(
+  const blockquoteElements = elementTree.children?.filter(
     (element) => element.type === "blockquote"
   );
 
-  if (blockquoteElements.length === 0) {
+  if (!blockquoteElements || blockquoteElements.length === 0) {
     return "";
   }
 

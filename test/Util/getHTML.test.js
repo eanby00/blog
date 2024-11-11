@@ -10,7 +10,7 @@ const MOCKED_ELEMENT_TREE = {
     type: "root",
     children: [
       {
-        type: "heading",
+        type: "blockquote",
         depth: 1,
         children: [
           {
@@ -36,7 +36,6 @@ const MOCKED_ELEMENT_TREE = {
 
 getHTML.getHTMLFromMD = jest.fn();
 getHTML.getHTMLFromMD.mockReturnValue("<h1>test</h1>");
-
 const getHTMLFromMD = getHTML.getHTMLFromMD;
 
 describe("mock getHTMLFromMD 체크", () => {
@@ -64,6 +63,23 @@ describe("findDescription 체크", () => {
 
   test("children이 존재하지 않는 경우 : ''", () => {
     const test = getHTML.findDescription(MOCKED_ELEMENT_TREE.CASE_4);
+    expect(test).toEqual("");
+  });
+});
+
+describe("getDescription 체크", () => {
+  test("올바르게 작동하는 경우 1", () => {
+    const test = getHTML.getDescription(MOCKED_ELEMENT_TREE.CASE_1);
+    expect(test).toEqual("test 헤더 메시지");
+  });
+
+  test("tree에 children이 존재하지 않는 경우", () => {
+    const test = getHTML.getDescription(MOCKED_ELEMENT_TREE.CASE_2);
+    expect(test).toEqual("");
+  });
+
+  test("children이 없는 경우", () => {
+    const test = getHTML.getDescription(MOCKED_ELEMENT_TREE.CASE_3);
     expect(test).toEqual("");
   });
 });
