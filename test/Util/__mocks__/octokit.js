@@ -5,7 +5,7 @@ export class Octokit {
 
   request(method) {
     if (method === "MD_FILE") {
-      return {
+      return Promise.resolve({
         data: {
           name: "test.md",
           path: "Posts/test tag/test/test.md",
@@ -23,9 +23,9 @@ export class Octokit {
             html: "test html url",
           },
         },
-      };
+      });
     } else if (method === "FOLDER") {
-      return {
+      return Promise.resolve({
         data: [
           {
             name: "test.md",
@@ -45,9 +45,9 @@ export class Octokit {
             },
           },
         ],
-      };
+      });
     } else if (method === "IMAGE_FILE") {
-      return {
+      return Promise.resolve({
         data: {
           name: "test.png",
           path: "Posts/test tag/test/test.png",
@@ -65,9 +65,9 @@ export class Octokit {
             html: "test html url",
           },
         },
-      };
+      });
     } else if (method === "COMMIT") {
-      return {
+      return Promise.resolve({
         data: [
           {
             commit: {
@@ -79,9 +79,9 @@ export class Octokit {
             },
           },
         ],
-      };
+      });
     } else {
-      return "";
+      return Promise.resolve("");
     }
   }
 }

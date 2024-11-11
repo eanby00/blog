@@ -14,7 +14,7 @@ export const getPath = (path) => {
   return path.split("/").slice(0, -1).join("/");
 };
 
-const getDate = async (path) => {
+export const getDate = async (path) => {
   const commit = await getCommit(path);
   return new Date(commit.data[0].commit.author.date);
 };
