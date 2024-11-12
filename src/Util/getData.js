@@ -92,16 +92,12 @@ export const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
-const getData = async () => {
-  try {
-    const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const postsWithImage = connectImages(posts, images);
-    const sortedPosts = sortPosts(postsWithImage);
-    const tags = getTags(sortedPosts);
-    return { posts: sortedPosts, tags };
-  } catch (error) {
-    console.log(error.message);
-  }
+export const getData = async () => {
+  const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
+  const postsWithImage = connectImages(posts, images);
+  const sortedPosts = sortPosts(postsWithImage);
+  const tags = getTags(sortedPosts);
+  return { posts: sortedPosts, tags };
 };
 
 export const getDatas = async () => {

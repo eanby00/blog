@@ -1,6 +1,8 @@
 import {
   connectImages,
   formatDate,
+  getData,
+  getDatas,
   getDate,
   getPath,
   getRawPosts,
@@ -14,6 +16,8 @@ import {
 jest.mock("octokit");
 jest.mock("../../src/Util/request");
 jest.mock("../../src/Util/getHTML");
+jest.mock("../../src/constants/API");
+jest.mock("../../src/store/store");
 
 describe("getTag 체크", () => {
   test("올바른 경우", () => {
@@ -235,5 +239,23 @@ describe("getTags 체크", () => {
   test("태그에 중복이 있는 경우 체크", () => {
     const test = getTags([{ tag: "test" }, { tag: "test1" }, { tag: "test" }]);
     expect(test.length).toEqual(2);
+  });
+});
+
+describe("getData 체크", () => {
+  test("작동 확인", async () => {
+    const test = await getData();
+
+    expect(test.posts[0].title).toEqual("TEST11");
+    expect(test.tags[0]).toEqual("test1");
+  });
+});
+
+describe("getDatas 체크", () => {
+  test("작동 확인", async () => {
+    const test = await getDatas();
+
+    expect(test.posts[0].title).toEqual("TEST11");
+    expect(test.tags[0]).toEqual("test1");
   });
 });
