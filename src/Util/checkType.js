@@ -9,5 +9,5 @@ export const isMDFile = (data) => {
 };
 
 export const isImgFile = (data) => {
-  return data?.name?.split(".").pop().toLowerCase() in FILE_FORMAT.IMAGE;
+  return FILE_FORMAT.IMAGE.includes(data?.name?.split(".").pop().toLowerCase());
 };

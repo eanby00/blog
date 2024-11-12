@@ -62,10 +62,12 @@ describe("isMDFile 함수 체크", () => {
 describe("isImgFile 함수 체크", () => {
   test("png 파일이 들어오는 경우 : true", () => {
     const test = isImgFile({ name: "test.png" });
+    expect(test).toBeTruthy();
   });
 
   test("jpg 파일이 들어오는 경우 : true", () => {
     const test = isImgFile({ name: "test.jpg" });
+    expect(test).toBeTruthy();
   });
 
   test("txt 파일이 들어오는 경우 : false", () => {
