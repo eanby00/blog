@@ -1,4 +1,5 @@
 import {
+  connectImages,
   formatDate,
   getDate,
   getPath,
@@ -164,5 +165,15 @@ describe("getRawPosts 체크", () => {
 
     expect(test.posts[0].title).toEqual("TEST11");
     expect(test.images[0].name).toEqual("TEST12.png");
+  });
+});
+
+describe("connectImages 체크", () => {
+  test("작동 체크", async () => {
+    const { posts, images } = await getRawPosts("TEST");
+    const test = connectImages(posts, images);
+
+    expect(test[0].title).toEqual("TEST11");
+    expect(test[0].images[0].name).toEqual("TEST12.png");
   });
 });

@@ -75,7 +75,7 @@ export const getRawPosts = async (path) => {
   return { posts, images };
 };
 
-const connectImages = (posts, images) => {
+export const connectImages = (posts, images) => {
   return posts.map((post) => {
     return {
       ...post,
