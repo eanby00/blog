@@ -19,7 +19,7 @@ export const getDate = async (path) => {
   return commit ? new Date(commit.data[0].commit.author.date) : null;
 };
 
-const formatDate = (day) => {
+export const formatDate = (day) => {
   const year = day.getFullYear();
   const month = day.getMonth() + 1;
   const date = day.getDate();
