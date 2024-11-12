@@ -1,7 +1,14 @@
-import { formatDate, getDate, getPath, getTag } from "../../src/Util/getData";
+import {
+  formatDate,
+  getDate,
+  getPath,
+  getTag,
+  modifyPost,
+} from "../../src/Util/getData";
 
 jest.mock("octokit");
 jest.mock("../../src/Util/request");
+jest.mock("../../src/Util/getHTML");
 
 describe("getTag 체크", () => {
   test("올바른 경우", () => {
@@ -37,7 +44,6 @@ describe("formatDate 체크", () => {
       month < 10 ? "0" + month.toString() : month
     }.${date}.`;
 
-    console.log(test);
     expect(test).toEqual(answer);
   });
 
@@ -50,7 +56,38 @@ describe("formatDate 체크", () => {
       month < 10 ? "0" + month.toString() : month
     }.${date}.`;
 
-    console.log(test);
     expect(test).toEqual(answer);
+  });
+});
+
+describe("modifyPost 체크", () => {
+  test("올바르게 작동하는 경우1", async () => {
+    const mockedData = {
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test1/test2/test3/test.md",
+      name: "test.md",
+      html_url: "test html url",
+    };
+
+    const test = await modifyPost(mockedData);
+    expect(test.title).toEqual("test");
+    expect(test.tag).toEqual("test2");
+    expect(test.path).toEqual("test1/test2/test3");
+    expect(test.html_url).toEqual("test html url");
+  });
+
+  test("올바르게 작동하는 경우2", async () => {
+    const mockedData = {
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test4/test5/test6/test7.md",
+      name: "test7.md",
+      html_url: "test html_url",
+    };
+
+    const test = await modifyPost(mockedData);
+    expect(test.title).toEqual("test7");
+    expect(test.tag).toEqual("test5");
+    expect(test.path).toEqual("test4/test5/test6");
+    expect(test.html_url).toEqual("test html_url");
   });
 });

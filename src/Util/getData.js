@@ -26,7 +26,7 @@ export const formatDate = (day) => {
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-const modifyPost = async ({ content, path, name, html_url }) => {
+export const modifyPost = async ({ content, path, name, html_url }) => {
   const raw = decodeBase64(content);
   const date = await getDate(path);
   const title = name.slice(0, -3);
