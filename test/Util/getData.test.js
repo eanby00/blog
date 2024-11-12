@@ -5,6 +5,7 @@ import {
   getPath,
   getRawPosts,
   getTag,
+  getTags,
   modifyImage,
   modifyPost,
   sortPosts,
@@ -222,5 +223,17 @@ describe("sortPosts 체크", () => {
     ];
     const test = sortPosts(mockedDates);
     expect(test).toEqual(answer);
+  });
+});
+
+describe("getTags 체크", () => {
+  test("태그에 중복이 없는 경우 체크", () => {
+    const test = getTags([{ tag: "test" }, { tag: "test1" }, { tag: "test2" }]);
+    expect(test.length).toEqual(3);
+  });
+
+  test("태그에 중복이 있는 경우 체크", () => {
+    const test = getTags([{ tag: "test" }, { tag: "test1" }, { tag: "test" }]);
+    expect(test.length).toEqual(2);
   });
 });

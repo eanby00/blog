@@ -88,7 +88,7 @@ export const sortPosts = (posts) => {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
-const getTags = (posts) => {
+export const getTags = (posts) => {
   return Array.from(new Set(posts.map((post) => post.tag)));
 };
 
