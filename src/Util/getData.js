@@ -84,7 +84,7 @@ export const connectImages = (posts, images) => {
   });
 };
 
-const sortPosts = (posts) => {
+export const sortPosts = (posts) => {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 

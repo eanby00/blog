@@ -7,6 +7,7 @@ import {
   getTag,
   modifyImage,
   modifyPost,
+  sortPosts,
 } from "../../src/Util/getData";
 
 jest.mock("octokit");
@@ -175,5 +176,51 @@ describe("connectImages 체크", () => {
 
     expect(test[0].title).toEqual("TEST11");
     expect(test[0].images[0].name).toEqual("TEST12.png");
+  });
+});
+
+describe("sortPosts 체크", () => {
+  const answer = [
+    { date: "2024-11-14T06:44:21.207Z" },
+    { date: "2024-11-13T06:44:21.207Z" },
+    { date: "2024-11-12T06:44:21.207Z" },
+    { date: "2024-11-11T06:44:21.207Z" },
+    { date: "2024-11-10T06:44:21.207Z" },
+  ];
+
+  test("무작위 배열 동작 체크", () => {
+    const mockedDates = [
+      { date: "2024-11-12T06:44:21.207Z" },
+      { date: "2024-11-11T06:44:21.207Z" },
+      { date: "2024-11-13T06:44:21.207Z" },
+      { date: "2024-11-14T06:44:21.207Z" },
+      { date: "2024-11-10T06:44:21.207Z" },
+    ];
+    const test = sortPosts(mockedDates);
+    expect(test).toEqual(answer);
+  });
+
+  test("내림차순 배열 동작 체크", () => {
+    const mockedDates = [
+      { date: "2024-11-14T06:44:21.207Z" },
+      { date: "2024-11-13T06:44:21.207Z" },
+      { date: "2024-11-12T06:44:21.207Z" },
+      { date: "2024-11-11T06:44:21.207Z" },
+      { date: "2024-11-10T06:44:21.207Z" },
+    ];
+    const test = sortPosts(mockedDates);
+    expect(test).toEqual(answer);
+  });
+
+  test("오름차순 배열 동작 체크", () => {
+    const mockedDates = [
+      { date: "2024-11-10T06:44:21.207Z" },
+      { date: "2024-11-11T06:44:21.207Z" },
+      { date: "2024-11-12T06:44:21.207Z" },
+      { date: "2024-11-13T06:44:21.207Z" },
+      { date: "2024-11-14T06:44:21.207Z" },
+    ];
+    const test = sortPosts(mockedDates);
+    expect(test).toEqual(answer);
   });
 });
