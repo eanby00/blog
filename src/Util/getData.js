@@ -52,7 +52,7 @@ export const modifyImage = ({ name, content, path }) => {
   };
 };
 
-const getRawPosts = async (path) => {
+export const getRawPosts = async (path) => {
   const posts = [];
   const images = [];
   const queue = [];

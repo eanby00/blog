@@ -2,6 +2,7 @@ import {
   formatDate,
   getDate,
   getPath,
+  getRawPosts,
   getTag,
   modifyImage,
   modifyPost,
@@ -152,5 +153,16 @@ describe("modifyImage 체크", () => {
       path: "test/test1/test2",
       type: "webp",
     });
+  });
+});
+
+describe("getRawPosts 체크", () => {
+  test("작동 체크", async () => {
+    const test = await getRawPosts("TEST");
+    expect(test.posts.length).toEqual(1);
+    expect(test.images.length).toEqual(1);
+
+    expect(test.posts[0].title).toEqual("TEST11");
+    expect(test.images[0].name).toEqual("TEST12.png");
   });
 });
