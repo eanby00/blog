@@ -43,7 +43,7 @@ export const modifyPost = async ({ content, path, name, html_url }) => {
   };
 };
 
-const modifyImage = ({ name, content, path }) => {
+export const modifyImage = ({ name, content, path }) => {
   return {
     name,
     content,

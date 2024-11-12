@@ -3,6 +3,7 @@ import {
   getDate,
   getPath,
   getTag,
+  modifyImage,
   modifyPost,
 } from "../../src/Util/getData";
 
@@ -89,5 +90,67 @@ describe("modifyPost 체크", () => {
     expect(test.tag).toEqual("test5");
     expect(test.path).toEqual("test4/test5/test6");
     expect(test.html_url).toEqual("test html_url");
+  });
+});
+
+describe("modifyImage 체크", () => {
+  test("들어온 데이터가 md 파일인 경우", () => {
+    const mockedData = {
+      name: "test.md",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2/test.md",
+    };
+    const test = modifyImage(mockedData);
+    expect(test).toEqual({
+      name: "test.md",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2",
+      type: "md",
+    });
+  });
+
+  test("들어온 데이터가 png 파일인 경우", () => {
+    const mockedData = {
+      name: "test.png",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2/test.png",
+    };
+    const test = modifyImage(mockedData);
+    expect(test).toEqual({
+      name: "test.png",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2",
+      type: "png",
+    });
+  });
+
+  test("들어온 데이터가 jpg 파일인 경우", () => {
+    const mockedData = {
+      name: "test.jpg",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2/test.jpg",
+    };
+    const test = modifyImage(mockedData);
+    expect(test).toEqual({
+      name: "test.jpg",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2",
+      type: "jpg",
+    });
+  });
+
+  test("들어온 데이터가 webp 파일인 경우", () => {
+    const mockedData = {
+      name: "test.webp",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2/test.webp",
+    };
+    const test = modifyImage(mockedData);
+    expect(test).toEqual({
+      name: "test.webp",
+      content: "PGgxPnRlc3Q8L2gxPg==",
+      path: "test/test1/test2",
+      type: "webp",
+    });
   });
 });
