@@ -15,7 +15,11 @@ const createPostElement = ({ id, title, date, description }) => {
   const postElement = createElement(".template-post", "section");
   postElement.dataset.id = id;
   $("h2", postElement).textContent = title;
-  $(".post-date", postElement).textContent = date;
+  if (date) {
+    $(".post-date", postElement).textContent = date;
+  } else {
+    $(".post-date", postElement).remove();
+  }
   $(".post-description", postElement).textContent =
     description || `${title}에 관한 포스트`;
 

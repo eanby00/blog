@@ -16,7 +16,7 @@ export const getPath = (path) => {
 
 export const getDate = async (path) => {
   const commit = await getCommit(path);
-  return new Date(commit.data[0].commit.author.date);
+  return commit ? new Date(commit.data[0].commit.author.date) : null;
 };
 
 const formatDate = (day) => {
@@ -36,7 +36,7 @@ const modifyPost = async ({ content, path, name, html_url }) => {
     title,
     tag: getTag(path),
     path: getPath(path),
-    date: formatDate(date),
+    date: date ? formatDate(date) : null,
     html_url,
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
