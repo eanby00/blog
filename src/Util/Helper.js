@@ -29,3 +29,11 @@ export const generateID = (title) => {
   const randomDate = (Date.now() * Math.random()).toString(16).replace(".", "");
   return titleCode + randomDate;
 };
+
+export const sortArray = (array) => {
+  return array.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
+export const deduplication = (array) => {
+  return Array.from(new Set(array));
+};

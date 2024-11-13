@@ -3,30 +3,30 @@ import { hasData, loadData, saveData } from "../store/store";
 import { isFolder, isImgFile, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
-import { generateID } from "./Helper";
+import { deduplication, generateID, sortArray } from "./Helper";
 import { getCommit, getContent } from "./request";
 
-export const getTag = (path) => {
+const getTag = (path) => {
   return path.split("/")[GITHUB_API.TAG_DEPTH];
 };
 
-export const getPath = (path) => {
+const getPath = (path) => {
   return path.split("/").slice(0, -1).join("/");
 };
 
-export const getDate = async (path) => {
+const getDate = async (path) => {
   const commit = await getCommit(path);
   return commit ? new Date(commit.data[0].commit.author.date) : null;
 };
 
-export const formatDate = (day) => {
+const formatDate = (day) => {
   const year = day.getFullYear();
   const month = day.getMonth() + 1;
   const date = day.getDate();
   return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
-export const modifyPost = async ({ content, path, name, html_url }) => {
+const modifyPost = async ({ content, path, name, html_url }) => {
   const raw = decodeBase64(content);
   const date = await getDate(path);
   const title = name.slice(0, -3);
@@ -43,7 +43,7 @@ export const modifyPost = async ({ content, path, name, html_url }) => {
   };
 };
 
-export const modifyImage = ({ name, content, path }) => {
+const modifyImage = ({ name, content, path }) => {
   return {
     name,
     content,
@@ -52,7 +52,7 @@ export const modifyImage = ({ name, content, path }) => {
   };
 };
 
-export const getRawPosts = async (path) => {
+const getRawPosts = async (path) => {
   const posts = [];
   const images = [];
   const queue = [];
@@ -75,7 +75,7 @@ export const getRawPosts = async (path) => {
   return { posts, images };
 };
 
-export const connectImages = (posts, images) => {
+const connectImages = (posts, images) => {
   return posts.map((post) => {
     return {
       ...post,
@@ -84,18 +84,14 @@ export const connectImages = (posts, images) => {
   });
 };
 
-export const sortPosts = (posts) => {
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+const getTags = (posts) => {
+  return deduplication(posts.map((post) => post.tag));
 };
 
-export const getTags = (posts) => {
-  return Array.from(new Set(posts.map((post) => post.tag)));
-};
-
-export const getData = async () => {
+const getData = async () => {
   const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
   const postsWithImage = connectImages(posts, images);
-  const sortedPosts = sortPosts(postsWithImage);
+  const sortedPosts = sortArray(postsWithImage);
   const tags = getTags(sortedPosts);
   return { posts: sortedPosts, tags };
 };
@@ -103,7 +99,7 @@ export const getData = async () => {
 export const getDatas = async () => {
   if (hasData()) {
     const { posts, tags } = loadData();
-    return { posts: sortPosts(posts), tags };
+    return { posts: sortArray(posts), tags };
   }
 
   const { posts, tags } = await getData();
