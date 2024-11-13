@@ -12,7 +12,7 @@ const getElementTreeFromMd = (rawMD) => {
   return unified().use(markdown).parse(rawMD);
 };
 
-export const findDescription = (data) => {
+const findDescription = (data) => {
   if (!data?.type) {
     return "";
   }
