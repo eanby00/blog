@@ -8,14 +8,14 @@ jest.mock("../../src/constants/API");
 jest.mock("../../src/store/store");
 
 describe("getDatas 체크", () => {
-  test("작동 확인", async () => {
+  test("sessionStorage의 데이터가 없는 경우", async () => {
     const { posts, tags } = await getDatas();
 
     expect(posts[0].title).toEqual("TEST11");
     expect(tags[0]).toEqual("test1");
   });
 
-  test("sessionStorage의 데이터를 가져오는 경우 작동 확인", async () => {
+  test("sessionStorage의 데이터가 있는 경우", async () => {
     store.hasData = jest.fn();
     store.hasData.mockReturnValue(true);
 
