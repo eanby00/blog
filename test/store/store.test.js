@@ -8,6 +8,7 @@ import {
   getStorage,
   getTags,
   hasData,
+  loadData,
   saveData,
   setStorage,
 } from "../../src/store/store";
@@ -189,5 +190,23 @@ describe("saveData 체크", () => {
 
     expect(getStorage("1")).toEqual({ id: 1, data: "test1" });
     expect(getStorage("tags")).toEqual({ data: "tag mocked data" });
+  });
+});
+
+describe("loadData 체크", () => {
+  const postMock = [
+    { id: 1, data: "test1" },
+    { id: 2, data: "test2" },
+    { id: 3, data: "test3" },
+    { id: 4, data: "test4" },
+  ];
+
+  test("작동 확인", () => {
+    sessionStorage.clear();
+    saveData(postMock, { data: "tag mocked data" });
+
+    const { posts, tags } = loadData();
+    expect(posts).toEqual(postMock);
+    expect(tags).toEqual({ data: "tag mocked data" });
   });
 });
