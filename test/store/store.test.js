@@ -3,10 +3,7 @@
  */
 
 import {
-  getKey,
-  getPosts,
   getStorage,
-  getTags,
   hasData,
   loadData,
   saveData,
@@ -97,55 +94,6 @@ describe("getStorage 체크", () => {
 
     const test = getStorage("test10");
     expect(test).toBeNull();
-  });
-});
-
-describe("getKey 체크", () => {
-  test("작동 확인", () => {
-    sessionStorage.clear();
-
-    setStorage("test", { data: "test" });
-    setStorage("test1", { data: "test1" });
-
-    expect(getKey(0)).toEqual("test");
-    expect(getKey(1)).toEqual("test1");
-  });
-});
-
-describe("getPosts 체크", () => {
-  test("작동 확인", () => {
-    sessionStorage.clear();
-
-    setStorage("test", { data: "test" });
-    setStorage("test1", { data: "test1" });
-    setStorage("test2", { data: "test2" });
-
-    const test = getPosts();
-    expect(test).toHaveLength(3);
-  });
-
-  test("tags가 있을 경우", () => {
-    sessionStorage.clear();
-
-    setStorage("test", { data: "test" });
-    setStorage("test1", { data: "test1" });
-    setStorage("tags", { data: "tags" });
-
-    const test = getPosts();
-    expect(test).toHaveLength(2);
-  });
-});
-
-describe("getTags 체크", () => {
-  test("작동 확인", () => {
-    sessionStorage.clear();
-
-    setStorage("test", { data: "test" });
-    setStorage("test1", { data: "test1" });
-    setStorage("tags", { data: "tags" });
-
-    const test = getTags();
-    expect(test).toEqual({ data: "tags" });
   });
 });
 

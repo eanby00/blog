@@ -6,11 +6,11 @@ export const getStorage = (key) => {
   return JSON.parse(sessionStorage.getItem(key));
 };
 
-export const getKey = (index) => {
+const getKey = (index) => {
   return sessionStorage.key(index);
 };
 
-export const getPosts = () => {
+const getPosts = () => {
   const posts = [];
   for (let i = 0; i < sessionStorage.length; ++i) {
     const key = getKey(i);
@@ -21,7 +21,7 @@ export const getPosts = () => {
   return posts;
 };
 
-export const getTags = () => {
+const getTags = () => {
   return getStorage("tags");
 };
 
