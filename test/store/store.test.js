@@ -7,6 +7,7 @@ import {
   getPosts,
   getStorage,
   getTags,
+  hasData,
   setStorage,
 } from "../../src/store/store";
 
@@ -143,5 +144,31 @@ describe("getTags 체크", () => {
 
     const test = getTags();
     expect(test).toEqual({ data: "tags" });
+  });
+});
+
+describe("hasData 체크", () => {
+  test("데이터가 존재하지 않는 경우", () => {
+    sessionStorage.clear();
+    const test = hasData();
+    expect(test).toBeFalsy();
+  });
+
+  test("데이터가 존재하지만, 정상적인 데이터가 아닌 경우", () => {
+    sessionStorage.clear();
+    setStorage("test", { data: "test" });
+
+    const test = hasData();
+
+    expect(test).toBeFalsy();
+  });
+
+  test("데이터가 존재하는 경우", () => {
+    sessionStorage.clear();
+    setStorage("tags", { data: "test" });
+
+    const test = hasData();
+
+    expect(test).toBeTruthy();
   });
 });

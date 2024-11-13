@@ -26,7 +26,7 @@ export const getTags = () => {
 };
 
 export const hasData = () => {
-  return sessionStorage.length > 1;
+  return getStorage("tags") ? true : false;
 };
 
 export const saveData = (posts, tags) => {
