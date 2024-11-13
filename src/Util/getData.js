@@ -3,7 +3,7 @@ import { hasData, loadData, saveData } from "../store/store";
 import { isFolder, isImgFile, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
-import { deduplication, generateID, sortArray } from "./Helper";
+import { deduplication, formatDate, generateID, sortArray } from "./Helper";
 import { getCommit, getContent } from "./request";
 
 const getTag = (path) => {
@@ -17,13 +17,6 @@ const getPath = (path) => {
 const getDate = async (path) => {
   const commit = await getCommit(path);
   return commit ? new Date(commit.data[0].commit.author.date) : null;
-};
-
-const formatDate = (day) => {
-  const year = day.getFullYear();
-  const month = day.getMonth() + 1;
-  const date = day.getDate();
-  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
 };
 
 const modifyPost = async ({ content, path, name, html_url }) => {
