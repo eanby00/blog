@@ -5,5 +5,5 @@ export const getDataFromURL = () => {
   const queryParams = url.searchParams;
   const id = queryParams.get("id");
 
-  return JSON.parse(getStorage(id));
+  return getStorage(id);
 };

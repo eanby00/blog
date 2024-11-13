@@ -8,6 +8,7 @@ import {
   getStorage,
   getTags,
   hasData,
+  saveData,
   setStorage,
 } from "../../src/store/store";
 
@@ -77,7 +78,7 @@ describe("getStorage 체크", () => {
     setStorage("test", { data: "test" });
 
     const test = getStorage("test");
-    expect(test).toEqual(`{"data":"test"}`);
+    expect(test).toEqual({ data: "test" });
   });
 
   test("여러 데이터 확인", () => {
@@ -86,8 +87,8 @@ describe("getStorage 체크", () => {
     setStorage("test1", { data: "test1" });
     setStorage("test2", { data: "test2" });
 
-    expect(getStorage("test1")).toEqual(`{"data":"test1"}`);
-    expect(getStorage("test2")).toEqual(`{"data":"test2"}`);
+    expect(getStorage("test1")).toEqual({ data: "test1" });
+    expect(getStorage("test2")).toEqual({ data: "test2" });
   });
 
   test("존재하지 않는 데이터 확인할 경우", () => {
@@ -170,5 +171,23 @@ describe("hasData 체크", () => {
     const test = hasData();
 
     expect(test).toBeTruthy();
+  });
+});
+
+describe("saveData 체크", () => {
+  const postMock = [
+    { id: 1, data: "test1" },
+    { id: 2, data: "test2" },
+    { id: 3, data: "test3" },
+    { id: 4, data: "test4" },
+  ];
+
+  test("작동 확인", () => {
+    sessionStorage.clear();
+    saveData(postMock, { data: "tag mocked data" });
+    expect(sessionStorage.length).toEqual(5);
+
+    expect(getStorage("1")).toEqual({ id: 1, data: "test1" });
+    expect(getStorage("tags")).toEqual({ data: "tag mocked data" });
   });
 });
