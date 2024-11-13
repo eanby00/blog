@@ -6,7 +6,7 @@ export const getStorage = (key) => {
   return sessionStorage.getItem(key);
 };
 
-const getKey = (index) => {
+export const getKey = (index) => {
   return sessionStorage.key(index);
 };
 

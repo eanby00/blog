@@ -2,11 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { getStorage, setStorage } from "../../src/store/store";
+import { getKey, getStorage, setStorage } from "../../src/store/store";
 
 class SessionStorageMock {
   store = {};
-  length = this.store.length;
 
   constructor() {}
   getItem(key) {
@@ -15,11 +14,14 @@ class SessionStorageMock {
 
   setItem(key, value) {
     this.store[key] = value;
-    this.length = this.store.length;
   }
 
   key(index) {
     return Object.keys(this.store)[index];
+  }
+
+  get length() {
+    return Object.keys(this.store).length;
   }
 }
 
@@ -73,5 +75,19 @@ describe("getStorage 체크", () => {
   test("존재하지 않는 데이터 확인할 경우", () => {
     const test = getStorage("test10");
     expect(test).toBeNull();
+  });
+});
+
+describe("getKey 체크", () => {
+  test("작동 확인", () => {
+    setStorage("test", { data: "test" });
+    setStorage("test1", { data: "test1" });
+    setStorage("test2", { data: "test2" });
+    setStorage("test3", { data: "test3" });
+
+    expect(getKey(0)).toEqual("test");
+    expect(getKey(1)).toEqual("test1");
+    expect(getKey(2)).toEqual("test2");
+    expect(getKey(3)).toEqual("test3");
   });
 });
