@@ -21,7 +21,7 @@ export const getPosts = () => {
   return posts;
 };
 
-const getTags = () => {
+export const getTags = () => {
   return JSON.parse(getStorage("tags"));
 };
 
