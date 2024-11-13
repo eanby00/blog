@@ -2,7 +2,12 @@
  * @jest-environment jsdom
  */
 
-import { getKey, getStorage, setStorage } from "../../src/store/store";
+import {
+  getKey,
+  getPosts,
+  getStorage,
+  setStorage,
+} from "../../src/store/store";
 
 class SessionStorageMock {
   store = {};
@@ -89,5 +94,30 @@ describe("getKey 체크", () => {
     expect(getKey(1)).toEqual("test1");
     expect(getKey(2)).toEqual("test2");
     expect(getKey(3)).toEqual("test3");
+  });
+});
+
+describe("getPosts 체크", () => {
+  test("작동 확인", () => {
+    setStorage("test", { data: "test" });
+    setStorage("test1", { data: "test1" });
+    setStorage("test2", { data: "test2" });
+    setStorage("test3", { data: "test3" });
+    setStorage("test4", { data: "test4" });
+
+    const test = getPosts();
+    expect(test).toHaveLength(5);
+  });
+
+  test("tags가 있을 경우", () => {
+    setStorage("test", { data: "test" });
+    setStorage("test1", { data: "test1" });
+    setStorage("test2", { data: "test2" });
+    setStorage("test3", { data: "test3" });
+    setStorage("test4", { data: "test4" });
+    setStorage("tags", { data: "tags" });
+
+    const test = getPosts();
+    expect(test).toHaveLength(5);
   });
 });

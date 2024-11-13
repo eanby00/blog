@@ -10,7 +10,7 @@ export const getKey = (index) => {
   return sessionStorage.key(index);
 };
 
-const getPosts = () => {
+export const getPosts = () => {
   const posts = [];
   for (let i = 0; i < sessionStorage.length; ++i) {
     const key = getKey(i);
