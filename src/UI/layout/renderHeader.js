@@ -1,4 +1,4 @@
-import { makeDomainUrl } from "../../Util/getDataFromURL";
+import { getDomainURL } from "../../Util/getDataFromURL";
 import { $ } from "../../Util/Helper";
 
 const toggleDarkMode = () => {
@@ -64,7 +64,7 @@ const renderSidebar = (sidebarSelector) => {
 
 const setAnchor = () => {
   const anchor = $(".main-header h1 a");
-  anchor.href = makeDomainUrl(location.href);
+  anchor.href = getDomainURL();
 };
 
 export const renderHeader = (sidebarSelector) => {

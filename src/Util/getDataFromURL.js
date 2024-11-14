@@ -1,9 +1,14 @@
-import { getStorage } from "../store/store";
+import { getStorage, setStorage } from "../store/store";
 
-export const makeDomainUrl = (href) => {
-  if (href.includes("?"))
-    return href.slice(0, href.lastIndexOf("?")).replace("/post", "");
-  return href;
+export const setDomainURL = (href) => {
+  if (getStorage("domain")) return;
+  setStorage("domain", href);
+};
+
+export const getDomainURL = () => {
+  if (!getStorage("domain"))
+    throw new Error("Domain이 제대로 설정되어 있지 않습니다.");
+  return getStorage("domain");
 };
 
 export const getDataFromURL = () => {
@@ -17,6 +22,6 @@ export const getDataFromURL = () => {
   const result = getStorage(id);
   if (result) return result;
 
-  location.href = makeDomainUrl(location.href);
+  location.href = getDomainURL();
   throw new Error("잘못된 접근입니다.");
 };

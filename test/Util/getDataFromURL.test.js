@@ -3,7 +3,11 @@
  */
 
 import * as store from "../../src/store/store";
-import { getDataFromURL, makeDomainUrl } from "../../src/Util/getDataFromURL";
+import {
+  getDataFromURL,
+  getDomainURL,
+  setDomainURL,
+} from "../../src/Util/getDataFromURL";
 
 const mockResponse = jest.fn();
 Object.defineProperty(window, "location", {
@@ -17,21 +21,18 @@ Object.defineProperty(window, "location", {
   writable: true,
 });
 
-describe("makeDomainUrl 체크", () => {
-  test("URL이 정상적인 경우", () => {
-    const url1 = "http://localhost:8080/post/?id=35d6fc";
-    const test1 = makeDomainUrl(url1);
-    expect(test1).toEqual("http://localhost:8080");
-
-    const url2 = "http://localhost:8080/post/";
-    const test2 = makeDomainUrl(url2);
-    expect(test2).toEqual("http://localhost:8080");
+describe("getDomainURL 체크", () => {
+  test("Domain URL이 없는 경우", () => {
+    expect(() => {
+      const test = getDomainURL();
+    }).toThrow();
   });
 
-  test("URL이 잘못되어 있는 경우", () => {
-    const url1 = "http://sdflajsfla";
-    const test1 = makeDomainUrl(url1);
-    expect(test1).toEqual("http://localhost:8080");
+  test("Domain URL이 있는 경우", () => {
+    setDomainURL("http://localhost:8080");
+
+    const test = getDomainURL();
+    expect(test).toEqual("http://localhost:8080");
   });
 });
 
@@ -53,7 +54,6 @@ describe("getDataFromURL 체크", () => {
     expect(() => {
       const test = getDataFromURL();
     }).toThrow();
-    expect(location.href).toEqual("http://localhost:8080/");
   });
 
   test("비정상적인 URL인 경우", () => {
