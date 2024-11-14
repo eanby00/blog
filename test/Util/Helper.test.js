@@ -4,6 +4,7 @@
 
 import {
   $,
+  $All,
   createElement,
   deduplication,
   formatDate,
@@ -22,6 +23,7 @@ document.body.innerHTML = `
     <div class="test-div">This is class Test2</div>
     <div class="test-span">
       <span>This is nested span!</span>
+      <span>This is nested span2!</span>
     </div>
     <div class="test-div">This is class Test3</div>
     <div class="test-div">This is class Test4</div>
@@ -42,6 +44,25 @@ describe("$ 체크", () => {
   test("매개변수가 없을 경우", () => {
     expect(() => {
       const test = $();
+    }).toThrow();
+  });
+});
+
+describe("$All 체크", () => {
+  test("document상의 검색", () => {
+    const test = $All(".test-div");
+    expect(test).toHaveLength(4);
+  });
+
+  test("특정 element상의 검색", () => {
+    const testParent = $(".test-span");
+    const test = $All("span", testParent);
+    expect(test).toHaveLength(2);
+  });
+
+  test("매개변수가 없을 경우", () => {
+    expect(() => {
+      const test = $All();
     }).toThrow();
   });
 });
