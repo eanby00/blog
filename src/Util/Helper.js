@@ -17,7 +17,11 @@ export const createElement = (selector, targetTag) => {
 };
 
 export const hasClass = (targetTag, className) => {
-  return targetTag.classList.contains(className);
+  try {
+    return targetTag.classList.contains(className);
+  } catch (error) {
+    throw new Error(`targetTag가 존재하지 않습니다.\n${error.message}`);
+  }
 };
 
 export const generateID = (title) => {

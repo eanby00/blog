@@ -1,9 +1,49 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import {
   deduplication,
   formatDate,
   generateID,
+  hasClass,
   sortArray,
 } from "../../src/Util/Helper";
+
+describe("hasClass 체크", () => {
+  test("element가 class를 가지고 있는 경우", () => {
+    const divElement = document.createElement("div");
+    divElement.classList.add("test");
+
+    const test = hasClass(divElement, "test");
+    expect(test).toBeTruthy();
+  });
+
+  test("element가 class를 가지고 있지 않는 경우", () => {
+    const divElement = document.createElement("div");
+    divElement.classList.add("test");
+
+    const test = hasClass(divElement, "test1");
+    expect(test).toBeFalsy();
+  });
+
+  test("class가 없는 경우", () => {
+    const divElement = document.createElement("div");
+
+    const test = hasClass(divElement);
+    expect(test).toBeFalsy();
+  });
+
+  test("element가 없는 경우", () => {
+    expect(() => {
+      const test1 = hasClass("test");
+    }).toThrow();
+
+    expect(() => {
+      const test2 = hasClass();
+    }).toThrow();
+  });
+});
 
 describe("generateID 체크", () => {
   test("'test'를 title로 하였을 경우", () => {
