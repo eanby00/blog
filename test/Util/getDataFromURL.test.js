@@ -3,11 +3,7 @@
  */
 
 import * as store from "../../src/store/store";
-import {
-  getDataFromURL,
-  getDomainURL,
-  setDomainURL,
-} from "../../src/Util/getDataFromURL";
+import { getDataFromURL, getDomainURL } from "../../src/Util/getDataFromURL";
 
 const mockResponse = jest.fn();
 Object.defineProperty(window, "location", {
@@ -23,14 +19,13 @@ Object.defineProperty(window, "location", {
 
 describe("getDomainURL 체크", () => {
   test("Domain URL이 없는 경우", () => {
-    expect(() => {
-      const test = getDomainURL();
-    }).toThrow();
+    location.href = "http://localhost:8080";
+
+    const test = getDomainURL();
+    expect(test).toEqual("http://localhost:8080");
   });
 
   test("Domain URL이 있는 경우", () => {
-    setDomainURL("http://localhost:8080");
-
     const test = getDomainURL();
     expect(test).toEqual("http://localhost:8080");
   });

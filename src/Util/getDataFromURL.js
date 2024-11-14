@@ -1,13 +1,11 @@
 import { getStorage, setStorage } from "../store/store";
 
-export const setDomainURL = (href) => {
-  if (getStorage("domain")) return;
-  setStorage("domain", href);
-};
-
 export const getDomainURL = () => {
-  if (!getStorage("domain"))
-    throw new Error("Domain이 제대로 설정되어 있지 않습니다.");
+  if (!getStorage("domain")) {
+    setStorage("domain", location.href);
+    return location.href;
+  }
+
   return getStorage("domain");
 };
 
