@@ -11,9 +11,12 @@ export const $All = (identifier, targetTag) => {
 };
 
 export const createElement = (selector, targetTag) => {
-  return document
-    .importNode($(selector).content, true)
-    .querySelector(targetTag);
+  if (targetTag) {
+    return document
+      .importNode($(selector).content, true)
+      .querySelector(targetTag);
+  }
+  return document.importNode($(selector).content, true);
 };
 
 export const hasClass = (targetTag, className) => {

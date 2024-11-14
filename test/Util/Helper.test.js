@@ -3,12 +3,46 @@
  */
 
 import {
+  $,
+  createElement,
   deduplication,
   formatDate,
   generateID,
   hasClass,
   sortArray,
 } from "../../src/Util/Helper";
+
+document.body.innerHTML = `
+    <template class="template-test">
+      <div>This is test div</div>
+      <p>This is test p</p>
+    </template>
+
+    <div class="test-div">This is class Test1</div>
+    <div class="test-div">This is class Test2</div>
+    <span class="test-span">This is class test span1</span>
+    <div class="test-div">This is class Test3</div>
+    <div class="test-div">This is class Test4</div>
+    `;
+
+describe("createElement 체크", () => {
+  test("targetTag가 존재할 경우", () => {
+    const test = createElement(".template-test", "div");
+    expect(test.textContent).toEqual("This is test div");
+  });
+
+  test("targetTag가 존재하지 않을 경우", () => {
+    const testElement = createElement(".template-test");
+    const test = $("p", testElement);
+    expect(test.textContent).toEqual("This is test p");
+  });
+
+  test("매개변수가 없을 경우", () => {
+    expect(() => {
+      const test = createElement();
+    }).toThrow();
+  });
+});
 
 describe("hasClass 체크", () => {
   test("element가 class를 가지고 있는 경우", () => {
