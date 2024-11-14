@@ -1,3 +1,4 @@
+import { makeDomainUrl } from "../../Util/getDataFromURL";
 import { $ } from "../../Util/Helper";
 
 const toggleDarkMode = () => {
@@ -59,12 +60,6 @@ const renderSidebar = (sidebarSelector) => {
       sidebar.classList.remove("open");
     }
   });
-};
-
-const makeDomainUrl = (href) => {
-  if (href.includes("?"))
-    return href.slice(0, href.lastIndexOf("?")).replace("/post", "");
-  return href;
 };
 
 const setAnchor = () => {
