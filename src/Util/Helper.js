@@ -1,4 +1,7 @@
 export const $ = (identifier, targetTag) => {
+  if (!identifier && !targetTag)
+    throw new Error("identifier는 필수 사항입니다.");
+
   return targetTag
     ? targetTag.querySelector(identifier)
     : document.querySelector(identifier);

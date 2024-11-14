@@ -20,10 +20,31 @@ document.body.innerHTML = `
 
     <div class="test-div">This is class Test1</div>
     <div class="test-div">This is class Test2</div>
-    <span class="test-span">This is class test span1</span>
+    <div class="test-span">
+      <span>This is nested span!</span>
+    </div>
     <div class="test-div">This is class Test3</div>
     <div class="test-div">This is class Test4</div>
     `;
+
+describe("$ 체크", () => {
+  test("document상의 검색", () => {
+    const test = $(".test-div");
+    expect(test.textContent).toEqual("This is class Test1");
+  });
+
+  test("특정 element상의 검색", () => {
+    const testParent = $(".test-span");
+    const test = $("span", testParent);
+    expect(test.textContent).toEqual("This is nested span!");
+  });
+
+  test("매개변수가 없을 경우", () => {
+    expect(() => {
+      const test = $();
+    }).toThrow();
+  });
+});
 
 describe("createElement 체크", () => {
   test("targetTag가 존재할 경우", () => {
