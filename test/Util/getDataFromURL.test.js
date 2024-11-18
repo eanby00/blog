@@ -18,14 +18,14 @@ Object.defineProperty(window, "location", {
 });
 
 describe("getDomainURL 체크", () => {
-  test("Domain URL이 없는 경우", () => {
+  test("Domain URL이 설정되지 않은 경우", () => {
     location.href = "http://localhost:8080";
 
     const test = getDomainURL();
     expect(test).toEqual("http://localhost:8080");
   });
 
-  test("Domain URL이 있는 경우", () => {
+  test("Domain URL이 설정된 경우", () => {
     const test = getDomainURL();
     expect(test).toEqual("http://localhost:8080");
   });
