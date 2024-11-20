@@ -1,10 +1,13 @@
-export const isMDFile = (data) => {
-  return (
-    typeof data === "object" &&
-    data.name.slice(data.name.length - 2).toLowerCase() === "md"
-  );
-};
+import { FILE_FORMAT } from "../constants/File_FORMAT";
 
 export const isFolder = (data) => {
   return Array.isArray(data);
+};
+
+export const isMDFile = (data) => {
+  return data?.name?.split(".").pop().toLowerCase() === "md";
+};
+
+export const isImgFile = (data) => {
+  return FILE_FORMAT.IMAGE.includes(data?.name?.split(".").pop().toLowerCase());
 };

@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanPlugin.CleanWebpackPlugin(),
     new webpack.DefinePlugin({
-      API_KEY: JSON.stringify(process.env.API_KEY),
+      "process.env": JSON.stringify(process.env),
     }),
   ],
 

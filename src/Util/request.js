@@ -2,7 +2,7 @@ import { Octokit } from "octokit";
 import { GITHUB_API } from "../constants/API";
 
 const octokit = new Octokit({
-  auth: API_KEY,
+  auth: process.env.API_KEY,
 });
 
 const request = (method, path) => {

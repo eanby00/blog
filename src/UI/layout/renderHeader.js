@@ -1,3 +1,4 @@
+import { getDomainURL } from "../../Util/getDataFromURL";
 import { $ } from "../../Util/Helper";
 
 const toggleDarkMode = () => {
@@ -8,6 +9,9 @@ const toggleDarkMode = () => {
   let isDarkModeWeb = localStorage.getItem("dark") === "true";
 
   const setMode = (trigger) => {
+    localStorage.setItem("dark", trigger);
+    isDarkModeWeb = trigger;
+
     if (trigger) {
       lightButton.classList.remove("close");
       darkButton.classList.add("close");
@@ -17,23 +21,28 @@ const toggleDarkMode = () => {
       darkButton.classList.remove("close");
       body.classList.remove("dark-mode");
     }
+  };
 
-    localStorage.setItem("dark", trigger);
-    isDarkModeWeb = trigger;
+  const setLightMode = () => {
+    setMode(true);
+  };
+
+  const setDarkMode = () => {
+    setMode(false);
   };
 
   const switchMode = (option) => {
     if (isDarkModeOS.matches || option) {
-      setMode(true);
+      setLightMode();
     } else {
-      setMode(false);
+      setDarkMode();
     }
   };
 
   switchMode(isDarkModeWeb);
 
-  darkButton.addEventListener("click", setMode.bind(null, true));
-  lightButton.addEventListener("click", setMode.bind(null, false));
+  darkButton.addEventListener("click", setLightMode);
+  lightButton.addEventListener("click", setDarkMode);
   isDarkModeOS.addEventListener("change", switchMode);
 };
 
@@ -63,10 +72,7 @@ const renderSidebar = (sidebarSelector) => {
 
 const setAnchor = () => {
   const anchor = $(".main-header h1 a");
-  let href = location.href;
-  if (href.includes("?"))
-    href = href.slice(0, href.lastIndexOf("?")).replace("/post", "");
-  anchor.href = href;
+  anchor.href = getDomainURL();
 };
 
 export const renderHeader = (sidebarSelector) => {

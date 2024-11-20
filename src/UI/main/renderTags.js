@@ -30,9 +30,7 @@ const filterPosts = (tagElement, posts) => {
 
 const selectTag = (posts, event) => {
   const tagElement = event.target;
-  if (hasClass(tagElement, "tag-container")) {
-    return;
-  }
+  if (hasClass(tagElement, "tag-container")) return;
 
   renderPosts(filterPosts(tagElement, posts));
 };

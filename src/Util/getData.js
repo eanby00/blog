@@ -1,9 +1,9 @@
 import { GITHUB_API } from "../constants/API";
 import { hasData, loadData, saveData } from "../store/store";
-import { isFolder, isMDFile } from "./checkType";
+import { isFolder, isImgFile, isMDFile } from "./checkType";
 import { decodeBase64 } from "./decodeBase64";
 import { getDescription, getHTMLFromMD } from "./getHTML";
-import { generateID } from "./Helper";
+import { deduplication, formatDate, generateID, sortArray } from "./Helper";
 import { getCommit, getContent } from "./request";
 
 const getTag = (path) => {
@@ -16,14 +16,7 @@ const getPath = (path) => {
 
 const getDate = async (path) => {
   const commit = await getCommit(path);
-  return new Date(commit.data[0].commit.author.date);
-};
-
-const formatDate = (day) => {
-  const year = day.getFullYear();
-  const month = day.getMonth() + 1;
-  const date = day.getDate();
-  return `${year}.${month < 10 ? "0" + month.toString() : month}.${date}.`;
+  return commit ? new Date(commit.data[0].commit.author.date) : null;
 };
 
 const modifyPost = async ({ content, path, name, html_url }) => {
@@ -36,7 +29,7 @@ const modifyPost = async ({ content, path, name, html_url }) => {
     title,
     tag: getTag(path),
     path: getPath(path),
-    date: formatDate(date),
+    date: date ? formatDate(date) : null,
     html_url,
     html: getHTMLFromMD(raw),
     description: getDescription(raw),
@@ -67,7 +60,7 @@ const getRawPosts = async (path) => {
       });
     } else if (isMDFile(data)) {
       posts.push(await modifyPost(data));
-    } else {
+    } else if (isImgFile(data)) {
       images.push(modifyImage(data));
     }
   }
@@ -76,38 +69,28 @@ const getRawPosts = async (path) => {
 };
 
 const connectImages = (posts, images) => {
-  return posts.map((post) => {
-    return {
-      ...post,
-      images: images.filter((image) => post.path === image.path),
-    };
-  });
-};
-
-const sortPosts = (posts) => {
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return posts.map((post) => ({
+    ...post,
+    images: images.filter((image) => post.path === image.path),
+  }));
 };
 
 const getTags = (posts) => {
-  return Array.from(new Set(posts.map((post) => post.tag)));
+  return deduplication(posts.map((post) => post.tag));
 };
 
 const getData = async () => {
-  try {
-    const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
-    const postsWithImage = connectImages(posts, images);
-    const sortedPosts = sortPosts(postsWithImage);
-    const tags = getTags(sortedPosts);
-    return { posts: sortedPosts, tags };
-  } catch (error) {
-    console.log(error.message);
-  }
+  const { posts, images } = await getRawPosts(GITHUB_API.PATH_POSTS);
+  const postsWithImage = connectImages(posts, images);
+  const sortedPosts = sortArray(postsWithImage);
+  const tags = getTags(sortedPosts);
+  return { posts: sortedPosts, tags };
 };
 
 export const getDatas = async () => {
   if (hasData()) {
     const { posts, tags } = loadData();
-    return { posts: sortPosts(posts), tags };
+    return { posts: sortArray(posts), tags };
   }
 
   const { posts, tags } = await getData();

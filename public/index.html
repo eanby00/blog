@@ -12,8 +12,8 @@
   <body>
     <script>
       const isDarkMode =
-        matchMedia("(prefers-color-scheme: dark)").matches ||
-        localStorage.getItem("dark") === "true";
+        localStorage.getItem("dark") === "true" ??
+        matchMedia("(prefers-color-scheme: dark)").matches;
       const body = document.querySelector("body");
 
       isDarkMode

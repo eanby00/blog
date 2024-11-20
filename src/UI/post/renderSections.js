@@ -1,3 +1,4 @@
+import { ELEMENT } from "../../constants/HTML_ELEMENT";
 import { INDEX_ANCHOR } from "../../constants/MD";
 import { $ } from "../../Util/Helper";
 
@@ -7,15 +8,9 @@ const splitSection = () => {
   let tagIndex = null;
   const sections = [];
 
-  nodes.forEach((node, index) => {
-    if (
-      node.tagName === "H1" ||
-      node.tagName === "H2" ||
-      node.tagName === "H3"
-    ) {
-      if (tagIndex !== null) {
-        sections.push(nodes.slice(tagIndex, index));
-      }
+  nodes.forEach(({ tagName }, index) => {
+    if (ELEMENT.H_TAGS.includes(tagName)) {
+      if (tagIndex !== null) sections.push(nodes.slice(tagIndex, index));
 
       tagIndex = index;
     }
@@ -28,14 +23,8 @@ const splitSection = () => {
 const parseSectionId = (textContent) => {
   const textList = textContent.toLowerCase().split("");
   const replacedText = textList.map((text) => {
-    if (text === " ") {
-      return "-";
-    }
-
-    if (text in INDEX_ANCHOR.REMOVE_TEXT_LIST) {
-      return "";
-    }
-
+    if (text === " ") return "-";
+    if (INDEX_ANCHOR.REMOVE_TEXT_LIST.includes(text)) return "";
     return text;
   });
 
@@ -48,8 +37,7 @@ const renderSection = (sections) => {
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
     const header = section[0];
-    const id = parseSectionId(header.textContent);
-    sectionElement.id = id;
+    sectionElement.id = parseSectionId(header.textContent);
     sectionElement.className = header.tagName.toLowerCase();
     sectionElement.append(...section);
 

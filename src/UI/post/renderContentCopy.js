@@ -1,6 +1,6 @@
 import { $, $All, createElement } from "../../Util/Helper";
 
-const copyText = async (tag, copyButton, copyDone) => {
+export const copyText = async (tag, copyButton, copyDone) => {
   await navigator.clipboard.writeText($("code", tag).textContent);
   copyDone.classList.toggle("close");
   copyButton.classList.toggle("close");
