@@ -8,10 +8,6 @@ import {
 } from "../../../src/UI/post/renderContentCopy";
 import { $, $All } from "../../../src/Util/Helper";
 
-// window.navigator = jest.fn(() => ({
-//   clipboard: jest.fn(() => ({ writeText: jest.fn() })),
-// }));
-
 const writeText = jest.fn();
 
 Object.assign(navigator, {
