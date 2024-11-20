@@ -13,12 +13,8 @@ const getElementTreeFromMd = (rawMD) => {
 };
 
 const findDescription = (data) => {
-  if (!data?.type) {
-    return "";
-  }
-  if (data.type === "text") {
-    return data.value;
-  }
+  if (!data?.type) return "";
+  if (data.type === "text") return data.value;
   return findDescription(data.children[0]);
 };
 
@@ -28,9 +24,6 @@ export const getDescription = (rawMD) => {
     (element) => element.type === "blockquote"
   );
 
-  if (!blockquoteElements || blockquoteElements.length === 0) {
-    return "";
-  }
-
+  if (!blockquoteElements || blockquoteElements.length === 0) return "";
   return findDescription(blockquoteElements[0]);
 };

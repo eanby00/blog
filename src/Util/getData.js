@@ -69,12 +69,10 @@ const getRawPosts = async (path) => {
 };
 
 const connectImages = (posts, images) => {
-  return posts.map((post) => {
-    return {
-      ...post,
-      images: images.filter((image) => post.path === image.path),
-    };
-  });
+  return posts.map((post) => ({
+    ...post,
+    images: images.filter((image) => post.path === image.path),
+  }));
 };
 
 const getTags = (posts) => {
