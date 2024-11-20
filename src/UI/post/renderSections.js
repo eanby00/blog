@@ -10,9 +10,7 @@ const splitSection = () => {
 
   nodes.forEach(({ tagName }, index) => {
     if (ELEMENT.H_TAGS.includes(tagName)) {
-      if (tagIndex !== null) {
-        sections.push(nodes.slice(tagIndex, index));
-      }
+      if (tagIndex !== null) sections.push(nodes.slice(tagIndex, index));
 
       tagIndex = index;
     }
@@ -39,8 +37,7 @@ const renderSection = (sections) => {
   sections.forEach((section) => {
     const sectionElement = document.createElement("section");
     const header = section[0];
-    const id = parseSectionId(header.textContent);
-    sectionElement.id = id;
+    sectionElement.id = parseSectionId(header.textContent);
     sectionElement.className = header.tagName.toLowerCase();
     sectionElement.append(...section);
 
