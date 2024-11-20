@@ -23,18 +23,26 @@ const toggleDarkMode = () => {
     }
   };
 
+  const setLightMode = () => {
+    setMode(true);
+  };
+
+  const setDarkMode = () => {
+    setMode(false);
+  };
+
   const switchMode = (option) => {
     if (isDarkModeOS.matches || option) {
-      setMode(true);
+      setLightMode();
     } else {
-      setMode(false);
+      setDarkMode();
     }
   };
 
   switchMode(isDarkModeWeb);
 
-  darkButton.addEventListener("click", setMode.bind(null, true));
-  lightButton.addEventListener("click", setMode.bind(null, false));
+  darkButton.addEventListener("click", setLightMode);
+  lightButton.addEventListener("click", setDarkMode);
   isDarkModeOS.addEventListener("change", switchMode);
 };
 

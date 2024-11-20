@@ -1,3 +1,5 @@
+import { KEY_TYPE } from "../constants/STORE";
+
 export const setStorage = (key, data) => {
   sessionStorage.setItem(key, JSON.stringify(data));
 };
@@ -14,11 +16,7 @@ const getPosts = () => {
   const posts = [];
   for (let i = 0; i < sessionStorage.length; ++i) {
     const key = getKey(i);
-    if (
-      key !== "tags" &&
-      key !== "IsThisFirstTime_Log_From_LiveServer" &&
-      key !== "domain"
-    ) {
+    if (!KEY_TYPE.WITHOUT_POST.includes(key)) {
       posts.push(getStorage(key));
     }
   }
