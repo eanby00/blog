@@ -28,8 +28,11 @@ const renderImage = (images) => {
   imageElements.forEach((imageElement) => {
     imageElement.id = imageElement.src.split("/").pop().replaceAll("%20", " ");
     const image = images.find((image) => image.name === imageElement.id);
-    if (image)
+    if (image) {
       imageElement.src = `data:image/${image.type};base64, ${image.content}`;
+    } else {
+      imageElement.remove();
+    }
   });
 };
 
