@@ -1,3 +1,4 @@
+import { ELEMENT } from "../../constants/HTML_ELEMENT";
 import { $, $All } from "../../Util/Helper";
 import { renderAnchors } from "./renderAnchor";
 import { renderContentCopy } from "./renderContentCopy";
@@ -5,14 +6,8 @@ import { renderSections } from "./renderSections";
 
 const replaceCheckbox = (html) => {
   return html
-    .replaceAll(
-      "[ ]",
-      `<input type="checkbox" disabled><label></label></input>`
-    )
-    .replaceAll(
-      "[x]",
-      `<input type="checkbox" checked disabled><label></label></input>`
-    );
+    .replaceAll("[ ]", ELEMENT.CHECKBOX)
+    .replaceAll("[x]", ELEMENT.CHECKBOX_SELECT);
 };
 
 const renderContent = ({ title, html }) => {
@@ -23,13 +18,22 @@ const renderContent = ({ title, html }) => {
   mainElement.insertAdjacentHTML("afterbegin", replacedHtml);
 };
 
+const createImgId = (element) => {
+  return element.src.split("/").pop().replaceAll("%20", " ");
+};
+
+const createImgSrc = ({ type, content }) => {
+  return `data:image/${type};base64, ${content}`;
+};
+
 const renderImage = (images) => {
   const imageElements = $All("img");
   imageElements.forEach((imageElement) => {
-    imageElement.id = imageElement.src.split("/").pop().replaceAll("%20", " ");
+    imageElement.id = createImgId(imageElement);
     const image = images.find((image) => image.name === imageElement.id);
+
     if (image) {
-      imageElement.src = `data:image/${image.type};base64, ${image.content}`;
+      imageElement.src = createImgSrc(image);
     } else {
       imageElement.remove();
     }

@@ -1,3 +1,4 @@
+import { ELEMENT } from "../../constants/HTML_ELEMENT";
 import { INDEX_ANCHOR } from "../../constants/MD";
 import { $ } from "../../Util/Helper";
 
@@ -8,7 +9,7 @@ const splitSection = () => {
   const sections = [];
 
   nodes.forEach(({ tagName }, index) => {
-    if (tagName === "H1" || tagName === "H2" || tagName === "H3") {
+    if (ELEMENT.H_TAGS.includes(tagName)) {
       if (tagIndex !== null) {
         sections.push(nodes.slice(tagIndex, index));
       }
@@ -24,14 +25,8 @@ const splitSection = () => {
 const parseSectionId = (textContent) => {
   const textList = textContent.toLowerCase().split("");
   const replacedText = textList.map((text) => {
-    if (text === " ") {
-      return "-";
-    }
-
-    if (INDEX_ANCHOR.REMOVE_TEXT_LIST.includes(text)) {
-      return "";
-    }
-
+    if (text === " ") return "-";
+    if (INDEX_ANCHOR.REMOVE_TEXT_LIST.includes(text)) return "";
     return text;
   });
 
