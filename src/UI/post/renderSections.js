@@ -28,7 +28,7 @@ const parseSectionId = (textContent) => {
       return "-";
     }
 
-    if (text in INDEX_ANCHOR.REMOVE_TEXT_LIST) {
+    if (INDEX_ANCHOR.REMOVE_TEXT_LIST.includes(text)) {
       return "";
     }
 
