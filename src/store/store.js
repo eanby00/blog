@@ -16,9 +16,7 @@ const getPosts = () => {
   const posts = [];
   for (let i = 0; i < sessionStorage.length; ++i) {
     const key = getKey(i);
-    if (!KEY_TYPE.WITHOUT_POST.includes(key)) {
-      posts.push(getStorage(key));
-    }
+    if (!KEY_TYPE.KEY_WITHOUT_POST.includes(key)) posts.push(getStorage(key));
   }
   return posts;
 };
