@@ -131,7 +131,4 @@ dist
 
 
 # custom
-# public/script/
 *.development.*
-# public/index.development.html
-# public/**/*.development.*
