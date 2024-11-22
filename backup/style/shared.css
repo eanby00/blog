@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+  scrollbar-width: none;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+body {
+  margin: 0;
+  min-width: 25rem;
+  background: var(--main-bg);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  padding: 0;
+  flex-grow: 1;
+}
+
+.main-header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--header-bg);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.main-header a {
+  color: var(--header-content);
+  text-decoration: none;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100vh;
+  background: var(--backdrop);
+  position: fixed;
+  z-index: 5;
+  display: none;
+}
+
+.main-header div {
+  display: flex;
+}
+
+.dark {
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+  svg {
+    fill: var(--header-content);
+  }
+}
+
+.light {
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+  svg {
+    fill: var(--header-content);
+  }
+}
+
+.mobile-menu {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: 0px;
+  display: flex;
+  gap: 0.4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mobile-menu span {
+  width: 2rem;
+  height: 0.3rem;
+  background: var(--header-content);
+  border-radius: 0.1rem;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.mobile-menu:active,
+.mobile-menu:hover,
+.mobile-menu.open {
+  span:nth-child(1) {
+    transform: translate(0, 0.7rem) rotateZ(45deg);
+  }
+
+  span:nth-child(2) {
+    transform: rotateY(90deg);
+  }
+
+  span:nth-child(3) {
+    transform: translate(0, -0.7rem) rotateZ(-45deg);
+  }
+}
+
+.spinner {
+  width: max-content;
+  margin: 2rem auto;
+  display: none;
+}
+
+.spinner svg {
+  width: 10rem;
+  height: 10rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+svg circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--spinner);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  transform: translate(10px, 10px);
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0%,
+  100% {
+    stroke-dashoffset: 440;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  50.1% {
+    stroke-dashoffset: 880;
+  }
+}
+
+footer {
+  width: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-github svg {
+  width: 2rem;
+  height: 2rem;
+
+  path {
+    fill: var(--icon-content);
+  }
+}
+
+.upToTop {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  background: var(--icon-bg);
+  border: 0px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  display: none;
+  cursor: pointer;
+}
+
+.upToTop.display {
+  display: block;
+}
+
+.upToTop:active,
+.upToTop:hover {
+  background: initial;
+  border: 0.2rem solid var(--icon-border);
+
+  svg {
+    fill: var(--icon-content);
+  }
+}
+
+.display {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .mobile-menu {
+    display: none;
+  }
+
+  .upToTop {
+    z-index: 8;
+  }
+}

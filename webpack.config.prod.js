@@ -37,12 +37,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanPlugin.CleanWebpackPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env),
-    }),
-  ],
+  plugins: [new CleanPlugin.CleanWebpackPlugin()],
 
   resolve: {
     fallback: {
