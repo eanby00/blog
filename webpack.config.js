@@ -9,18 +9,16 @@ module.exports = {
   mode: "development",
   entry: { main: "./src/main.js", post: "./src/post.js" },
   output: {
-    filename: (pathData) => {
-      return pathData.chunk.name === "main"
-        ? "script/[name].development.js"
-        : "script/[name].js";
-    },
+    filename: "script/[name].development.js",
     path: path.resolve(__dirname, "public"),
     clean: {
       keep: (filename) => {
         return (
           filename.includes("style") ||
           filename.includes("post") ||
-          filename.includes("index.html")
+          filename.includes("index.html") ||
+          filename.includes("main.js") ||
+          filename.includes("post.js")
         );
       },
     },
@@ -63,9 +61,14 @@ module.exports = {
       "process.env": JSON.stringify(process.env),
     }),
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: "./template/index.html",
       filename: "index.development.html",
       chunks: ["main"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./template/post/index.html",
+      filename: "post/index.development.html",
+      chunks: ["post"],
     }),
   ],
   resolve: {

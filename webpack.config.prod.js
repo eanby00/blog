@@ -1,7 +1,6 @@
 const path = require("path");
-const CleanPlugin = require("clean-webpack-plugin");
-const webpack = require("webpack");
 const dotenv = require("dotenv");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 dotenv.config();
 
@@ -9,9 +8,19 @@ module.exports = {
   mode: "production",
   entry: { main: "./src/main.js", post: "./src/post.js" },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "public", "script"),
-    publicPath: "public/script/",
+    filename: "script/[name].js",
+    path: path.resolve(__dirname, "public"),
+    clean: {
+      keep: (filename) => {
+        return (
+          filename.includes("style") ||
+          filename.includes("post") ||
+          filename.includes("index.development.html") ||
+          filename.includes("main.development.js") ||
+          filename.includes("post.development.js")
+        );
+      },
+    },
   },
   devtool: "cheap-source-map",
   module: {
@@ -37,7 +46,18 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanPlugin.CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./template/index.html",
+      filename: "index.html",
+      chunks: ["main"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./template/post/index.html",
+      filename: "post/index.html",
+      chunks: ["post"],
+    }),
+  ],
 
   resolve: {
     fallback: {
