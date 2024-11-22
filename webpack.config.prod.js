@@ -9,7 +9,7 @@ module.exports = {
   entry: { main: "./src/main.js", post: "./src/post.js" },
   output: {
     filename: "script/[name].js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "docs"),
     clean: {
       keep: (filename) => {
         return (

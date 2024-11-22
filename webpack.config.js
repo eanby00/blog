@@ -10,7 +10,7 @@ module.exports = {
   entry: { main: "./src/main.js", post: "./src/post.js" },
   output: {
     filename: "script/[name].development.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "docs"),
     clean: {
       keep: (filename) => {
         return (
@@ -26,7 +26,7 @@ module.exports = {
   devtool: "eval-cheap-module-source-map",
   devServer: {
     static: {
-      directory: path.join(__dirname, "public"),
+      directory: path.join(__dirname, "docs"),
     },
     devMiddleware: {
       index: "index.development.html",
