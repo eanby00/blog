@@ -1,5 +1,4 @@
 const path = require("path");
-const CleanPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -16,6 +15,15 @@ module.exports = {
         : "script/[name].js";
     },
     path: path.resolve(__dirname, "public"),
+    clean: {
+      keep: (filename) => {
+        return (
+          filename.includes("style") ||
+          filename.includes("post") ||
+          filename.includes("index.html")
+        );
+      },
+    },
   },
   devtool: "eval-cheap-module-source-map",
   devServer: {
@@ -23,10 +31,8 @@ module.exports = {
       directory: path.join(__dirname, "public"),
     },
     devMiddleware: {
-      writeToDisk: true,
-    },
-    devMiddleware: {
       index: "index.development.html",
+      writeToDisk: true,
     },
   },
   module: {
@@ -53,7 +59,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // new CleanPlugin.CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(process.env),
     }),
