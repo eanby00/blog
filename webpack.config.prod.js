@@ -47,9 +47,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env.API_KEY": "API_KEY",
-    }),
     new HtmlWebpackPlugin({
       template: "./template/index.html",
       filename: "index.html",
