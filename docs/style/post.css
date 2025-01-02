@@ -124,7 +124,7 @@ main {
   width: 50%;
   height: 100vh;
   padding-top: 5rem;
-  background: var(--nav-bg);
+  background: var(--nav-mobile-bg);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -135,7 +135,7 @@ main {
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: var(--nav-border) var(--nav-bg);
+  scrollbar-color: var(--nav-border) var(--nav-mobile-bg);
 }
 
 .anchor-container nav {
@@ -152,7 +152,7 @@ main {
 
 .anchor-container li {
   margin: 0.2rem 0;
-  border-left: 0.5rem solid var(--nav-bg);
+  border-left: 0.5rem solid var(--nav-mobile-bg);
   list-style-type: none;
 }
 
@@ -212,10 +212,16 @@ main {
     height: 100vh;
     min-width: 12rem;
     padding-top: 0.5rem;
+    background: var(--nav-bg);
     position: sticky;
     transform: translateX(0);
     transition: initial;
     z-index: 5;
+    scrollbar-color: var(--nav-border) var(--nav-bg);
+  }
+
+  .anchor-container li {
+    border-left: 0.5rem solid var(--nav-bg);
   }
 
   .anchor-container h2 {

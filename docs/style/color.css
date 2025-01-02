@@ -35,6 +35,7 @@ body {
   --icon-content-alter: var(--color-text-alter);
 
   --nav-bg: var(--color-brand-secondary);
+  --nav-mobile-bg: var(--color-brand-quaternary);
   --nav-border: var(--color-brand-primary);
   --nav-content: var(--color-text-primary);
 }
