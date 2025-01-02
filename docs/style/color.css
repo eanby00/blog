@@ -17,6 +17,7 @@ body {
   --spinner: var(--color-brand-primary);
 
   --card-bg: var(--color-brand-primary);
+  --card-bg-dark: var(--color-brand-quaternary);
   --card-border: var(--color-brand-primary);
   --card-content: var(--color-text-alter);
   --card-bg-alter: var(--color-brand-secondary);
@@ -42,7 +43,7 @@ body {
 
 body.dark-mode {
   --color-brand-primary: #31304d;
-  --color-brand-secondary: black;
+  --color-brand-secondary: #1e1e1e;
   --color-brand-tertiary: #31304d;
   --color-brand-quaternary: #161a30;
 
