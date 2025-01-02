@@ -14,8 +14,7 @@ module.exports = {
     clean: {
       keep: (filename) => {
         return (
-          filename.includes("style") ||
-          filename.includes("post") ||
+          filename.includes(".css") ||
           filename.includes("index.html") ||
           filename.includes("main.js") ||
           filename.includes("post.js")

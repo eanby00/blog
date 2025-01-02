@@ -13,8 +13,7 @@ module.exports = {
     clean: {
       keep: (filename) => {
         return (
-          filename.includes("style") ||
-          filename.includes("post") ||
+          filename.includes(".css") ||
           filename.includes("index.development.html") ||
           filename.includes("main.development.js") ||
           filename.includes("post.development.js")
