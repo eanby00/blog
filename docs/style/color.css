@@ -17,6 +17,7 @@ body {
   --spinner: var(--color-brand-primary);
 
   --card-bg: var(--color-brand-primary);
+  --card-bg-dark: var(--color-brand-quaternary);
   --card-border: var(--color-brand-primary);
   --card-content: var(--color-text-alter);
   --card-bg-alter: var(--color-brand-secondary);
@@ -35,13 +36,14 @@ body {
   --icon-content-alter: var(--color-text-alter);
 
   --nav-bg: var(--color-brand-secondary);
+  --nav-mobile-bg: var(--color-brand-quaternary);
   --nav-border: var(--color-brand-primary);
   --nav-content: var(--color-text-primary);
 }
 
 body.dark-mode {
   --color-brand-primary: #31304d;
-  --color-brand-secondary: black;
+  --color-brand-secondary: #292b36;
   --color-brand-tertiary: #31304d;
   --color-brand-quaternary: #161a30;
 

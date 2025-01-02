@@ -87,6 +87,18 @@
   -webkit-box-orient: vertical;
 }
 
+.dark-mode .card {
+  background: var(--card-bg-dark);
+  border: 0.2rem solid var(--card-bg-dark);
+}
+
+.dark-mode .card:hover,
+.card:active,
+.card.selected {
+  background: var(--card-bg);
+  border: 0.2rem solid var(--card-bg);
+}
+
 @media (min-width: 40rem) {
   main {
     width: 70%;
