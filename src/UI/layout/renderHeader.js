@@ -5,8 +5,11 @@ const toggleDarkMode = () => {
   const darkButton = $(".dark");
   const lightButton = $(".light");
   const body = $("body");
+
   const isDarkModeOS = matchMedia("(prefers-color-scheme: dark)");
   let isDarkModeWeb = localStorage.getItem("dark") === "true";
+  let isDarkMode =
+    localStorage.getItem("dark") === null ? isDarkModeOS : isDarkModeWeb;
 
   const setMode = (trigger) => {
     localStorage.setItem("dark", trigger);
@@ -31,15 +34,15 @@ const toggleDarkMode = () => {
     setMode(false);
   };
 
-  const switchMode = (option) => {
-    if (isDarkModeOS.matches || option) {
+  const switchMode = () => {
+    if (isDarkMode) {
       setLightMode();
     } else {
       setDarkMode();
     }
   };
 
-  switchMode(isDarkModeWeb);
+  switchMode();
 
   darkButton.addEventListener("click", setLightMode);
   lightButton.addEventListener("click", setDarkMode);

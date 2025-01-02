@@ -49,31 +49,11 @@ document.body.innerHTML = `
       <div class="test"></div>
     </header>`;
 
-describe("renderHeader 체크 - white 모드의 경우", () => {
+describe("renderHeader 체크 - dark 모드의 경우", () => {
   location.href = "http://localhost:8080/";
 
   renderHeader(".test");
 
-  const darkButton = $(".dark");
-  const lightButton = $(".light");
-  const body = $("body");
-
-  test("기본 동작 확인", () => {
-    expect(darkButton.classList.contains("close")).toBeFalsy();
-    expect(lightButton.classList.contains("close")).toBeTruthy();
-    expect(body.classList.contains("dark-mode")).toBeFalsy();
-  });
-
-  test("다크 버튼을 눌렀을 경우 동작 확인", () => {
-    darkButton.click();
-
-    expect(darkButton.classList.contains("close")).toBeTruthy();
-    expect(lightButton.classList.contains("close")).toBeFalsy();
-    expect(body.classList.contains("dark-mode")).toBeTruthy();
-  });
-});
-
-describe("renderHeader 체크 - dark 모드의 경우", () => {
   matchMedia.matches = false;
 
   const darkButton = $(".dark");
@@ -92,6 +72,26 @@ describe("renderHeader 체크 - dark 모드의 경우", () => {
     expect(darkButton.classList.contains("close")).toBeFalsy();
     expect(lightButton.classList.contains("close")).toBeTruthy();
     expect(body.classList.contains("dark-mode")).toBeFalsy();
+  });
+});
+
+describe("renderHeader 체크 - white 모드의 경우", () => {
+  const darkButton = $(".dark");
+  const lightButton = $(".light");
+  const body = $("body");
+
+  test("기본 동작 확인", () => {
+    expect(darkButton.classList.contains("close")).toBeFalsy();
+    expect(lightButton.classList.contains("close")).toBeTruthy();
+    expect(body.classList.contains("dark-mode")).toBeFalsy();
+  });
+
+  test("다크 버튼을 눌렀을 경우 동작 확인", () => {
+    darkButton.click();
+
+    expect(darkButton.classList.contains("close")).toBeTruthy();
+    expect(lightButton.classList.contains("close")).toBeFalsy();
+    expect(body.classList.contains("dark-mode")).toBeTruthy();
   });
 });
 
