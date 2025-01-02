@@ -93,8 +93,8 @@
 }
 
 .dark-mode .card:hover,
-.card:active,
-.card.selected {
+.dark-mode .card:active,
+.dark-mode .card.selected {
   background: var(--card-bg);
   border: 0.2rem solid var(--card-bg);
 }
