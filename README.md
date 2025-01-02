@@ -17,7 +17,6 @@ Github의 레포지토리에 작성된 MD 파일들을 읽어 포스팅할 수 �
 ### version 1
 
 - vercel을 이용한 호스팅
-  - github pages를 위해 docs로 변경한 폴더명과 webpack 설정 다시 public으로 변경 필요
 
 ### version 2
 
