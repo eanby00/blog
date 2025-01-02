@@ -47,6 +47,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+
     new HtmlWebpackPlugin({
       template: "./template/index.html",
       filename: "index.html",
