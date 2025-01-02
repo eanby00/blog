@@ -1,6 +1,7 @@
 <!doctype html><html lang="ko"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Document</title><link rel="stylesheet" href="../style/color.css"/><link rel="stylesheet" href="../style/shared.css"/><link rel="stylesheet" href="../style/post.css"/><script defer="defer" src="../script/post.js"></script></head><body><script>const isDarkMode =
-        localStorage.getItem("dark") === "true" ??
-        matchMedia("(prefers-color-scheme: dark)").matches;
+        localStorage.getItem("dark") === null
+          ? matchMedia("(prefers-color-scheme: dark)").matches
+          : localStorage.getItem("dark");
       const body = document.querySelector("body");
 
       isDarkMode
