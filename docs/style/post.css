@@ -209,7 +209,7 @@ main {
   .content-container {
     width: 70%;
     padding: 1rem;
-    border-right: 1px solid var(--article-border);
+    border-right: 0.3rem solid var(--article-border);
   }
 
   .content-container p img {
