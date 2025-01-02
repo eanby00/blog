@@ -1,6 +1,6 @@
 const path = require("path");
-const webpack = require("webpack");
 const dotenv = require("dotenv");
+const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 dotenv.config();
@@ -47,10 +47,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      process: "process/browser",
-    }),
-
     new HtmlWebpackPlugin({
       template: "./template/index.html",
       filename: "index.html",
@@ -60,6 +56,9 @@ module.exports = {
       template: "./template/post/index.html",
       filename: "post/index.html",
       chunks: ["post"],
+    }),
+    new Dotenv({
+      systemvars: true,
     }),
   ],
 
