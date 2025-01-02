@@ -88,9 +88,12 @@ main {
 }
 
 .content-container li code {
-  padding: 0.1rem 0.2rem;
+  padding: 0.2rem;
   background: var(--code-bg);
   border-radius: 0.2rem;
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: center;
 }
 
 .content-container input[type="checkbox"] {
@@ -113,6 +116,7 @@ main {
   color: var(--icon-content);
   font-size: 0.8rem;
   font-weight: bold;
+  position: absolute;
 }
 
 .content-container p img {
