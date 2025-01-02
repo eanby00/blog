@@ -14,10 +14,6 @@ Github의 레포지토리에 작성된 MD 파일들을 읽어 포스팅할 수 �
 
 ## 앞으로 해야 할 것
 
-### version 1
-
-- vercel을 이용한 호스팅
-
 ### version 2
 
 - React 적용하기
