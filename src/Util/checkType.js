@@ -1,4 +1,4 @@
-import { FILE_FORMAT } from "../constants/File_FORMAT";
+import { FILE_FORMAT } from "../constants/FILE_FORMAT";
 
 export const isFolder = (data) => {
   return Array.isArray(data);
