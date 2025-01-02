@@ -21,10 +21,5 @@ Github의 레포지토리에 작성된 MD 파일들을 읽어 포스팅할 수 �
 
 ### version 2
 
-- 웹 컴포넌트 적용하기
-- SCSS 적용하기
-
-### version 3
-
 - React 적용하기
 - TypeScript 적용하기
