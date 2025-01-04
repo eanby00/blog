@@ -1,9 +1,6 @@
 const path = require("path");
-const dotenv = require("dotenv");
-const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-dotenv.config();
+const webpack = require("webpack");
 
 module.exports = {
   mode: "production",
@@ -57,8 +54,8 @@ module.exports = {
       filename: "post/index.html",
       chunks: ["post"],
     }),
-    new Dotenv({
-      systemvars: true,
+    new webpack.ProvidePlugin({
+      process: "process/browser",
     }),
   ],
 
@@ -70,6 +67,7 @@ module.exports = {
       vm: require.resolve("vm-browserify"),
       buffer: require.resolve("buffer/"),
       stream: require.resolve("stream-browserify"),
+      "process/browser": require.resolve("process/browser"),
     },
   },
 };
